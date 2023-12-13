@@ -1,18 +1,21 @@
 version: '3.8'
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
+  postres_db:
+    image: postgres:latest
+    restart: on-failure
+    container_name: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      
     ports:
       - '5432:5432'
     volumes: 
-      - db:/var/lib/postgresql/data
+      - pgdb:/var/lib/postgresql/data
   backend:
     build: .
     restart: on-failure
+    container_name: lms
     # command: sh -c "gunicorn --config gunicorn_config.py /app/powercrm.wsgi:application"
     expose:
       - "8000"
@@ -39,5 +42,5 @@ services:
     depends_on:
       - backend
 volumes:
-  db:
+  pgdb:
   staticfiles:
