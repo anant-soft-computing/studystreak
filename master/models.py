@@ -89,7 +89,7 @@ class Section(models.Model):
 
 
 class batch(models.Model):
-    batch_name = models.TimeField(max_length=200, null=True, blank=True)
+    batch_name = models.CharField(max_length=200, null=True, blank=True)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
     batch_timing = models.CharField(max_length=200, null=True, blank=True)
