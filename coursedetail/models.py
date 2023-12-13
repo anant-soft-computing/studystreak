@@ -64,12 +64,6 @@ class Lesson(models.Model):
     Lesson_Duration = models.CharField(
         max_length=200, null=True, blank=True, default=None
     )
-    Lesson_attachment = models.FileField(
-        upload_to="documents/", null=True, blank=True, default=None
-    )
-    Lesson_attachment_description = models.CharField(
-        max_length=200, null=True, blank=True, default=None
-    )
     active = models.BooleanField(default=False)
 
     def __str__(self):
