@@ -103,5 +103,9 @@ class LessonAttachment(models.Model):
         upload_to="documents/", null=True, blank=True, default=None
     )
     Lesson_attachment_description = models.CharField(
-        max_length=200, null=True, blank=True, default=None
+        max_length=200,
+        null=True,
+        blank=True,
+        default=None,
+        verbose_name="Attachment Description",
     )

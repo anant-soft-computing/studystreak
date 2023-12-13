@@ -2,7 +2,15 @@ import nested_admin
 from django.contrib import admin
 from nested_admin import NestedModelAdmin
 
+from master.models import LessonAttachment
+
 from .models import Lesson, Quiz_Question, QuizOption
+
+
+class LessonAttachmentInline(nested_admin.NestedStackedInline):
+    model = LessonAttachment
+    extra = 1
+    fk_name = "lesson"
 
 
 class OptionsInline(nested_admin.NestedStackedInline):
@@ -36,7 +44,7 @@ class Quiz_QuestionAdmin(NestedModelAdmin):
         "active",
     ]
     search_fields = ["Lesson_Title"]
-    inlines = [QuestionInline]
+    inlines = [QuestionInline, LessonAttachmentInline]
 
 
 admin.site.register(Lesson, Quiz_QuestionAdmin)
