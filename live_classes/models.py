@@ -1,10 +1,18 @@
 # live_classes/models.py
 
 from django.db import models
+
 from Courses.models import Course
+
 
 class LiveClass(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    package = models.ForeignKey(
+        "package.Package", on_delete=models.CASCADE, null=True, blank=True
+    )
+    batch = models.ForeignKey(
+        "master.batch", on_delete=models.CASCADE, null=True, blank=True
+    )
     meeting_title = models.CharField(max_length=255)
     meeting_description = models.TextField()  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
     start_time = models.TimeField()
