@@ -98,7 +98,7 @@ class batch(models.Model):
 
 
 class LessonAttachment(models.Model):
-    lesson = models.ForeignKey("coursedetail.Lession", on_delete=models.CASCADE)
+    lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
     Lesson_attachment = models.FileField(
         upload_to="documents/", null=True, blank=True, default=None
     )
