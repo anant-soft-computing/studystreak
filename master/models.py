@@ -97,15 +97,25 @@ class batch(models.Model):
         return self.batch_name
 
 
-class LessonAttachment(models.Model):
-    lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
-    Lesson_attachment = models.FileField(
+class Attachment(models.Model):
+    attachment = models.FileField(
         upload_to="documents/", null=True, blank=True, default=None
     )
-    Lesson_attachment_description = models.CharField(
+    attachment_description = models.CharField(
         max_length=200,
         null=True,
         blank=True,
         default=None,
         verbose_name="Attachment Description",
     )
+
+    class Meta:
+        abstract = True
+
+
+class LessonAttachment(Attachment):
+    lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
+
+
+class LessonAssignment(Attachment):
+    lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
