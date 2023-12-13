@@ -27,7 +27,7 @@ class Course(models.Model):
     Support_Available = models.BooleanField(default=False)
 
     # Requirements
-    Requirements = models.ForeignKey(Requirements, on_delete=models.CASCADE)
+    Requirements = models.ManyToManyField(Requirements)
 
     # Batch Timing
 
