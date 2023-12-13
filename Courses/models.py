@@ -7,6 +7,16 @@ from coursedetail.models import Lesson
 from master.models import Category, Language, Level, Outcomes, Requirements, batch
 
 
+class course_type(models.TextChoices):
+    private = "PRIVATE", "PRIVATE"
+    public = "PUBLIC", "PUBLIC"
+
+
+class course_delivery(models.TextChoices):
+    taught = "TAUGHT", "Taught course"
+    self_study = "SELF-STUDY", "Self-study course"
+
+
 class Course(models.Model):
     # Course Detail
     Course_Title = models.CharField(max_length=200)
@@ -51,6 +61,12 @@ class Course(models.Model):
     # Lessons
     Lessons = models.ManyToManyField(Lesson, blank=True)
 
+    course_delivery = models.CharField(
+        max_length=200, null=True, blank=True, choices=course_delivery.choices
+    )
+    course_type = models.CharField(
+        max_length=200, null=True, blank=True, choices=course_type.choices
+    )
     # Django requires this for the admin site
 
     def __str__(self):
