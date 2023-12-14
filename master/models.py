@@ -8,7 +8,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name_plural = "Catergories"
 
 class Level(models.Model):
     name = models.CharField(max_length=200)
@@ -69,7 +70,8 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name_plural = "Countries"
 
 class State(models.Model):
     name = models.CharField(max_length=200)
@@ -83,7 +85,8 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name_plural = "Cities"
 
 class Section(models.Model):
     name = models.CharField(max_length=200)
@@ -101,7 +104,8 @@ class batch(models.Model):
 
     def __str__(self):
         return self.batch_name
-
+    class Meta:
+        verbose_name_plural = "Batches"
 
 class Attachment(models.Model):
     attachment = models.FileField(
