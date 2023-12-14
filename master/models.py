@@ -22,14 +22,16 @@ class Requirements(models.Model):
 
     def __str__(self):
         return self.description[:50]  # Displaying the first 50 characters
-
+    class Meta:
+        verbose_name_plural = "Requirements"
 
 class Outcomes(models.Model):
     description = models.TextField()
 
     def __str__(self):
         return self.description[:50]  # Displaying the first 50 characters
-
+    class Meta:
+        verbose_name_plural = "Outcomes"
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
@@ -50,6 +52,9 @@ class SEOMetakeywords(models.Model):
 
     def __str__(self):
         return " ".join(tag for tag in self.keywords)
+    
+    class Meta:
+        verbose_name_plural = "SEOMetakeywords"
 
 
 class PackageType(models.Model):
