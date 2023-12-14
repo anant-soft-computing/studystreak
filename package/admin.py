@@ -51,6 +51,7 @@ class PackageAdmin(ImportExportModelAdmin):
                     "package_price",
                     "PackageType",
                     "select_course",
+                    "duration",
                 )
             },
         ),
