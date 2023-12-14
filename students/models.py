@@ -72,7 +72,9 @@ class Student(models.Model):
         choices=VisaCounsellingInterest.choices,
         default=VisaCounsellingInterest.YES,
     )
-    course_to_enroll = models.ForeignKey(Package, on_delete=models.SET_NULL, null=True)
+    course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
+    create_batch = models.ForeignKey("master.batch", on_delete=models.CASCADE, )
+    create_course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name

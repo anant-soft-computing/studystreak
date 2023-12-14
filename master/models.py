@@ -100,8 +100,11 @@ class batch(models.Model):
     batch_name = models.CharField(max_length=200, null=True, blank=True)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
-    batch_timing = models.CharField(max_length=200, null=True, blank=True)
-
+    # batch_timing = models.CharField(max_length=200, null=True, blank=True)
+    batch_start_timing = models.TimeField(null=True, blank=True)
+    batch_end_timing = models.TimeField(null=True, blank=True)
+    add_package = models.ForeignKey("package.package", on_delete =models.CASCADE, related_name = "+")
+    create_course = models.ForeignKey("Courses.Course", on_delete =models.CASCADE, related_name = "+")
     def __str__(self):
         return self.batch_name
     class Meta:
