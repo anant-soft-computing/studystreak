@@ -73,7 +73,7 @@ class Lesson(models.Model):
 class QuizOption(models.Model):
     name = models.ForeignKey("Quiz_Question", on_delete=models.CASCADE)
     Answers = models.CharField(max_length=200, null=True, blank=True)
-    # Corect_Answer = models.BooleanField(default=False)
+    correct_answer = models.BooleanField(verbose_name="Is this correct?", default=False)
 
     def __str__(self):
         return str(self.Answers)
