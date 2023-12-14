@@ -30,6 +30,8 @@ class Package(models.Model):
     # Section: DOUBT SOLVING
     group_doubt_solving = models.BooleanField(default=False)
     one_to_one_doubt_solving = models.BooleanField(default=False)
+    validity = models.DateTimeField(null=True, blank=True)
+    duration = models.PositiveIntegerField(help_text = 'in_months')
 
     def __str__(self):
         return self.package_name

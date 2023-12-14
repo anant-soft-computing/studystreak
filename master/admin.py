@@ -68,5 +68,5 @@ class SectionAdmin(ImportExportModelAdmin):
 
 @admin.register(batch)
 class batchAdmin(ImportExportModelAdmin):
-    list_display = ['batch_name', 'batch_startdate', 'batch_enddate', 'batch_timing']
-    search_fields = ['batch_name', 'batch_startdate', 'batch_enddate', 'batch_timing']
+    list_display = ['batch_name', 'batch_startdate', 'batch_enddate', 'batch_start_timing', 'batch_end_timing']
+    search_fields = ['batch_name', 'batch_startdate', 'batch_enddate', 'batch_start_timing', 'batch_end_timing']
