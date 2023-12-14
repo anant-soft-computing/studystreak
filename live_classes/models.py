@@ -22,3 +22,7 @@ class LiveClass(models.Model):
 
     def __str__(self):
         return self.meeting_title
+
+    class Meta:
+        verbose_name_plural = "LiveClasses"
+        
