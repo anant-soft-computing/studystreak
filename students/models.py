@@ -1,8 +1,4 @@
-from django.contrib.auth.models import (
-    AbstractBaseUser,
-    BaseUserManager,
-    PermissionsMixin,
-)
+from django.contrib.auth.models import BaseUserManager, User
 from django.db import models
 
 # from package.models import Package  # Assuming the City, State, and Country are modeled in the Package app
@@ -15,15 +11,21 @@ from package.models import Package
 
 
 class StudentManager(BaseUserManager):
-    def create_user(self, username, email, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, **extra_fields)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
 
-class Student(AbstractBaseUser, PermissionsMixin):
+class Student(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        help_text="Create a student user first and then add the student details",
+    )
+
     class Gender(models.TextChoices):
         MALE = "Male", "Male"
         FEMALE = "Female", "Female"
@@ -34,10 +36,6 @@ class Student(AbstractBaseUser, PermissionsMixin):
         NO = "No", "No"
 
     # Section: Basic Info
-    first_name = models.CharField(max_length=100)
-    middle_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField()
     gender = models.CharField(
         max_length=20, choices=Gender.choices, default=Gender.MALE
     )
@@ -74,18 +72,11 @@ class Student(AbstractBaseUser, PermissionsMixin):
         choices=VisaCounsellingInterest.choices,
         default=VisaCounsellingInterest.YES,
     )
-    # Section: Login Credential
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
     course_to_enroll = models.ForeignKey(Package, on_delete=models.SET_NULL, null=True)
 
-    groups = models.ManyToManyField("auth.Group", related_name="student_groups")
-    user_permissions = models.ManyToManyField(
-        "auth.Permission", related_name="student_user_permissions"
-    )
-    objects = StudentManager()
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
-
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.user.first_name + " " + self.user.last_name
+
+    def delete(self, *args, **kwargs):
+        self.user.delete()
+        return super().delete(*args, **kwargs)
