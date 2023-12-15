@@ -19,6 +19,8 @@ class StudentAdmin(admin.ModelAdmin):
         "country_interested_in",
         "remark",
         "interested_in_visa_counselling",
+        'create_batch',
+        'create_course'
     )
 
     admin.display(empty_value="???")
@@ -43,6 +45,8 @@ class StudentAdmin(admin.ModelAdmin):
         "gre_taken_before",
         "gmat_taken_before",
         "interested_in_visa_counselling",
+        'create_batch',
+        'create_course',
     ]
 
     # # Jazzmin fieldsets

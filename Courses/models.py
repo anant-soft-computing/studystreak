@@ -47,8 +47,8 @@ class Course(models.Model):
     Outcome = models.ManyToManyField(Outcomes)
 
     # Course Price
-    Course_Price = models.PositiveIntegerField()
-    Discount_in_percent = models.PositiveIntegerField()
+    # Course_Price = models.PositiveIntegerField()
+    # Discount_in_percent = models.PositiveIntegerField()
 
     # Course Media
     Course_Overview_Provider = models.CharField(max_length=200)
@@ -59,7 +59,7 @@ class Course(models.Model):
     SEO_Meta_Keywords = ArrayField(models.SlugField(max_length=200), blank=True)
     Meta_Description = ArrayField(models.SlugField(max_length=200), blank=True)
     # Lessons
-    Lessons = models.ManyToManyField(Lesson, blank=True)
+    lessons = models.ManyToManyField(Lesson, blank=True)
 
     course_delivery = models.CharField(
         max_length=200, null=True, blank=True, choices=course_delivery.choices
@@ -68,6 +68,10 @@ class Course(models.Model):
         max_length=200, null=True, blank=True, choices=course_type.choices
     )
     # Django requires this for the admin site
+    add_batch = models.ForeignKey(
+        "master.batch", on_delete=models.CASCADE, related_name="+"
+    )
+    add_package = models.ForeignKey("package.Package", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Course_Title
