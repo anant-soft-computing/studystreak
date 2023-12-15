@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "Reading_Exam",
     "Writing_Exam",
     "Speaking_Exam",
+    "studystreak_api",
 ]
 
 MIDDLEWARE = [
