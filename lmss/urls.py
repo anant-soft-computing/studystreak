@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from assessment.views import assessmentListView, assessmentRetUpdDelView, LoginView
+from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
 from Listening_Exam.views import *
@@ -50,6 +50,8 @@ from website.views import (
     HomepageSliderRetUpdDelView,
 )
 from Writing_Exam.views import *
+
+from studystreak_api.views import LoginView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
