@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from assessment.views import assessmentListView, assessmentRetUpdDelView
+from assessment.views import assessmentListView, assessmentRetUpdDelView, LoginView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
 from Listening_Exam.views import *
@@ -53,6 +53,7 @@ from Writing_Exam.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('api/login/', LoginView.as_view()),
     path("api/assessmentview/", assessmentListView.as_view()),
     path("api/assessmentretupddelview/<int:pk>/", assessmentRetUpdDelView.as_view()),
     path("api/lssonview/", LessonListView.as_view()),
