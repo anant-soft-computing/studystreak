@@ -34,7 +34,8 @@ class CourseAdmin(ImportExportModelAdmin):
         "SEO_Meta_Keywords",
         "Meta_Description",
     ]
-    list_filter = [
+    list_filter = (
+        "Course_Title",
         "Category",
         "Level",
         "Language",
@@ -46,11 +47,9 @@ class CourseAdmin(ImportExportModelAdmin):
         "Featured",
         "Support_Available",
         "Course_Overview_Provider",
-        "Course_Overview_URL",
-        "Course_Thumbnail",
-        "SEO_Meta_Keywords",
-        "Meta_Description",
-    ]
+        "lessons",
+    )
+    filter_horizonal = ("lessons",)
     search_fields = [
         "Course_Title",
         "Short_Description",
@@ -63,7 +62,6 @@ class CourseAdmin(ImportExportModelAdmin):
         "enrollment_count",
         "is_active",
         "faqs",
-        "lessons",
     ]
 
     # Using fieldsets to organize the admin form into sections/tabs as per Jazzmin theme

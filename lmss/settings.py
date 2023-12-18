@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ["65.20.73.247", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "master",
     "Courses",
     "live_classes",

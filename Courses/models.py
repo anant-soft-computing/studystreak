@@ -36,17 +36,9 @@ class Course(models.Model):
     Featured = models.BooleanField(default=False)
     Support_Available = models.BooleanField(default=False)
 
-    # Requirements
     Requirements = models.ManyToManyField(Requirements)
 
-    # Batch Timing
-
-    # Outcome
     Outcome = models.ManyToManyField(Outcomes)
-
-    # Course Price
-    # Course_Price = models.PositiveIntegerField()
-    # Discount_in_percent = models.PositiveIntegerField()
 
     # Course Media
     Course_Overview_Provider = models.CharField(max_length=200)
