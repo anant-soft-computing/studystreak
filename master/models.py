@@ -154,3 +154,12 @@ class LessonAssignment(Attachment):
 class CourseMaterial(models.Model):
     course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE)
     course_material = models.FileField(upload_to="course_materials/")
+
+
+class AdditionalResource(models.Model):
+    info = models.CharField(max_length=255)
+    course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE)
+    course_files = models.FileField(upload_to="additional-course-docs/", max_length=100)
+
+    def __str__(self):
+        return self.info
