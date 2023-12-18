@@ -29,7 +29,6 @@ class Course(models.Model):
     Language = models.ForeignKey(Language, on_delete=models.CASCADE)
     EnrollmentStartDate = models.DateField()
     EnrollmentEndDate = models.DateField()
-    enrollment_count = models.IntegerField(default=0)
     max_enrollments = models.IntegerField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     faqs = models.TextField(null=True, blank=True)
