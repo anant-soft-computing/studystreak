@@ -72,6 +72,7 @@ class CourseAdmin(ImportExportModelAdmin):
             {
                 "fields": (
                     "Course_Title",
+                    "course_identifier",
                     "Short_Description",
                     "Description",
                     "Category",
