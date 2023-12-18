@@ -25,8 +25,6 @@ class CourseAdmin(ImportExportModelAdmin):
         "Course_Thumbnail",
         "SEO_Meta_Keywords",
         "Meta_Description",
-        "add_batch",
-        "add_package",
     ]
     list_filter = [
         "Category",
@@ -44,8 +42,6 @@ class CourseAdmin(ImportExportModelAdmin):
         "Course_Thumbnail",
         "SEO_Meta_Keywords",
         "Meta_Description",
-        "add_batch",
-        "add_package",
     ]
     search_fields = [
         "Course_Title",

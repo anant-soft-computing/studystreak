@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 from coursedetail.models import Lesson
-from master.models import Category, Language, Level, Outcomes, Requirements, batch
+from master.models import Category, Language, Level, Outcomes, Requirements
 
 
 class course_type(models.TextChoices):
@@ -41,8 +41,6 @@ class Course(models.Model):
 
     # Batch Timing
 
-    Batch_Timing = models.ForeignKey(batch, max_length=200, on_delete=models.CASCADE)
-
     # Outcome
     Outcome = models.ManyToManyField(Outcomes)
 
@@ -67,11 +65,6 @@ class Course(models.Model):
     course_type = models.CharField(
         max_length=200, null=True, blank=True, choices=course_type.choices
     )
-    # Django requires this for the admin site
-    add_batch = models.ForeignKey(
-        "master.batch", on_delete=models.CASCADE, related_name="+"
-    )
-    add_package = models.ForeignKey("package.Package", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Course_Title
