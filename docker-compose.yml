@@ -41,6 +41,7 @@ services:
     volumes:
       - staticfiles:/home/app/staticfiles/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./front/:/usr/share/nginx/html/
     depends_on:
       - backend
 volumes:

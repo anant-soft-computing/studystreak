@@ -4,4 +4,6 @@ FROM nginx:latest
 
 RUN mkdir -p /home/app/staticfiles
 
+RUN mkdir -p /usr/share/nginx/html
+
 COPY ./front/ /usr/share/nginx/html
