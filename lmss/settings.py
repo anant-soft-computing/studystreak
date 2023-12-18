@@ -17,7 +17,7 @@ SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["65.20.73.247", "localhost"]
+# ALLOWED_HOSTS = ["65.20.73.247", "localhost"]
 
 
 # Application definition
@@ -135,6 +135,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = "/var/www/static/"
 MEDIA_ROOT = "/var/www/media/"
+
+PASSWORD_RESET_TIMEOUT = 900
+
+
+# Email setting
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "mehulmac777@gmail.com"
+EMAIL_HOST_PASSWORD = "096380309561"
+EMAIL_USE_TLS = True
 
 JAZZMIN_SETTINGS = {
     "topmenu_links": [
