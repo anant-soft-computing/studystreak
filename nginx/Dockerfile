@@ -4,6 +4,6 @@ FROM nginx:latest
 
 RUN mkdir -p /home/app/staticfiles
 
-RUN mkdir -p /usr/share/nginx/html
+RUN mkdir -p /home/studystreak
 
-COPY ./front/ /usr/share/nginx/html
+COPY ./front/ /home/studystreak
