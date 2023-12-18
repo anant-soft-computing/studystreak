@@ -84,6 +84,7 @@ class CourseAdmin(ImportExportModelAdmin):
                     "Support_Available",
                     "course_type",
                     "course_delivery",
+                    "primary_instructor",
                     "is_active",
                     "faqs",
                 )
