@@ -51,8 +51,11 @@ from website.views import (
 )
 from Writing_Exam.views import *
 
+from studystreak_api.views import LoginView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('api/login/', LoginView.as_view()),
     path("api/assessmentview/", assessmentListView.as_view()),
     path("api/assessmentretupddelview/<int:pk>/", assessmentRetUpdDelView.as_view()),
     path("api/lssonview/", LessonListView.as_view()),

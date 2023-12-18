@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import assessment
-
+from django.contrib.auth.models import User
 
 class assessmentListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,5 +17,4 @@ class assessmentRetUpdDelSerializer(serializers.ModelSerializer):
         
         depth = 2
         
-
 
