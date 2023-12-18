@@ -8,8 +8,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
     class Meta:
         verbose_name_plural = "Catergories"
+
 
 class Level(models.Model):
     name = models.CharField(max_length=200)
@@ -23,16 +25,20 @@ class Requirements(models.Model):
 
     def __str__(self):
         return self.description[:50]  # Displaying the first 50 characters
+
     class Meta:
         verbose_name_plural = "Requirements"
+
 
 class Outcomes(models.Model):
     description = models.TextField()
 
     def __str__(self):
         return self.description[:50]  # Displaying the first 50 characters
+
     class Meta:
         verbose_name_plural = "Outcomes"
+
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
@@ -53,7 +59,7 @@ class SEOMetakeywords(models.Model):
 
     def __str__(self):
         return " ".join(tag for tag in self.keywords)
-    
+
     class Meta:
         verbose_name_plural = "SEOMetakeywords"
 
@@ -70,8 +76,10 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
     class Meta:
         verbose_name_plural = "Countries"
+
 
 class State(models.Model):
     name = models.CharField(max_length=200)
@@ -85,8 +93,10 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+
     class Meta:
         verbose_name_plural = "Cities"
+
 
 class Section(models.Model):
     name = models.CharField(max_length=200)
@@ -103,12 +113,19 @@ class batch(models.Model):
     # batch_timing = models.CharField(max_length=200, null=True, blank=True)
     batch_start_timing = models.TimeField(null=True, blank=True)
     batch_end_timing = models.TimeField(null=True, blank=True)
-    add_package = models.ForeignKey("package.package", on_delete =models.CASCADE, related_name = "+")
-    create_course = models.ForeignKey("Courses.Course", on_delete =models.CASCADE, related_name = "+")
+    add_package = models.ForeignKey(
+        "package.package", on_delete=models.CASCADE, related_name="+"
+    )
+    create_course = models.ForeignKey(
+        "Courses.Course", on_delete=models.CASCADE, related_name="+"
+    )
+
     def __str__(self):
         return self.batch_name
+
     class Meta:
         verbose_name_plural = "Batches"
+
 
 class Attachment(models.Model):
     attachment = models.FileField(
@@ -132,3 +149,8 @@ class LessonAttachment(Attachment):
 
 class LessonAssignment(Attachment):
     lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
+
+
+class CourseMaterial(models.Model):
+    course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE)
+    course_material = models.FileField(upload_to="course_materials/")

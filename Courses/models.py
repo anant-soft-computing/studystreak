@@ -52,7 +52,6 @@ class Course(models.Model):
     Course_Overview_Provider = models.CharField(max_length=200)
     Course_Overview_URL = models.URLField()
     Course_Thumbnail = models.ImageField(upload_to="course_thumbnails/")
-    course_material = models.CharField(max_length=200, null=True, blank=True)
     # Course SEO
     SEO_Meta_Keywords = ArrayField(models.SlugField(max_length=200), blank=True)
     Meta_Description = ArrayField(models.SlugField(max_length=200), blank=True)
