@@ -1,11 +1,12 @@
 # students/admin.py
 
 from django.contrib import admin
+from import_export.admin import ExportMixin
 
 from .models import Student
 
 
-class StudentAdmin(admin.ModelAdmin):
+class StudentAdmin(ExportMixin, admin.ModelAdmin):
     list_display = (
         "first_name",
         "last_name",
@@ -19,8 +20,8 @@ class StudentAdmin(admin.ModelAdmin):
         "country_interested_in",
         "remark",
         "interested_in_visa_counselling",
-        'create_batch',
-        'create_course'
+        "create_batch",
+        "create_course",
     )
 
     admin.display(empty_value="???")
@@ -45,10 +46,14 @@ class StudentAdmin(admin.ModelAdmin):
         "gre_taken_before",
         "gmat_taken_before",
         "interested_in_visa_counselling",
-        'create_batch',
-        'create_course',
+        "create_batch",
+        "create_course",
     ]
 
+    search_fields = (
+        "user__first_name",
+        "user__last_name",
+    )
     # # Jazzmin fieldsets
     # fieldsets = (
     #     (
