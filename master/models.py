@@ -162,3 +162,15 @@ class AdditionalResource(models.Model):
 
     def __str__(self):
         return self.info
+
+
+class Cupon(models.Model):
+    cupon_name = models.CharField(max_length=200, null=True)
+    campaign_name = models.CharField(max_length=50)
+    cupon_code = models.CharField(max_length=50)
+    discount = models.IntegerField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.cupon_name
