@@ -17,8 +17,7 @@ SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["65.20.73.247", "localhost"]
-
+ALLOWED_HOSTS = ["65.20.73.247", "localhost",]
 
 # Application definition
 
@@ -66,11 +65,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "lmss.urls"
-
+import os
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
