@@ -100,7 +100,6 @@ class City(models.Model):
 
 class Section(models.Model):
     name = models.CharField(max_length=200)
-    course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
