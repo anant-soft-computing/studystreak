@@ -88,6 +88,7 @@ class CourseAdmin(ImportExportModelAdmin):
                     "primary_instructor",
                     "is_active",
                     "faqs",
+                    "tutor",
                 )
             },
         ),
