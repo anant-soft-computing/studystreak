@@ -17,8 +17,7 @@ SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ["65.20.73.247", "localhost",]
+ALLOWED_HOSTS = ["65.20.73.247", "localhost",]
 
 # Application definition
 
@@ -63,11 +62,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "lmss.urls"
-
+import os
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -145,8 +144,8 @@ PASSWORD_RESET_TIMEOUT = 900
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "machhimehul61@gmail.com"
-EMAIL_HOST_PASSWORD = "120873109012"
+EMAIL_HOST_USER = "noreply.oecindia@gmail.com"
+EMAIL_HOST_PASSWORD = "ktbiipsiktogqhwo"
 EMAIL_USE_TLS = True
 
 JAZZMIN_SETTINGS = {
