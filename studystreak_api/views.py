@@ -48,7 +48,7 @@ class RegistrationView(APIView):
            
             subject = 'Registration Confirmation'
             message = 'Thank you for registering!'
-            from_email = 'machhimehul12@gmail.com'  
+            from_email = 'machhimehul61@gmail.com'  
             recipient_list = [user.email]
 
             send_mail(subject, message, from_email, recipient_list)

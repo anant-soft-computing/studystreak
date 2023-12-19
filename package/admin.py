@@ -19,7 +19,6 @@ class PackageAdmin(ImportExportModelAdmin):
         "practice_test",
         "speaking_test",
         "writing_evaluation",
-        "Total_test",
         "live_classes_membership",
         "group_doubt_solving",
         "one_to_one_doubt_solving",
@@ -33,7 +32,6 @@ class PackageAdmin(ImportExportModelAdmin):
         "practice_test",
         "speaking_test",
         "writing_evaluation",
-        "Total_test",
         "live_classes_membership",
         "group_doubt_solving",
         "one_to_one_doubt_solving",
@@ -61,10 +59,12 @@ class PackageAdmin(ImportExportModelAdmin):
             {
                 "fields": (
                     "full_length_test",
+                    "full_length_test_count",
                     "practice_test",
+                    "practice_test_count",
                     "speaking_test",
+                    "speaking_test_count",
                     "writing_evaluation",
-                    "Total_test",
                 )
             },
         ),
@@ -80,7 +80,14 @@ class PackageAdmin(ImportExportModelAdmin):
         ),
         (
             "DOUBT SOLVING",
-            {"fields": ("group_doubt_solving", "one_to_one_doubt_solving")},
+            {
+                "fields": (
+                    "group_doubt_solving",
+                    "group_doubt_solving_count",
+                    "one_to_one_doubt_solving",
+                    "one_to_one_doubt_solving_count",
+                )
+            },
         ),
     )
 
