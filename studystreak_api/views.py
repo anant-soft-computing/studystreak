@@ -19,6 +19,11 @@ from rest_framework import status
 from .renderers import UserRenderes
 from rest_framework.permissions import IsAuthenticated
 from django.core.mail import send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
+
 
 #################### Login #####################
 
@@ -30,6 +35,7 @@ def get_tokens_for_user(user):
         "access": str(refresh.access_token),
     }
 
+from students.models import Student
 class RegistrationView(APIView):
     # renderer_classes = [UserRenderes]
     # def post(self,request):
@@ -44,15 +50,27 @@ class RegistrationView(APIView):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            Student.objects.create(user=user)
             print(user)
+            
            
             subject = 'Registration Confirmation'
             message = 'Thank you for registering!'
-            from_email = 'machhimehul61@gmail.com'  
             recipient_list = [user.email]
+            context = {}
+            from_email = settings.EMAIL_HOST_USER
+            html_message = render_to_string("emails/email-verification.html", context=context)
+            plain_message = strip_tags(html_message)
 
-            send_mail(subject, message, from_email, recipient_list)
-            print(send_mail)
+            message = EmailMultiAlternatives(
+                subject=subject,
+                body=plain_message,
+                from_email=from_email,
+                to=recipient_list,
+            )
+
+            message.attach_alternative(html_message, "text/html")
+            message.send()
             return Response({"msg": "Registration successful"}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
