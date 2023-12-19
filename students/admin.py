@@ -1,12 +1,39 @@
 # students/admin.py
 
+import json
+
 from django.contrib import admin
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import Count
+from django.db.models.functions import TruncDay
 from import_export.admin import ExportMixin
 
 from .models import Student
 
 
 class StudentAdmin(ExportMixin, admin.ModelAdmin):
+    ordering = ("-created_at",)
+    date_hierarchy = "created_at"
+
+    def changelist_view(self, request, extra_content=None):
+        response = super().changelist_view(request, extra_context=extra_content)
+        queryset = response.context_data["cl"].queryset
+        chart_data = self.chart_data(queryset)
+        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
+        response.context_data.update({"chart_data": as_json})
+        return response
+
+    def chart_data(self, queryset):
+        return (
+            queryset.annotate(date=TruncDay("created_at"))
+            .values("date")
+            .annotate(y=Count("id"))
+            .order_by("-date")
+        )
+
+    import_export_change_list_template = (
+        "admin/students/student/change_list_export.html"
+    )
     list_display = (
         "first_name",
         "last_name",

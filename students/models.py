@@ -73,8 +73,16 @@ class Student(models.Model):
         default=VisaCounsellingInterest.YES,
     )
     course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
-    create_batch = models.ForeignKey("master.batch", on_delete=models.CASCADE, )
-    create_course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE,)
+    create_batch = models.ForeignKey(
+        "master.batch",
+        on_delete=models.CASCADE,
+    )
+    create_course = models.ForeignKey(
+        "Courses.Course",
+        on_delete=models.CASCADE,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name

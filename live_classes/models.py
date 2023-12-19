@@ -25,4 +25,3 @@ class LiveClass(models.Model):
 
     class Meta:
         verbose_name_plural = "LiveClasses"
-        

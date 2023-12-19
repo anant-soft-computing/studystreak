@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
@@ -39,6 +39,14 @@ from QuestionBank.views import *
 from Reading_Exam.views import *
 from Speaking_Exam.views import *
 from students.views import *
+from studystreak_api.views import (
+    ChangePasswordView,
+    LoginView,
+    PasswordResetView,
+    ProfileView,
+    RegistrationView,
+    SendPasswordResetView,
+)
 from website.views import (
     BlogListView,
     BlogRetUpdDelViews,
@@ -51,11 +59,10 @@ from website.views import (
 )
 from Writing_Exam.views import *
 
-from studystreak_api.views import LoginView,  RegistrationView, ProfileView, ChangePasswordView, SendPasswordResetView,PasswordResetView
-
 urlpatterns = [
+    path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
-    path('api/login/', LoginView.as_view()),
+    path("api/login/", LoginView.as_view()),
     path("api/assessmentview/", assessmentListView.as_view()),
     path("api/assessmentretupddelview/<int:pk>/", assessmentRetUpdDelView.as_view()),
     path("api/lssonview/", LessonListView.as_view()),
@@ -204,12 +211,15 @@ urlpatterns = [
         "api/SpeakingQuestionTyperetupddelview/<int:pk>/",
         SpeakingQuestionTypeRetUpdDelViews.as_view(),
     ),
-    
-    path("api/registration/",RegistrationView.as_view(), name="registration"),
-    path('api/profile/', ProfileView.as_view(), name='profileview'),
-    path('api/changepassword/', ChangePasswordView.as_view(), name='change-password'),
-    path('api/resetpassword/', SendPasswordResetView.as_view(), name='reset-password'),
-    path('api/resetpassword/<uid>/<token>/', PasswordResetView.as_view(), name="reset-with-link")
+    path("api/registration/", RegistrationView.as_view(), name="registration"),
+    path("api/profile/", ProfileView.as_view(), name="profileview"),
+    path("api/changepassword/", ChangePasswordView.as_view(), name="change-password"),
+    path("api/resetpassword/", SendPasswordResetView.as_view(), name="reset-password"),
+    path(
+        "api/resetpassword/<uid>/<token>/",
+        PasswordResetView.as_view(),
+        name="reset-with-link",
+    ),
 ]
 
 
