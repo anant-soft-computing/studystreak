@@ -139,12 +139,13 @@ MEDIA_ROOT = "/var/www/media/"
 PASSWORD_RESET_TIMEOUT = 900
 
 
+<<<<<<< Updated upstream
 # Email setting
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "mehulmac777@gmail.com"
-EMAIL_HOST_PASSWORD = "096380309561"
+EMAIL_HOST_USER = "machhimehul12@gmail.com"
+EMAIL_HOST_PASSWORD = "9722943121"
 EMAIL_USE_TLS = True
 
 JAZZMIN_SETTINGS = {
@@ -166,3 +167,13 @@ JAZZMIN_SETTINGS = {
         {"app": "books"},
     ],
 }
+=======
+# Email setting 
+import os 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "mehulmac777@gmail.com"
+EMAIL_HOST_PASSWORD = "096380309561"
+EMAIL_USE_TLS = True
+>>>>>>> Stashed changes

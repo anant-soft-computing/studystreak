@@ -210,6 +210,11 @@ urlpatterns = [
     path('api/changepassword/', ChangePasswordView.as_view(), name='change-password'),
     path('api/resetpassword/', SendPasswordResetView.as_view(), name='reset-password'),
     path('api/resetpassword/<uid>/<token>/', PasswordResetView.as_view(), name="reset-with-link")
+<<<<<<< Updated upstream
+=======
+    
+    
+>>>>>>> Stashed changes
 ]
 
 

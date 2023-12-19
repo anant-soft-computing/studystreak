@@ -12,12 +12,8 @@ from rest_framework import (
 from rest_framework.views import APIView  # noqa: F811
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .serializers import LoginSerializer
-from rest_framework.response import Response
-from .serializers import (ChangePasswordSerializer, LoginSerializer, PasswordResetSerializer, RegisterSerializer, 
-                          ResetPasswordSerializer, UserProfileSerializer)
-from rest_framework import status
-from .renderers import UserRenderes
-from rest_framework.permissions import IsAuthenticated
+
+
 
 #################### Login #####################
 
@@ -29,16 +25,6 @@ def get_tokens_for_user(user):
         "access": str(refresh.access_token),
     }
 
-class RegistrationView(APIView):
-    renderer_classes = [UserRenderes]
-    def post(self,request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-
-            return Response({"msg": "Registration successful"}, status=status.HTTP_201_CREATED)
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
     def post(self, request, format=None):
