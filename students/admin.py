@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
 from django.db.models.functions import TruncDay
+from django.template.response import TemplateResponse
 from import_export.admin import ExportMixin
 
 from .models import Student
@@ -15,12 +16,24 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
     ordering = ("-created_at",)
     date_hierarchy = "created_at"
 
-    def changelist_view(self, request, extra_content=None):
-        response = super().changelist_view(request, extra_context=extra_content)
-        queryset = response.context_data["cl"].queryset
-        chart_data = self.chart_data(queryset)
-        as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
-        response.context_data.update({"chart_data": as_json})
+    # def changelist_view(self, request, extra_content=None):
+    #     response = super().changelist_view(request, extra_context=extra_content)
+    #     queryset = response.context_data["cl"].queryset
+    #     chart_data = self.chart_data(queryset)
+    #     as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
+    #     response.context_data.update({"chart_data": as_json})
+    #     return response
+
+    def changelist_view(self, request, extra_context=None):
+        response = super().changelist_view(request, extra_context=extra_context)
+        try:
+            if isinstance(response, TemplateResponse):
+                queryset = response.context_data["cl"].queryset
+                chart_data = self.chart_data(queryset)
+                as_json = json.dumps(list(chart_data), cls=DjangoJSONEncoder)
+                response.context_data.update({"chart_data": as_json})
+        except KeyError:
+            pass
         return response
 
     def chart_data(self, queryset):
@@ -49,6 +62,7 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
         "interested_in_visa_counselling",
         "create_batch",
         "create_course",
+        "referal_code",
     )
 
     admin.display(empty_value="???")
@@ -81,6 +95,7 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
         "user__first_name",
         "user__last_name",
     )
+    readonly_fields = ("referal_code",)
     # # Jazzmin fieldsets
     # fieldsets = (
     #     (

@@ -1,3 +1,6 @@
+import base64
+import uuid
+
 from django.contrib.auth.models import BaseUserManager, User
 from django.db import models
 
@@ -50,7 +53,7 @@ class Student(models.Model):
     )
     phone_no = models.CharField(max_length=15, null=True)
     whatsapp_no = models.CharField(max_length=15, null=True)
-    reference_by = models.TextField( null=True)
+    reference_by = models.TextField(null=True)
     country_interested_in = models.ForeignKey(
         Country,
         related_name="student_interest_country",
@@ -64,32 +67,41 @@ class Student(models.Model):
     toefl_taken_before = models.BooleanField(default=False)
     gre_taken_before = models.BooleanField(default=False)
     gmat_taken_before = models.BooleanField(default=False)
-    remark = models.TextField( null=True)
-    biography = models.TextField( null=True)  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
+    remark = models.TextField(null=True)
+    biography = models.TextField(
+        null=True
+    )  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
     user_image = models.ImageField(upload_to="student_images/", null=True)
     interested_in_visa_counselling = models.CharField(
         max_length=50,
         choices=VisaCounsellingInterest.choices,
         default=VisaCounsellingInterest.YES,
-        null=True
+        null=True,
     )
     course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
     create_batch = models.ForeignKey(
-        "master.batch",
-        on_delete=models.CASCADE,
-        null=True
+        "master.batch", on_delete=models.CASCADE, null=True
     )
     create_course = models.ForeignKey(
-        "Courses.Course",
-        on_delete=models.CASCADE,
-        null=True
+        "Courses.Course", on_delete=models.CASCADE, null=True
     )
+    referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.referal_code = self.generate_verification_code()
+        return super().save(*args, **kwargs)
+
     def delete(self, *args, **kwargs):
         self.user.delete()
         return super().delete(*args, **kwargs)
+
+    def generate_verification_code(self):
+        uuid_bytes = uuid.uuid1().bytes
+        # uuid.uuid1().bytes.decode("base64").rstrip()
+        return base64.urlsafe_b64encode(uuid_bytes).decode("utf-8")[:10]
