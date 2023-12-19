@@ -48,38 +48,41 @@ class Student(models.Model):
     city = models.ForeignKey(
         City, related_name="student_city", on_delete=models.SET_NULL, null=True
     )
-    phone_no = models.CharField(max_length=15)
-    whatsapp_no = models.CharField(max_length=15)
-    reference_by = models.TextField()
+    phone_no = models.CharField(max_length=15, null=True)
+    whatsapp_no = models.CharField(max_length=15, null=True)
+    reference_by = models.TextField( null=True)
     country_interested_in = models.ForeignKey(
         Country,
         related_name="student_interest_country",
         on_delete=models.SET_NULL,
         null=True,
     )
-    last_education = models.CharField(max_length=200)
+    last_education = models.CharField(max_length=200, null=True)
     ielts_taken_before = models.BooleanField(default=False)
     duolingo_taken_before = models.BooleanField(default=False)
     pte_taken_before = models.BooleanField(default=False)
     toefl_taken_before = models.BooleanField(default=False)
     gre_taken_before = models.BooleanField(default=False)
     gmat_taken_before = models.BooleanField(default=False)
-    remark = models.TextField()
-    biography = models.TextField()  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
-    user_image = models.ImageField(upload_to="student_images/")
+    remark = models.TextField( null=True)
+    biography = models.TextField( null=True)  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
+    user_image = models.ImageField(upload_to="student_images/", null=True)
     interested_in_visa_counselling = models.CharField(
         max_length=50,
         choices=VisaCounsellingInterest.choices,
         default=VisaCounsellingInterest.YES,
+        null=True
     )
     course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
     create_batch = models.ForeignKey(
         "master.batch",
         on_delete=models.CASCADE,
+        null=True
     )
     create_course = models.ForeignKey(
         "Courses.Course",
         on_delete=models.CASCADE,
+        null=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

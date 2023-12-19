@@ -23,6 +23,7 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ["username", "password"]
 
 class RegisterSerializer(serializers.ModelSerializer):
+  
   email = serializers.EmailField(
     required=True,
     validators=[UniqueValidator(queryset=User.objects.all())]
