@@ -49,12 +49,15 @@ INSTALLED_APPS = [
     "Reading_Exam",
     "Writing_Exam",
     "Speaking_Exam",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -128,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "staticfiles/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -145,9 +148,12 @@ PASSWORD_RESET_TIMEOUT = 900
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "machhimehul61@gmail.com"
-EMAIL_HOST_PASSWORD = "120873109012"
+EMAIL_HOST_USER = "noreply.oecindia@gmail.com"
+EMAIL_HOST_PASSWORD = "ktbiipsiktogqhwo"
 EMAIL_USE_TLS = True
+
+# gmail password: oecindia@123
+
 
 JAZZMIN_SETTINGS = {
     "topmenu_links": [
@@ -174,3 +180,11 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    "APPEND_SLASH": True,
+}
+
+APPEND_SLASH = True
