@@ -40,6 +40,7 @@ class Package(models.Model):
     one_to_one_doubt_solving_count = models.PositiveIntegerField(default=0)
     validity = models.DateTimeField(null=True, blank=True)
     duration = models.PositiveIntegerField(help_text="in_months")
+    coupon_code = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.package_name

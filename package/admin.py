@@ -50,6 +50,7 @@ class PackageAdmin(ImportExportModelAdmin):
                     "PackageType",
                     "select_course",
                     "duration",
+                    "coupon_code",
                 )
             },
         ),
