@@ -5,6 +5,14 @@ from .models import Answer, Exam
 # Register your models here.
 
 
+class AnswerInline(admin.TabularInline):
+    """Tabular Inline View for Answer"""
+
+    model = Answer
+    extra = 1
+    fk_name = "exam"
+
+
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     pass
@@ -12,4 +20,4 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
-    pass
+    inlines = [AnswerInline]

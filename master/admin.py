@@ -9,16 +9,28 @@ from .models import (
     Country,
     CourseOverview,
     Cupon,
+    ExamType,
     Language,
     Level,
     Outcomes,
     PackageType,
+    QuestionType,
     Requirements,
     Section,
     SEOMetakeywords,
     State,
     batch,
 )
+
+
+@admin.register(ExamType)
+class ExamTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(QuestionType)
+class QuestionTypeAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Category)

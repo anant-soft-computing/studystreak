@@ -1,5 +1,5 @@
+from ckeditor.fields import RichTextField
 from django.db import models
-from froala_editor.fields import FroalaField
 
 from master.models import ExamType, QuestionType
 
@@ -21,9 +21,9 @@ class Exam(models.Model):
     exam_Name = models.CharField(max_length=10)
     exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
     question_type = models.ForeignKey(QuestionType, on_delete=models.CASCADE)
-    passage = FroalaField()
+    passage = RichTextField()
     no_of_questions = models.IntegerField(default=4)
-    question = FroalaField()
+    question = RichTextField()
     block_type = models.CharField(max_length=20, choices=BlockType.choices, null=True)
     difficulty_level = models.CharField(
         max_length=20, choices=Difficulty.choices, null=True
