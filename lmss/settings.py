@@ -17,7 +17,10 @@ SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["65.20.73.247", "localhost",]
+ALLOWED_HOSTS = [
+    "65.20.73.247",
+    "localhost",
+]
 
 # Application definition
 
@@ -49,6 +52,8 @@ INSTALLED_APPS = [
     "Writing_Exam",
     "Speaking_Exam",
     "corsheaders",
+    "exam",
+    "froala_editor",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +71,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "lmss.urls"
 import os
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

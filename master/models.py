@@ -174,3 +174,17 @@ class Cupon(models.Model):
 
     def __str__(self):
         return self.cupon_name
+
+
+class ExamType(models.Model):
+    exam_type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.exam_type
+
+
+class QuestionType(models.Model):
+    question_type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.question_type

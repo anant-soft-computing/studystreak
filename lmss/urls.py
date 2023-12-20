@@ -211,12 +211,16 @@ urlpatterns = [
         "api/SpeakingQuestionTyperetupddelview/<int:pk>/",
         SpeakingQuestionTypeRetUpdDelViews.as_view(),
     ),
-    
-    path("api/registration/",RegistrationView.as_view(), name="registration"),
-    path('api/profile/', ProfileView.as_view(), name='profileview'),
-    path('api/changepassword/', ChangePasswordView.as_view(), name='change-password'),
-    path('api/resetpassword/', SendPasswordResetView.as_view(), name='reset-password'),
-    path('api/resetpassword/<uid>/<token>/', PasswordResetView.as_view(), name="reset-with-link")
+    path("api/registration/", RegistrationView.as_view(), name="registration"),
+    path("api/profile/", ProfileView.as_view(), name="profileview"),
+    path("api/changepassword/", ChangePasswordView.as_view(), name="change-password"),
+    path("api/resetpassword/", SendPasswordResetView.as_view(), name="reset-password"),
+    path(
+        "api/resetpassword/<uid>/<token>/",
+        PasswordResetView.as_view(),
+        name="reset-with-link",
+    ),
+    path("froala_editor/", include("froala_editor.urls")),
 ]
 
 
