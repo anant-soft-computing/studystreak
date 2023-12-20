@@ -173,7 +173,7 @@ class Cupon(models.Model):
     end_date = models.DateTimeField()
 
     def __str__(self):
-        return self.cupon_name
+        return self.cupon_name - self.cupon_code
 
 
 class ExamType(models.Model):
