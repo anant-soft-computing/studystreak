@@ -193,3 +193,19 @@ REST_FRAMEWORK = {
 }
 
 APPEND_SLASH = True
+
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "extraPlugins": ",".join(
+            [
+                "devtools",
+                "menubutton",
+                "table",
+                "tableresize",
+                "tabletools",
+            ]
+        ),
+    },
+}
