@@ -21,3 +21,36 @@ class AnswerAdmin(admin.ModelAdmin):
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "exam_Name",
+                    "exam_type",
+                ),
+            },
+        ),
+        (
+            "Block details",
+            {
+                "fields": (
+                    "block_type",
+                    "difficulty_level",
+                    "block_threshold",
+                ),
+            },
+        ),
+        (
+            "Question details",
+            {
+                "fields": (
+                    "question_type",
+                    "passage",
+                    "no_of_questions",
+                    "question",
+                ),
+            },
+        ),
+    )
