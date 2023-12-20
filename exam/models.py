@@ -4,6 +4,18 @@ from froala_editor.fields import FroalaField
 from master.models import ExamType, QuestionType
 
 
+class BlockType(models.TextChoices):
+    practice = "Practice", "Practice"
+    full_length = "Full Length", "Full Length"
+    both = "Both", "Both"
+
+
+class Difficulty(models.TextChoices):
+    easy = "Easy", "Easy"
+    medium = "Medium", "Medium"
+    hard = "Hard", "Hard"
+
+
 # Create your models here.
 class Exam(models.Model):
     exam_Name = models.CharField(max_length=10)
@@ -12,6 +24,11 @@ class Exam(models.Model):
     passage = FroalaField()
     no_of_questions = models.IntegerField(default=4)
     question = FroalaField()
+    block_type = models.CharField(max_length=20, choices=BlockType.choices, null=True)
+    difficulty_level = models.CharField(
+        max_length=20, choices=Difficulty.choices, null=True
+    )
+    block_threshold = models.PositiveIntegerField(null=True)
 
     def __str__(self):
         return self.exam_Name
