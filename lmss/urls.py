@@ -62,8 +62,10 @@ from website.views import (
 from Writing_Exam.views import *
 
 router = DefaultRouter()
-router.register("exam-blocks", ExamViewSet, basename="exam-blocks")
-router.register("exam-blocks-answers", AnswerViewSet, basename="exam-blocks-answers")
+router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
+router.register(
+    "api/exam-blocks-answers", AnswerViewSet, basename="exam-blocks-answers"
+)
 
 
 urlpatterns = [
