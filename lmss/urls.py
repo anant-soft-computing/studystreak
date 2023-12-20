@@ -1,9 +1,11 @@
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
+from exam.views import AnswerViewSet, ExamViewSet
 from Listening_Exam.views import *
 from live_classes.views import LiveClassListView, LiveClassRetUpdDelView
 from master.views import (
@@ -58,6 +60,11 @@ from website.views import (
     HomepageSliderRetUpdDelView,
 )
 from Writing_Exam.views import *
+
+router = DefaultRouter()
+router.register("exam-blocks", ExamViewSet, basename="exam-blocks")
+router.register("exam-blocks-answers", AnswerViewSet, basename="exam-blocks-answers")
+
 
 urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
@@ -221,7 +228,7 @@ urlpatterns = [
         name="reset-with-link",
     ),
     path("froala_editor/", include("froala_editor.urls")),
-]
+] + router.urls
 
 
 admin.site.site_header = "StudyStreak Admin"
