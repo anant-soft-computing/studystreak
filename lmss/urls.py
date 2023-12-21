@@ -242,9 +242,9 @@ urlpatterns = [
     ),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
-    path("set-csrf/", set_csrf_token, name="Set-CSRF"),
-    path("login/", login_view, name="Login"),
-    path("test-auth/", CheckAuth.as_view(), name="check-auth"),
+    path("api/test/set-csrf/", set_csrf_token, name="Set-CSRF"),
+    path("api/test/login/", login_view, name="Login"),
+    path("api/test/test-auth/", CheckAuth.as_view(), name="check-auth"),
 ] + router.urls
 
 
