@@ -5,7 +5,9 @@ from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 from django.utils.html import strip_tags
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -87,6 +89,7 @@ class RegistrationView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class LoginView(APIView):
     def post(self, request, format=None):
         serializer = LoginSerializer(data=request.data)
