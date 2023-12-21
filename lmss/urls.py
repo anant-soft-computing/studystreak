@@ -70,7 +70,7 @@ router.register(
 
 
 urlpatterns = [
-    path("li", get_csrf_token, name="csrf-token"),
+    path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
     path("api/login/", LoginView.as_view()),
