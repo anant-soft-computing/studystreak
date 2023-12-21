@@ -20,7 +20,7 @@ class Difficulty(models.TextChoices):
 class Exam(models.Model):
     exam_name = models.CharField(max_length=10)
     exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
-    question_type = models.ForeignKey(QuestionType, on_delete=models.CASCADE)
+    question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextField()
     no_of_questions = models.IntegerField(default=4)
     question = RichTextField()

@@ -7,7 +7,7 @@ from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
 from exam.views import AnswerViewSet, ExamViewSet
-from Listening_Exam.views import *
+from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from live_classes.views import LiveClassListView, LiveClassRetUpdDelView
 from master.views import (
     CategoryListView,
@@ -26,6 +26,7 @@ from master.views import (
     OutcomesRetUpdDelView,
     PackageTypeListView,
     PackageTypeRetUpdDelView,
+    QuestionTypeView,
     RequirementsListView,
     RequirementsRetUpdDelView,
     SectionListView,
@@ -38,18 +39,21 @@ from master.views import (
     batchRetUpdDelView,
 )
 from package.views import PackageListView, PackageRetUpdDelView
-from QuestionBank.views import *
-from Reading_Exam.views import *
-from Speaking_Exam.views import *
-from students.views import *
+from QuestionBank.views import *  # noqa: F403
+from Reading_Exam.views import *  # noqa: F403
+from Speaking_Exam.views import *  # noqa: F403
+from students.views import *  # noqa: F403
 from studystreak_api.views import (
     ChangePasswordView,
+    CheckAuth,
     LoginView,
     PasswordResetView,
     ProfileView,
     RegistrationView,
     SendPasswordResetView,
     get_csrf_token,
+    login_view,
+    set_csrf_token,
 )
 from website.views import (
     BlogListView,
@@ -61,7 +65,7 @@ from website.views import (
     HomepageSliderListView,
     HomepageSliderRetUpdDelView,
 )
-from Writing_Exam.views import *
+from Writing_Exam.views import *  # noqa: F403
 
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
@@ -149,7 +153,7 @@ urlpatterns = [
     ),
     path("api/blog/", BlogListView.as_view()),
     path("api/blogretupddelview/<int:pk>/", BlogRetUpdDelViews.as_view()),
-    path("api/ReadingExam/", ReadingExamListView.as_view()),
+    path("api/ReadingExam/", ReadingExamListView.as_view()),  # noqa: F405
     path("api/ReadingExamretupddelview/<int:pk>/", ReadingExamRetUpdDelViews.as_view()),
     path("api/ListeningExam/", ListeningExamListView.as_view()),
     path(
@@ -237,6 +241,10 @@ urlpatterns = [
         name="reset-with-link",
     ),
     path("froala_editor/", include("froala_editor.urls")),
+    path("api/QuestionType", QuestionTypeView.as_view()),
+    path("set-csrf/", set_csrf_token, name="Set-CSRF"),
+    path("login/", login_view, name="Login"),
+    path("test-auth/", CheckAuth.as_view(), name="check-auth"),
 ] + router.urls
 
 
