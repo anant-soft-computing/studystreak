@@ -31,7 +31,7 @@ class Exam(models.Model):
     block_threshold = models.PositiveIntegerField(null=True)
 
     def __str__(self):
-        return self.exam_Name
+        return self.exam_name
 
     class Meta:
         verbose_name = "Exam_Block"
