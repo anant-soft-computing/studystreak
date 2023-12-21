@@ -27,7 +27,7 @@ class ExamAdmin(admin.ModelAdmin):
             None,
             {
                 "fields": (
-                    "exam_Name",
+                    "exam_name",
                     "exam_type",
                 ),
             },

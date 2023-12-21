@@ -6,4 +6,4 @@ RUN mkdir -p /home/app/staticfiles
 
 RUN mkdir -p /home/studystreak
 
-COPY ./../front/ /home/studystreak
+# COPY ./../front/ /home/studystreak
