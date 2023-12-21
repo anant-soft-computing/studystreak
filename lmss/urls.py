@@ -48,6 +48,7 @@ from studystreak_api.views import (
     ProfileView,
     RegistrationView,
     SendPasswordResetView,
+    get_csrf_token,
 )
 from website.views import (
     BlogListView,
@@ -69,6 +70,7 @@ router.register(
 
 
 urlpatterns = [
+    path("li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
     path("api/login/", LoginView.as_view()),

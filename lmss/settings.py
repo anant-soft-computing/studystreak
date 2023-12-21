@@ -62,8 +62,8 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    # "rest_framework_simplejwt.middleware.TokenMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -209,3 +209,6 @@ CKEDITOR_CONFIGS = {
         ),
     },
 }
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True

@@ -2,11 +2,11 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from django.core.mail import EmailMultiAlternatives
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from rest_framework import (
-    status,
-)
+from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView  # noqa: F811
@@ -22,6 +22,12 @@ from .serializers import (
     ResetPasswordSerializer,
     UserProfileSerializer,
 )
+
+
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    return JsonResponse({"li": csrf_token})
+
 
 #################### Login #####################
 

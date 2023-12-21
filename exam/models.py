@@ -18,7 +18,7 @@ class Difficulty(models.TextChoices):
 
 # Create your models here.
 class Exam(models.Model):
-    exam_Name = models.CharField(max_length=10)
+    exam_name = models.CharField(max_length=10)
     exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
     question_type = models.ForeignKey(QuestionType, on_delete=models.CASCADE)
     passage = RichTextField()
