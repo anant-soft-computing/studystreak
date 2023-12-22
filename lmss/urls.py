@@ -76,6 +76,7 @@ router.register(
 
 
 urlpatterns = [
+    path("api-auth/", include("rest_framework.urls")),
     path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),

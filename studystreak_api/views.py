@@ -92,6 +92,8 @@ class RegistrationView(APIView):
 @method_decorator(csrf_exempt, name="dispatch")
 class LoginView(APIView):
     def post(self, request, format=None):
+        csrf_token = request.headers.get("X-CSRFToken")
+        print(csrf_token)
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             username = serializer.data.get("username")
