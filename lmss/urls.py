@@ -40,6 +40,7 @@ from master.views import (
     SEOMetakeywordsRetUpdDelView,
     StateListView,
     StateRetUpdDelView,
+    TestTypeViewset,
     batchListView,
     batchRetUpdDelView,
 )
@@ -78,7 +79,7 @@ router.register(
 router.register(
     "api/full-length-test", FullLengthTestViewSet, basename="full-length-test"
 )
-
+router.register("api/test-types", TestTypeViewset, basename="test-types")
 
 urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),

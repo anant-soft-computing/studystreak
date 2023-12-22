@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.viewsets import ModelViewSet
 
 from .models import (
     Category,
@@ -14,6 +15,7 @@ from .models import (
     Section,
     SEOMetakeywords,
     State,
+    TestType,
     batch,
 )
 from .serializers import (
@@ -41,6 +43,7 @@ from .serializers import (
     SEOMetakeywordsRetUpdDelSerializers,
     StateListSerializers,
     StateRetUpdDelSerializers,
+    TestTypeSerializers,
     batchListSerializers,
 )
 
@@ -186,3 +189,8 @@ class batchRetUpdDelView(generics.ListCreateAPIView):
 class QuestionTypeView(generics.ListCreateAPIView):
     serializer_class = QuestionTypeSerializers
     queryset = QuestionType.objects.all()
+
+
+class TestTypeViewset(ModelViewSet):
+    serializer_class = TestTypeSerializers
+    queryset = TestType.objects.all()

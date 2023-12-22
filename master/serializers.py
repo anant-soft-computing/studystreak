@@ -14,6 +14,7 @@ from .models import (
     Section,
     SEOMetakeywords,
     State,
+    TestType,
     batch,
 )
 
@@ -190,4 +191,10 @@ class batchRetUpdDelSerializers(serializers.ModelSerializer):
 class QuestionTypeSerializers(serializers.ModelSerializer):
     class Meta:
         model = QuestionType
+        fields = "__all__"
+
+
+class TestTypeSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = TestType
         fields = "__all__"
