@@ -17,10 +17,22 @@ class Difficulty(models.TextChoices):
     hard = "Hard", "Hard"
 
 
+class ExamType(models.TextChoices):
+    reading = "Reading", "Reading"
+    listening = "Listening", "Listening"
+    speaking = "Speaking", "Speaking"
+    writing = "Writing", "Writing"
+
+
 # Create your models here.
 class Exam(models.Model):
     exam_name = models.CharField(max_length=10)
-    exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
+    exam_type = models.CharField(
+        max_length=20, choices=ExamType.choices, default=ExamType.reading
+    )
+    test_type = models.ForeignKey(
+        "master.TestType", on_delete=models.SET_NULL, null=True
+    )
     # question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextUploadingField("contents")
     no_of_questions = models.IntegerField(default=4)
@@ -36,7 +48,7 @@ class Exam(models.Model):
     audio_file = models.FileField(upload_to="examblockaudio/", null=True, blank=True)
 
     def __str__(self):
-        return self.exam_name
+        return f"{self.exam_name}-{self.exam_type}"
 
     class Meta:
         verbose_name = "Exam_Block"
@@ -54,3 +66,17 @@ class Answer(models.Model):
 
     class Meta:
         unique_together = ("exam", "question_number")
+
+
+class FullLengthTest(models.Model):
+    difficulty_level = models.CharField(max_length=20, choices=Difficulty.choices)
+    reading = models.ManyToManyField(
+        Exam, limit_choices_to={"exam_type": "Reading"}, related_name="reading"
+    )
+    listening = models.ManyToManyField(
+        Exam, limit_choices_to={"exam_type": "Listening"}, related_name="listening"
+    )
+    writing = models.ManyToManyField(
+        Exam, limit_choices_to={"exam_type": "Writing"}, related_name="writing"
+    )
+    speaking = models.ManyToManyField(Exam, limit_choices_to={"exam_type": "Speaking"})

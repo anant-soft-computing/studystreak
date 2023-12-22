@@ -20,8 +20,14 @@ from .models import (
     Section,
     SEOMetakeywords,
     State,
+    TestType,
     batch,
 )
+
+
+@admin.register(TestType)
+class TestTypeAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(ModuleType)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Answer, Exam
+from .models import Answer, Exam, FullLengthTest
 
 # Register your models here.
 
@@ -30,6 +30,7 @@ class ExamAdmin(admin.ModelAdmin):
                     "exam_name",
                     "exam_type",
                     "type_of_module",
+                    "test_type",
                 ),
             },
         ),
@@ -55,3 +56,8 @@ class ExamAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+
+@admin.register(FullLengthTest)
+class FullLengthTestAdmin(admin.ModelAdmin):
+    pass

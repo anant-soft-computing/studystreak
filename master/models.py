@@ -195,3 +195,10 @@ class ModuleType(models.Model):
 
     def __str__(self):
         return self.module_type
+
+
+class TestType(models.Model):
+    test_type = models.CharField(max_length=20, null=True)
+
+    def __str__(self):
+        return self.test_type
