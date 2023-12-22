@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
@@ -45,16 +45,12 @@ from Speaking_Exam.views import *  # noqa: F403
 from students.views import *  # noqa: F403
 from studystreak_api.views import (
     ChangePasswordView,
-    CheckAuth,
     LoginView,
     PasswordResetView,
     ProfileView,
     RegistrationView,
     SendPasswordResetView,
     get_csrf_token,
-    login_view,
-    logout_view,
-    set_csrf_token,
 )
 from website.views import (
     BlogListView,
@@ -76,15 +72,11 @@ router.register(
 
 
 urlpatterns = [
-    path("api-auth/", include("rest_framework.urls")),
     path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),
     path("api/login/", LoginView.as_view()),
-    # new view
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    #
     path("api/assessmentview/", assessmentListView.as_view()),
     path("api/assessmentretupddelview/<int:pk>/", assessmentRetUpdDelView.as_view()),
     path("api/lssonview/", LessonListView.as_view()),
@@ -244,10 +236,6 @@ urlpatterns = [
     ),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
-    path("api/test/set-csrf/", set_csrf_token, name="Set-CSRF"),
-    path("api/test/login/", login_view, name="Login"),
-    path("api/test/test-auth/", CheckAuth.as_view(), name="check-auth"),
-    path("api/test/logout/", logout_view, name="logout"),
 ] + router.urls
 
 
