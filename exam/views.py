@@ -1,15 +1,25 @@
 from rest_framework import viewsets
 
 # Create your views here.
-from .models import Answer, Exam
-from .serializers import AnswerSerializer, ExamSerializer
+from .models import Answer, Exam, FullLengthTest
+from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer
 
 
 class ExamViewSet(viewsets.ModelViewSet):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
 
+    def create(self, request, *args, **kwargs):
+        # answer_data = request.data.pop("answers")
+
+        return super().create(request, *args, **kwargs)
+
 
 class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+
+
+class FullLengthTestViewSet(viewsets.ModelViewSet):
+    queryset = FullLengthTest.objects.all()
+    serializer_class = FullLengthTestSerializer

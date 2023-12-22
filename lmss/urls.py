@@ -1,12 +1,17 @@
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
-from exam.views import AnswerViewSet, ExamViewSet
+from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from live_classes.views import LiveClassListView, LiveClassRetUpdDelView
 from master.views import (
@@ -68,6 +73,10 @@ router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
 router.register(
     "api/exam-blocks-answers", AnswerViewSet, basename="exam-blocks-answers"
+)
+
+router.register(
+    "api/full-length-test", FullLengthTestViewSet, basename="full-length-test"
 )
 
 
@@ -237,6 +246,18 @@ urlpatterns = [
     ),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Optional UI:
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 ] + router.urls
 
 
