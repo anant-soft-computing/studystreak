@@ -91,6 +91,9 @@ class RegistrationView(APIView):
 
 @method_decorator(csrf_exempt, name="dispatch")
 class LoginView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request, format=None):
         csrf_token = request.headers.get("X-CSRFToken")
         print(csrf_token)
