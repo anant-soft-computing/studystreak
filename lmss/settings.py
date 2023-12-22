@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -15,13 +16,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    "65.20.73.247",
-    "localhost",
-]
-
+# ALLOWED_HOSTS = [
+#     "65.20.73.247",
+#     "localhost",
+# ]
+ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -69,7 +70,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "lmss.urls"
-import os
 
 TEMPLATES = [
     {
@@ -212,9 +212,12 @@ CKEDITOR_CONFIGS = {
 # CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_HTTPONLY = True
 
-CSRF_TRUSETED_ORIGINS = ALLOWED_HOSTS
+# CSRF_TRUSETED_ORIGINS = ALLOWED_HOSTS
 # CSRF_COOKIE_SAMESITE = "Strict"
 # SESSION_COOKIE_SAMESITE = "Strict"
 # CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+X_FRAME_OPTIONS = "SAMEORIGIN"

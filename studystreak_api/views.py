@@ -173,7 +173,7 @@ class PasswordResetView(APIView):
 
 import json
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
@@ -188,6 +188,14 @@ def set_csrf_token(request):
     This will be `/api/set-csrf-cookie/` on `urls.py`
     """
     return JsonResponse({"details": "CSRF cookie set"})
+
+
+def logout_view(request):
+    """
+    This will be `/api/logout/` on `urls.py`
+    """
+    logout(request)
+    return JsonResponse({"detail": "Success"})
 
 
 @require_POST
@@ -217,4 +225,8 @@ class CheckAuth(APIView):
     authentication_classes = [SessionAuthentication]
 
     def get(self, request):
-        return Response({"detail": "You're Authenticated"})
+        if request.user and request.user.is_authenticated:
+            return Response({"detail": "You're Authenticated"})
+
+        else:
+            return Response({"detail": "You're not Authenticated"})

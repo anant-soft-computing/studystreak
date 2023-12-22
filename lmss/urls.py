@@ -53,6 +53,7 @@ from studystreak_api.views import (
     SendPasswordResetView,
     get_csrf_token,
     login_view,
+    logout_view,
     set_csrf_token,
 )
 from website.views import (
@@ -245,6 +246,7 @@ urlpatterns = [
     path("api/test/set-csrf/", set_csrf_token, name="Set-CSRF"),
     path("api/test/login/", login_view, name="Login"),
     path("api/test/test-auth/", CheckAuth.as_view(), name="check-auth"),
+    path("api/test/logout/", logout_view, name="logout"),
 ] + router.urls
 
 
