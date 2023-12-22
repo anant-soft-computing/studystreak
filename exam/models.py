@@ -2,7 +2,7 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-from master.models import ExamType
+from master.models import ExamType, TestType
 
 
 class BlockType(models.TextChoices):
@@ -28,11 +28,12 @@ class ExamType(models.TextChoices):
 class Exam(models.Model):
     exam_name = models.CharField(max_length=10)
     exam_type = models.CharField(
-        max_length=20, choices=ExamType.choices, default=ExamType.reading
+        max_length=20,
+        choices=ExamType.choices,
+        default=ExamType.reading,
+        help_text="(Reading, Listening, Speaking, Writing)",
     )
-    test_type = models.ForeignKey(
-        "master.TestType", on_delete=models.SET_NULL, null=True
-    )
+    test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True)
     # question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextUploadingField("contents")
     no_of_questions = models.IntegerField(default=4)
@@ -69,6 +70,9 @@ class Answer(models.Model):
 
 
 class FullLengthTest(models.Model):
+    test_type = models.ForeignKey(
+        TestType, on_delete=models.SET_NULL, null=True, help_text="IELTS/PTE etc"
+    )
     difficulty_level = models.CharField(max_length=20, choices=Difficulty.choices)
     reading = models.ManyToManyField(
         Exam, limit_choices_to={"exam_type": "Reading"}, related_name="reading"

@@ -198,6 +198,8 @@ class ModuleType(models.Model):
 
 
 class TestType(models.Model):
+    """This model is used to store the test type like IELTS, TOEFL, PTE etc."""
+
     test_type = models.CharField(max_length=20, null=True)
 
     def __str__(self):
