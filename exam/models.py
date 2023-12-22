@@ -1,7 +1,7 @@
 from ckeditor.fields import RichTextField
 from django.db import models
 
-from master.models import ExamType, QuestionType
+from master.models import ExamType
 
 
 class BlockType(models.TextChoices):
@@ -20,7 +20,7 @@ class Difficulty(models.TextChoices):
 class Exam(models.Model):
     exam_name = models.CharField(max_length=10)
     exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
-    question_type = models.ManyToManyField(QuestionType, null=True)
+    # question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextField()
     no_of_questions = models.IntegerField(default=4)
     question = RichTextField()
