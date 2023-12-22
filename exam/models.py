@@ -35,7 +35,7 @@ class Exam(models.Model):
     )
     test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True)
     # question_type = models.ManyToManyField(QuestionType, null=True)
-    passage = RichTextUploadingField("contents")
+    passage = RichTextUploadingField("contents", null=True, blank=True)
     no_of_questions = models.IntegerField(default=4)
     question = RichTextField()
     block_type = models.CharField(max_length=20, choices=BlockType.choices, null=True)
