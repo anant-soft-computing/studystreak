@@ -72,6 +72,7 @@ router.register(
 
 
 urlpatterns = [
+    path("ckeditor/", include("ckeditor_uploader.urls")),
     path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("admin/", admin.site.urls),

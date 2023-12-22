@@ -188,3 +188,10 @@ class QuestionType(models.Model):
 
     def __str__(self):
         return self.question_type
+
+
+class ModuleType(models.Model):
+    module_type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.module_type

@@ -29,6 +29,7 @@ class ExamAdmin(admin.ModelAdmin):
                 "fields": (
                     "exam_name",
                     "exam_type",
+                    "type_of_module",
                 ),
             },
         ),
@@ -46,7 +47,7 @@ class ExamAdmin(admin.ModelAdmin):
             "Question details",
             {
                 "fields": (
-                    "question_type",
+                    "audio_file",
                     "passage",
                     "no_of_questions",
                     "question",

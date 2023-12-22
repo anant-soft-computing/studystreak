@@ -1,4 +1,5 @@
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 from master.models import ExamType
@@ -21,7 +22,7 @@ class Exam(models.Model):
     exam_name = models.CharField(max_length=10)
     exam_type = models.ForeignKey(ExamType, on_delete=models.CASCADE)
     # question_type = models.ManyToManyField(QuestionType, null=True)
-    passage = RichTextField()
+    passage = RichTextUploadingField("contents")
     no_of_questions = models.IntegerField(default=4)
     question = RichTextField()
     block_type = models.CharField(max_length=20, choices=BlockType.choices, null=True)
@@ -29,6 +30,10 @@ class Exam(models.Model):
         max_length=20, choices=Difficulty.choices, null=True
     )
     block_threshold = models.PositiveIntegerField(null=True)
+    type_of_module = models.ForeignKey(
+        "master.ModuleType", on_delete=models.SET_NULL, null=True
+    )
+    audio_file = models.FileField(upload_to="examblockaudio/", null=True, blank=True)
 
     def __str__(self):
         return self.exam_name

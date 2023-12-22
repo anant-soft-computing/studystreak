@@ -49,8 +49,9 @@ INSTALLED_APPS = [
     "corsheaders",
     "exam",
     "froala_editor",
+    "ckeditor_uploader",
 ]
-
+CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -127,7 +128,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = "/var/www/static/"
 MEDIA_ROOT = "/var/www/media/"
-
+MEDIA_URL = "media/"
 PASSWORD_RESET_TIMEOUT = 900
 
 

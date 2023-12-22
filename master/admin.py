@@ -12,6 +12,7 @@ from .models import (
     ExamType,
     Language,
     Level,
+    ModuleType,
     Outcomes,
     PackageType,
     QuestionType,
@@ -21,6 +22,11 @@ from .models import (
     State,
     batch,
 )
+
+
+@admin.register(ModuleType)
+class ModuleTypeAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(ExamType)
