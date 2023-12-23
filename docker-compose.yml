@@ -22,6 +22,7 @@ services:
     volumes:
       - ./:/app
       - staticfiles:/var/www/static/
+      - media:/var/www/media/
       - /var/certbot/conf:/etc/letsencrypt/:ro
     env_file:
       - ./.env
@@ -40,6 +41,7 @@ services:
       - "443:443"
     volumes:
       - staticfiles:/home/app/staticfiles/
+      - media:/home/app/media/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./front/:/home/studystreak/
     depends_on:
@@ -47,3 +49,4 @@ services:
 volumes:
   pgdb:
   staticfiles:
+  media:
