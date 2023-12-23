@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 
 # Create your views here.
 from .models import Answer, Exam, FullLengthTest
@@ -9,7 +9,7 @@ from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSeriali
 class ExamViewSet(viewsets.ModelViewSet):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def create(self, request, *args, **kwargs):
         # answer_data = request.data.pop("answers")
