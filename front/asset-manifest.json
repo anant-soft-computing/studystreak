@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.783c3980.css",
-    "main.js": "/static/js/main.f65f02fe.js",
+    "main.js": "/static/js/main.9122f1c6.js",
     "static/media/register__bg.png": "/static/media/register__bg.8f3340b40d006c7271d9.png",
     "static/media/blog_7.png": "/static/media/blog_7.ad28b4e16bb1b8845095.png",
     "static/media/blog_6.png": "/static/media/blog_6.d2b53c8250f4c3df1d44.png",
@@ -13,9 +13,7 @@
     "static/media/blog_18.png": "/static/media/blog_18.b290840ffa8c04654d38.png",
     "static/media/blog_16.png": "/static/media/blog_16.6e5cb373a4c7d52de20a.png",
     "static/media/blog_15.png": "/static/media/blog_15.c436dfbb5409e544f91a.png",
-    "static/media/dashbord__4.jpg": "/static/media/dashbord__4.ec6aff606c2657c45b2b.jpg",
     "static/media/blog_3.png": "/static/media/blog_3.5fc631e493bceaf7944c.png",
-    "static/media/dashbord__5.jpg": "/static/media/dashbord__5.24e33c7273569ece0ca0.jpg",
     "static/media/grid_5.png": "/static/media/grid_5.e9f18e71579e17540a87.png",
     "static/media/blog_19.png": "/static/media/blog_19.2b10ad70e00d9e53a971.png",
     "static/media/blog_23.png": "/static/media/blog_23.e49318c11d30aba45560.png",
@@ -25,14 +23,11 @@
     "static/media/blog_4.png": "/static/media/blog_4.45e139f4a6f5e1712f2a.png",
     "static/media/duolingo.png": "/static/media/duolingo.983c9fe6ee0aedf254ee.png",
     "static/media/grid_6.png": "/static/media/grid_6.38b1f8fa06b2b0aff5fc.png",
-    "static/media/dashbord__7.jpg": "/static/media/dashbord__7.de0d175a82c8d53f2ca5.jpg",
     "static/media/blog_20.png": "/static/media/blog_20.34f73f8907c98501f65d.png",
     "static/media/grid_2.png": "/static/media/grid_2.0324cb3a03ae0ab486b1.png",
     "static/media/tofel.png": "/static/media/tofel.4f82ab3a611ff8dc2758.png",
     "static/media/about_10.png": "/static/media/about_10.c6fba820cc5e8886a5dd.png",
-    "static/media/dashbord__9.jpg": "/static/media/dashbord__9.d588d4cbc2fb40d766de.jpg",
     "static/media/output.png": "/static/media/output.e559f09119a4e649a8e4.png",
-    "static/media/dashbord__8.jpg": "/static/media/dashbord__8.af7d5bf233ab511ba68f.jpg",
     "static/media/Logo.png": "/static/media/Logo.9cbe0dbaf5b0b8bad502.png",
     "static/media/gmat.png": "/static/media/gmat.f8698c960dcbc482ed1d.png",
     "static/media/gre.png": "/static/media/gre.24a7c007d86f05cc32fb.png",
@@ -55,10 +50,10 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "main.783c3980.css.map": "/static/css/main.783c3980.css.map",
-    "main.f65f02fe.js.map": "/static/js/main.f65f02fe.js.map"
+    "main.9122f1c6.js.map": "/static/js/main.9122f1c6.js.map"
   },
   "entrypoints": [
     "static/css/main.783c3980.css",
-    "static/js/main.f65f02fe.js"
+    "static/js/main.9122f1c6.js"
   ]
 }
