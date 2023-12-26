@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -13,9 +14,17 @@ SECRET_KEY = "django-insecure-o#zup200eb=2f@80#j$+6wu!2x9ts-6xczkgcd%aerj2*8kh!=
 
 DEBUG = True
 
+# ALLOWED_HOSTS = [
+#     "65.20.73.247",
+#     "localhost",
+# # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+
 ALLOWED_HOSTS = [
     "65.20.73.247",
     "localhost",
+    '127.0.0.1'
 ]
 
 
@@ -224,3 +233,5 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
+
+PASSWORD_RESET_TIMEOUT = (60 * 30)
