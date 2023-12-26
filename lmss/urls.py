@@ -44,6 +44,7 @@ from master.views import (
     batchListView,
     batchRetUpdDelView,
 )
+from studystreak_api.views import redirectview
 from package.views import PackageListView, PackageRetUpdDelView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
@@ -57,6 +58,10 @@ from studystreak_api.views import (
     RegistrationView,
     SendPasswordResetView,
     get_csrf_token,
+    SendPasswordResetView,RedirectLinkView, get_csrf_token,
+    login_view,
+    logout_view,
+    set_csrf_token,
 )
 from website.views import (
     BlogListView,
