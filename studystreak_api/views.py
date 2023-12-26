@@ -14,6 +14,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView  # noqa: F811
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.shortcuts import render 
+from .form import RedirectForm
 
 from .renderers import UserRenderes
 from .serializers import (
@@ -22,7 +24,7 @@ from .serializers import (
     PasswordResetSerializer,
     RegisterSerializer,
     ResetPasswordSerializer,
-    UserProfileSerializer,
+    UserProfileSerializer,RedirectLinkSerializer
 )
 
 
@@ -133,17 +135,20 @@ class ProfileView(APIView):
 
     def get(self, request, format=None):
         serializer = UserProfileSerializer(request.user)
+        print(serializer)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ChangePasswordView(APIView):
     renderer_classes = [UserRenderes]
     permission_classes = [IsAuthenticated]
-
+    authentication_classes = [JWTAuthentication]
     def post(self, request, format=None):
         serializer = ChangePasswordSerializer(
             data=request.data, context={"user": request.user}
         )
+        print(serializer)
+        print("****")
         if serializer.is_valid(raise_exception=True):
             return Response({"msg": "Password changed"})
 
@@ -174,6 +179,62 @@ class PasswordResetView(APIView):
             return Response(
                 {"msg": "password reset successfully"}, status=status.HTTP_200_OK
             )
+
+
+class RedirectLinkView(APIView):
+    renderer_classes = [UserRenderes]
+    
+    def post(self, request, uid, token, format=None):
+        serializer = RedirectLinkSerializer(
+            data=request.data, context={"uid": uid, "token": token}
+        )
+        
+        if serializer.is_valid(raise_exception=True):
+            return Response(
+                {"msg": "password reset successfully"}, status=status.HTTP_200_OK
+            )
+            
+from django.utils.encoding import smart_str, force_bytes, DjangoUnicodeDecodeError 
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def redirectview(request,uid,token):
+    try:
+        id = smart_str(urlsafe_base64_decode(uid))   
+        user = User.objects.get(id=id)
+    except Exception as e:
+        return HttpResponse("user not found")
+        # return "user not found"
+    
+    if PasswordResetTokenGenerator().check_token(user, token):
+        form  = RedirectForm
+        if form.is_valid():
+            form.save()
+            # return render(request, "successful.html")
+            return HttpResponse("successgull")
+            # templates success=mess
+        else:
+            return HttpResponse("form is not valid")
+            # return render({"form":"password and password2 not match"})
+        # if password == password2:
+        #         user.set_password(password)
+    #     user.save()
+    #     return render("msg resetsuccessfull") 
+    # else:
+    #     return render("msg resetunsuccessfull")  
+    # render a form with pass1 and pass2 
+    # form = RedirectForm
+    # user = User.objects.get(id=id)
+                
+    # try:
+     
+    # except DjangoUnicodeDecodeError as indentifier:
+    #     PasswordResetTokenGenerator().check_token(user,token)
+    #     raise serializers.ValidationError("Token is not valid or expired.")
+          
+       
 
 
 import json
