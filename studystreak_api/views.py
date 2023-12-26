@@ -207,6 +207,7 @@ def redirectview(request,uid,token):
     except Exception as e:
         return HttpResponse("user not found")
         # return "user not found"
+        print("")
     
     if PasswordResetTokenGenerator().check_token(user, token):
         form  = RedirectForm
