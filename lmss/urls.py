@@ -7,7 +7,7 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
-
+from studystreak_api.views import confirm_user
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
@@ -264,6 +264,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    path("confirm/<uid>/<token>", confirm_user, name='confirm-user'),
 ] + router.urls
 
 

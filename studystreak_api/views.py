@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from django.core.mail import EmailMultiAlternatives
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView  # noqa: F811
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
-from django.shortcuts import render 
+from django.shortcuts import render, redirect
 from .form import RedirectForm
 
 from .renderers import UserRenderes
@@ -46,8 +46,8 @@ def get_tokens_for_user(user):
 
 
 from students.models import Student
-
-
+from django.contrib.sites.shortcuts import get_current_site
+from studystreak_api.utils import account_activation_token
 class RegistrationView(APIView):
     # renderer_classes = [UserRenderes]
     # def post(self,request):
@@ -68,7 +68,15 @@ class RegistrationView(APIView):
             subject = "Registration Confirmation"
             message = "Thank you for registering!"
             recipient_list = [user.email]
-            context = {}
+            current_site = get_current_site(request) 
+            token = account_activation_token.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            # link = f"{current_site.domain}/confirm/{uid}/{token}"
+            context = {
+                "domain":current_site.domain,
+                "uid":uid,
+                "token":token,
+            }
             from_email = settings.EMAIL_HOST_USER
             html_message = render_to_string(
                 "emails/email-verification.html", context=context
@@ -248,7 +256,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
+from studystreak_api.utils import account_activation_token
 @ensure_csrf_cookie
 def set_csrf_token(request):
     """
@@ -297,3 +305,26 @@ class CheckAuth(APIView):
 
         else:
             return Response({"detail": "You're not Authenticated"})
+
+
+
+def confirm_user(request, uid, token):
+    try:
+        user_id = force_bytes(urlsafe_base64_decode(uid))
+        user = User.objects.get(pk=user_id)
+    
+    except Exception as e:
+        user = None 
+    
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        link =(f"http://{get_current_site(request).domain}")
+        user.save(update_fields=["is_active"])
+
+        return render(request, "emails/account-active.html", context = {"link":link})
+        return HttpResponseRedirect(f"http://{get_current_site(request).domain}")
+
+    else:
+        return HttpResponse("Some error occured.")
+    
+
