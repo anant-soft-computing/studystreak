@@ -5,11 +5,8 @@ from django.contrib.auth.models import BaseUserManager, User
 from django.db import models
 
 # from package.models import Package  # Assuming the City, State, and Country are modeled in the Package app
-from master.models import (
-    City,  # For the City, State, and Country ForeignKey
-    Country,
-    State,
-)
+from master.models import City  # For the City, State, and Country ForeignKey
+from master.models import Country, State
 from package.models import Package
 
 
@@ -27,6 +24,7 @@ class Student(models.Model):
         User,
         on_delete=models.CASCADE,
         help_text="Create a student user first and then add the student details",
+        related_name="student",
     )
 
     class Gender(models.TextChoices):
