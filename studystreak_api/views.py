@@ -208,7 +208,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-def redirectview(request,uid,token):
+def userresetpassword(request,uid,token):
     try:
         id = smart_str(urlsafe_base64_decode(uid))   
         user = User.objects.get(id=id)

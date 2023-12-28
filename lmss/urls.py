@@ -44,7 +44,7 @@ from master.views import (
     batchListView,
     batchRetUpdDelView,
 )
-from studystreak_api.views import redirectview
+from studystreak_api.views import userresetpassword
 from package.views import PackageListView, PackageRetUpdDelView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
@@ -250,6 +250,7 @@ urlpatterns = [
         PasswordResetView.as_view(),
         name="reset-with-link",
     ),
+    path('api/user/resetpassword/<uid>/<token>/', userresetpassword),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
