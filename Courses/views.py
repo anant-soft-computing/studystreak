@@ -4,7 +4,7 @@ from .serializers import CourseListSerializers, CourseRetUpdDelSerializers
 from rest_framework import generics
 
 
-class CourseListView(generics.ListAPIView):
+class CourseListView(generics.ListCreateAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseListSerializers
 

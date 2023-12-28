@@ -217,7 +217,7 @@ from django.utils.encoding import force_bytes, smart_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
-def redirectview(request, uid, token):
+def userresetpassword(request, uid, token):
     try:
         id = smart_str(urlsafe_base64_decode(uid))
         user = User.objects.get(id=id)
