@@ -7,7 +7,7 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
-from studystreak_api.views import confirm_user
+
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
@@ -44,7 +44,6 @@ from master.views import (
     batchListView,
     batchRetUpdDelView,
 )
-from studystreak_api.views import userresetpassword
 from package.views import PackageListView, PackageRetUpdDelView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
@@ -52,16 +51,15 @@ from Speaking_Exam.views import *  # noqa: F403
 from students.views import *  # noqa: F403
 from studystreak_api.views import (
     ChangePasswordView,
+    GetUserRole,
     LoginView,
     PasswordResetView,
     ProfileView,
     RegistrationView,
     SendPasswordResetView,
+    confirm_user,
     get_csrf_token,
-    SendPasswordResetView,RedirectLinkView, get_csrf_token,
-    login_view,
-    logout_view,
-    set_csrf_token,
+    userresetpassword,
 )
 from website.views import (
     BlogListView,
@@ -250,7 +248,7 @@ urlpatterns = [
         PasswordResetView.as_view(),
         name="reset-with-link",
     ),
-    path('api/user/resetpassword/<uid>/<token>/', userresetpassword),
+    path("api/user/resetpassword/<uid>/<token>/", userresetpassword),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
@@ -265,7 +263,8 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
-    path("confirm/<uid>/<token>", confirm_user, name='confirm-user'),
+    path("confirm/<uid>/<token>", confirm_user, name="confirm-user"),
+    path("api/whoami/", GetUserRole.as_view(), name="whoami"),
 ] + router.urls
 
 

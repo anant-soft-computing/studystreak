@@ -334,3 +334,11 @@ def confirm_user(request, uid, token):
 
     else:
         return HttpResponse("Some error occured.")
+
+
+class GetUserRole(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        return Response(get_user_role(request.user), 200)
