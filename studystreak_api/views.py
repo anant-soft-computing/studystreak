@@ -1,22 +1,31 @@
+import json
+
 from django.conf import settings
-from django.contrib.auth import authenticate
-from django.contrib.auth.models import Group
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group, User
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
+from django.utils.encoding import force_bytes, smart_str
 from django.utils.html import strip_tags
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.views.decorators.http import require_POST
+from rest_framework import generics, status
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView  # noqa: F811
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from studystreak_api.utils import get_user_role
+from students.models import Student
+from studystreak_api.utils import account_activation_token, get_user_role
 
 from .form import RedirectForm
 from .renderers import UserRenderes
@@ -28,6 +37,7 @@ from .serializers import (
     RegisterSerializer,
     ResetPasswordSerializer,
     UserProfileSerializer,
+    UserSerializer,
 )
 
 
@@ -46,12 +56,6 @@ def get_tokens_for_user(user):
         "refresh": str(refresh),
         "access": str(refresh.access_token),
     }
-
-
-from django.contrib.sites.shortcuts import get_current_site
-
-from students.models import Student
-from studystreak_api.utils import account_activation_token
 
 
 class RegistrationView(APIView):
@@ -210,13 +214,6 @@ class RedirectLinkView(APIView):
             )
 
 
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.http import HttpResponse
-from django.utils.encoding import force_bytes, smart_str
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-
-
 def userresetpassword(request, uid, token):
     try:
         id = smart_str(urlsafe_base64_decode(uid))
@@ -251,19 +248,6 @@ def userresetpassword(request, uid, token):
     # except DjangoUnicodeDecodeError as indentifier:
     #     PasswordResetTokenGenerator().check_token(user,token)
     #     raise serializers.ValidationError("Token is not valid or expired.")
-
-
-import json
-
-from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.views.decorators.http import require_POST
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from studystreak_api.utils import account_activation_token
 
 
 @ensure_csrf_cookie
@@ -342,3 +326,8 @@ class GetUserRole(APIView):
 
     def post(self, request):
         return Response(get_user_role(request.user), 200)
+
+
+class GetUserView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

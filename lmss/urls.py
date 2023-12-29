@@ -52,6 +52,7 @@ from students.views import *  # noqa: F403
 from studystreak_api.views import (
     ChangePasswordView,
     GetUserRole,
+    GetUserView,
     LoginView,
     PasswordResetView,
     ProfileView,
@@ -265,6 +266,7 @@ urlpatterns = [
     ),
     path("confirm/<uid>/<token>", confirm_user, name="confirm-user"),
     path("api/whoami/", GetUserRole.as_view(), name="whoami"),
+    path("api/getusers/", GetUserView.as_view(), name="GetUsers"),
 ] + router.urls
 
 
