@@ -1,19 +1,25 @@
 from rest_framework import serializers
-from .models import Course
 
+from .models import Course
 
 
 class CourseListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = '__all__'
-        
+        fields = "__all__"
+
         depth = 2
-        
+
+
+class CourseCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = "__all__"
+
 
 class CourseRetUpdDelSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = '__all__'
-        
+        fields = "__all__"
+
         depth = 2
