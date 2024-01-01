@@ -23,7 +23,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView  # noqa: F811
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from students.models import Student
 from studystreak_api.utils import account_activation_token, get_user_role
 
