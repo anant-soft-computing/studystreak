@@ -17,12 +17,24 @@ class PackageRetUpdDelSerializers(serializers.ModelSerializer):
         depth = 1
 
 
+# class CoursePackageSerializer(serializers.ModelSerializer):
+#     packages = serializers.SerializerMethodField()
+
+#     class Meta:
+#         model = Course
+#         fields = ['id', 'Course_Title', 'packages']
+
+#     def get_packages(self, obj):
+#         return [package.package_name for package in obj.package_set.all()]
 class CoursePackageSerializer(serializers.ModelSerializer):
     packages = serializers.SerializerMethodField()
-
+    
     class Meta:
         model = Course
-        fields = ['id', 'Course_Title', 'packages']
+        fields = ['id', 'Course_Title', 'packages'] 
 
     def get_packages(self, obj):
-        return [package.package_name for package in obj.package_set.all()]
+        return [
+            {'package_name': package.package_name, 'package_price': package.package_price} 
+            for package in obj.package_set.all()
+        ]
