@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "froala_editor",
     "ckeditor_uploader",
     "drf_spectacular",
+    'django_filters',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
@@ -151,6 +152,9 @@ EMAIL_HOST_PASSWORD = "ktbiipsiktogqhwo"
 EMAIL_USE_TLS = True
 
 # gmail password: oecindia@123
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 
 JAZZMIN_SETTINGS = {
