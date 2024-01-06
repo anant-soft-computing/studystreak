@@ -1,4 +1,3 @@
-from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -21,11 +20,7 @@ DEBUG = True
 DEBUG = True
 
 
-ALLOWED_HOSTS = [
-    "65.20.73.247",
-    "localhost",
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = ["65.20.73.247", "localhost", "127.0.0.1"]
 
 
 INSTALLED_APPS = [
@@ -60,7 +55,7 @@ INSTALLED_APPS = [
     "froala_editor",
     "ckeditor_uploader",
     "drf_spectacular",
-    'django_filters',
+    "django_filters",
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
@@ -153,7 +148,7 @@ EMAIL_USE_TLS = True
 
 # gmail password: oecindia@123
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
 }
 
 
@@ -206,13 +201,7 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# CSRF_COOKIE_SECURE = True
-# CSRF_COOKIE_HTTPONLY = True
-
-# CSRF_TRUSETED_ORIGINS = ALLOWED_HOSTS
-# CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SAMESITE = "Strict"
-# CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_HTTPONLY = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
@@ -223,9 +212,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
@@ -238,4 +224,4 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-PASSWORD_RESET_TIMEOUT = (60 * 30)
+PASSWORD_RESET_TIMEOUT = 60 * 30
