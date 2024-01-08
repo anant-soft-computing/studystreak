@@ -321,6 +321,7 @@ class CheckAuth(APIView):
 #         return HttpResponse("Some error occured.")
 
 def confirm_user(request, uid, token):
+    print(f"Confirm User View - UID: {uid}, Token: {token}")
     try:
         user_id = force_bytes(urlsafe_base64_decode(uid))
         user = User.objects.get(pk=user_id)

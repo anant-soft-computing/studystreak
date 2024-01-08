@@ -269,7 +269,7 @@ urlpatterns = [
     path("api/getusers/", GetUserView.as_view(), name="GetUsers"),
 
     path('api/course/<int:pk>/packages/', CoursePackageView.as_view(), name='course-packages'),
-    path('api/listofcoursewithpackages/', ListofCourse.as_view(), name='listofcourse' )
+    path('api/listofcoursewithpackage/', ListofCourse.as_view(), name='listofcourse' )
 ] + router.urls
 
 
