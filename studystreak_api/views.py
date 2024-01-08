@@ -73,6 +73,7 @@ class RegistrationView(APIView):
             user = serializer.save()
             Student.objects.create(user=user)
             print(user)
+            print("9999")
 
             subject = "Registration Confirmation"
             message = "Thank you for registering!"
@@ -101,6 +102,7 @@ class RegistrationView(APIView):
 
             message.attach_alternative(html_message, "text/html")
             message.send()
+            print("8888")
             return Response(
                 {"msg": "Registration successful"}, status=status.HTTP_201_CREATED
             )
@@ -299,6 +301,25 @@ class CheckAuth(APIView):
             return Response({"detail": "You're not Authenticated"})
 
 
+# def confirm_user(request, uid, token):
+#     try:
+#         user_id = force_bytes(urlsafe_base64_decode(uid))
+#         user = User.objects.get(pk=user_id)
+
+#     except Exception:
+#         user = None
+
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         link = f"http://{get_current_site(request).domain}"
+#         user.save(update_fields=["is_active"])
+
+#         return render(request, "emails/account-active.html", context={"link": link})
+#         return HttpResponseRedirect(f"http://{get_current_site(request).domain}")
+
+#     else:
+#         return HttpResponse("Some error occured.")
+
 def confirm_user(request, uid, token):
     try:
         user_id = force_bytes(urlsafe_base64_decode(uid))
@@ -312,12 +333,11 @@ def confirm_user(request, uid, token):
         link = f"http://{get_current_site(request).domain}"
         user.save(update_fields=["is_active"])
 
+        
         return render(request, "emails/account-active.html", context={"link": link})
-        return HttpResponseRedirect(f"http://{get_current_site(request).domain}")
 
-    else:
-        return HttpResponse("Some error occured.")
-
+    
+    return HttpResponseRedirect(f"http://{get_current_site(request).domain}/api/login")
 
 class GetUserRole(APIView):
     authentication_classes = [JWTAuthentication]
