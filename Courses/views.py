@@ -6,6 +6,7 @@ from .serializers import (
     CourseCreateSerializers,
     CourseListSerializers,
     CourseRetUpdDelSerializers,
+   
 )
 
 class CourseListView(generics.ListCreateAPIView):
@@ -24,3 +25,5 @@ class CourseListView(generics.ListCreateAPIView):
 class CourseRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseRetUpdDelSerializers
+
+

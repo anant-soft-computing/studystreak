@@ -48,3 +48,11 @@ class CoursePackageSerializer(serializers.ModelSerializer):
             'PackageType': PackageCourseTypeSerializer(package.PackageType).data,
             'select_course': CourseCoursePackageSerializer(package.select_course).data} 
             for package in obj.package_set.all()]
+
+
+
+class CourseListsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = ("id", "package_name", "select_course")
+        depth = 1
