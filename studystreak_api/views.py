@@ -332,6 +332,7 @@ def confirm_user(request, uid, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         link = f"https://{get_current_site(request).domain}"
+        print(link)
         user.save(update_fields=["is_active"])
 
         
