@@ -271,7 +271,7 @@ urlpatterns = [
     path('api/course/<int:pk>/packages/', CoursePackageView.as_view(), name='course-packages'),
     path('api/listofcoursewithpackage/', ListofCourse.as_view(), name='listofcourse' ),
 
-    path('api/enroll-package/<int:package_id>/', EnrollPackageView.as_view(), name='enroll-package'),
+    path('api/enroll-package/', EnrollPackageView.as_view(), name='enroll-package'),
 ] + router.urls
 
 

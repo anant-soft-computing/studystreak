@@ -38,7 +38,7 @@ class CoursePackageSerializer(serializers.ModelSerializer):
 
     def get_packages(self, obj):
         return [
-            {'package_name': package.package_name, 'package_price': package.package_price, 'soft_copy': package.soft_copy, 
+            {'package_id': package.id,'package_name': package.package_name, 'package_price': package.package_price, 'soft_copy': package.soft_copy, 
             'hard_copy': package.hard_copy, 'full_length_test': package.full_length_test, 'full_length_test_count': package.full_length_test_count,
             'practice_test': package.practice_test, 'practice_test_count': package.practice_test_count, 'speaking_test': package.speaking_test,
             'speaking_test_count': package.speaking_test_count, 'writing_evaluation': package.writing_evaluation,
@@ -55,7 +55,10 @@ class CoursePackageSerializer(serializers.ModelSerializer):
 class CourseListsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Package
-        fields = ("id", "package_name", "select_course")
+        fields = ("id", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
+        "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
+        "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
+        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code")
         depth = 1
 
 
