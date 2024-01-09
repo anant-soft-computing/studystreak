@@ -53,14 +53,27 @@ class CoursePackageSerializer(serializers.ModelSerializer):
 
 
 class CourseListsSerializers(serializers.ModelSerializer):
+    # user_profile = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
+
     class Meta:
         model = Package
         fields = ("id", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
         "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
         "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
-        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code")
+        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")
         depth = 1
 
 
 class EnrollmentSerializer(serializers.Serializer):
     package_id = serializers.IntegerField()
+
+# from rest_framework import serializers
+# from django.contrib.auth.models import User
+# from .models import UserProfile
+
+# class UserRegistrationSerializer(serializers.ModelSerializer):
+#     def create(self, validated_data):
+#         user = User.objects.create_user(**validated_data)
+#         user_profile = UserProfile.objects.create(user=user)
+
+#         return user

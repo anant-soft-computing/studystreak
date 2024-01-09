@@ -1,10 +1,9 @@
 # package/models.py
 
 from django.db import models
-
 from Courses.models import Course
 from master.models import PackageType
-
+from django.contrib.auth.models import User
 
 # Section: Package
 class Package(models.Model):
@@ -46,3 +45,21 @@ class Package(models.Model):
 
     def __str__(self):
         return self.package_name
+
+
+from django.contrib.auth.models import User
+from django.db import models
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
+# from django.contrib.auth.models import User
+# from .models import UserProfile
+
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)

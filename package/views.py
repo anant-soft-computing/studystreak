@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Package
+from .models import Package, UserProfile
 from .serializers import PackageListSerializers, PackageRetUpdDelSerializers, CoursePackageSerializer, CourseListsSerializers,EnrollmentSerializer
 from rest_framework import generics
 from Courses.models import Course
@@ -30,10 +30,22 @@ class CoursePackageView(generics.RetrieveAPIView):
 
 class ListofCourse(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = Package.objects.all()
     serializer_class = CourseListsSerializers
 
-
+    def get_queryset(self):
+        user = self.request.user
+        print(user)
+        try:
+            user_profile = user.userprofile  
+        except UserProfile.DoesNotExist:
+            user_profile = None
+            
+        if user_profile:
+            packages = Package.objects.filter(user_profile=user_profile)
+            print(f"Packages: {packages}")
+            return packages
+        else:
+            return Package.objects.none()
 
 class EnrollPackageView(APIView):
     permission_classes = [IsAuthenticated]

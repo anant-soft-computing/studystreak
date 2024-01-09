@@ -143,8 +143,8 @@ PASSWORD_RESET_TIMEOUT = 900
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "noreply.oecindia@gmail.com"
-EMAIL_HOST_PASSWORD = "ktbiipsiktogqhwo"
+EMAIL_HOST_USER = "noreply.studystreak@gmail.com"
+EMAIL_HOST_PASSWORD = "studystreak@123"
 EMAIL_USE_TLS = True
 
 # gmail password: oecindia@123
