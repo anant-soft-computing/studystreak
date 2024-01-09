@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Package
 from Courses.models import Course
 from master.models import Cupon, PackageType
+from students.models import Student
 class PackageListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Package
@@ -56,3 +57,7 @@ class CourseListsSerializers(serializers.ModelSerializer):
         model = Package
         fields = ("id", "package_name", "select_course")
         depth = 1
+
+
+class EnrollmentSerializer(serializers.Serializer):
+    package_id = serializers.IntegerField()

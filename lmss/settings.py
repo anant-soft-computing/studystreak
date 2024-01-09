@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    'rest_framework.authtoken',
     "ckeditor",
     "website",
     "CreateTest",
@@ -225,3 +226,10 @@ SPECTACULAR_SETTINGS = {
 }
 
 PASSWORD_RESET_TIMEOUT = 60 * 30
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
