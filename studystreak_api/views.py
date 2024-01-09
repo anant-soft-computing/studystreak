@@ -339,7 +339,7 @@ def confirm_user(request, uid, token):
         return render(request, "emails/account-active.html", context={"link": link})
 
     
-    return HttpResponseRedirect(f"http://{get_current_site(request).domain}/api/login")
+    return HttpResponseRedirect(f"http://{get_current_site(request).domain}/login")
 
 class GetUserRole(APIView):
     authentication_classes = [JWTAuthentication]
