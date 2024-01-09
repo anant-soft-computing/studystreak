@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c6cb4d96.css",
-    "main.js": "/static/js/main.c7eee3d0.js",
+    "main.css": "/static/css/main.da39e198.css",
+    "main.js": "/static/js/main.9855770b.js",
     "static/media/register__bg.png": "/static/media/register__bg.8f3340b40d006c7271d9.png",
     "static/media/blog_7.png": "/static/media/blog_7.ad28b4e16bb1b8845095.png",
     "static/media/blog_6.png": "/static/media/blog_6.d2b53c8250f4c3df1d44.png",
@@ -14,17 +14,12 @@
     "static/media/blog_16.png": "/static/media/blog_16.6e5cb373a4c7d52de20a.png",
     "static/media/blog_15.png": "/static/media/blog_15.c436dfbb5409e544f91a.png",
     "static/media/blog_3.png": "/static/media/blog_3.5fc631e493bceaf7944c.png",
-    "static/media/grid_5.png": "/static/media/grid_5.e9f18e71579e17540a87.png",
     "static/media/blog_19.png": "/static/media/blog_19.2b10ad70e00d9e53a971.png",
     "static/media/blog_23.png": "/static/media/blog_23.e49318c11d30aba45560.png",
-    "static/media/grid_4.png": "/static/media/grid_4.13417639c2117befd519.png",
     "static/media/grid_1.png": "/static/media/grid_1.3f3a23058614a25ec029.png",
-    "static/media/grid_3.png": "/static/media/grid_3.173912ca95430f2be1f0.png",
     "static/media/blog_4.png": "/static/media/blog_4.45e139f4a6f5e1712f2a.png",
     "static/media/duolingo.png": "/static/media/duolingo.983c9fe6ee0aedf254ee.png",
-    "static/media/grid_6.png": "/static/media/grid_6.38b1f8fa06b2b0aff5fc.png",
     "static/media/blog_20.png": "/static/media/blog_20.34f73f8907c98501f65d.png",
-    "static/media/grid_2.png": "/static/media/grid_2.0324cb3a03ae0ab486b1.png",
     "static/media/tofel.png": "/static/media/tofel.4f82ab3a611ff8dc2758.png",
     "static/media/about_10.png": "/static/media/about_10.c6fba820cc5e8886a5dd.png",
     "static/media/output.png": "/static/media/output.e559f09119a4e649a8e4.png",
@@ -40,20 +35,18 @@
     "static/media/virtual-reality.png": "/static/media/virtual-reality.6cf970970e8e2f97a1c3.png",
     "static/media/blog_10.png": "/static/media/blog_10.8db9d8346d0c8db09ed8.png",
     "static/media/dashbord__2.jpg": "/static/media/dashbord__2.475f9e9a3415949f383e.jpg",
-    "static/media/blog-details__8.png": "/static/media/blog-details__8.f70c16100963e7f73def.png",
     "static/media/blog-details__7.png": "/static/media/blog-details__7.d4f0ce89edc694ef9ffb.png",
-    "static/media/blog-details__6.png": "/static/media/blog-details__6.8a030a0b4ea0948d5d97.png",
     "static/media/machine-learning.png": "/static/media/machine-learning.2ab753ec11aac345bc37.png",
     "index.html": "/index.html",
     "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.c6cb4d96.css.map": "/static/css/main.c6cb4d96.css.map",
-    "main.c7eee3d0.js.map": "/static/js/main.c7eee3d0.js.map"
+    "main.da39e198.css.map": "/static/css/main.da39e198.css.map",
+    "main.9855770b.js.map": "/static/js/main.9855770b.js.map"
   },
   "entrypoints": [
-    "static/css/main.c6cb4d96.css",
-    "static/js/main.c7eee3d0.js"
+    "static/css/main.da39e198.css",
+    "static/js/main.9855770b.js"
   ]
 }
