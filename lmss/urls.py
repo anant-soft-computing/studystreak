@@ -264,7 +264,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
-    path("confirm/<uid>/<token>", confirm_user, name="confirm-user"),
+    path("api/confirm/<uid>/<token>", confirm_user, name="confirm-user"),
     path("api/whoami/", GetUserRole.as_view(), name="whoami"),
     path("api/getusers/", GetUserView.as_view(), name="GetUsers"),
 
