@@ -37,12 +37,13 @@ class ListofCourse(generics.ListAPIView):
         print(user)
         try:
             user_profile = user.userprofile  
+            print("***")
         except UserProfile.DoesNotExist:
             user_profile = None
             
         if user_profile:
             packages = Package.objects.filter(user_profile=user_profile)
-            print(f"Packages: {packages}")
+            print(packages)
             return packages
         else:
             return Package.objects.none()
