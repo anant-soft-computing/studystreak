@@ -331,7 +331,7 @@ def confirm_user(request, uid, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
-        link = f"https://{get_current_site(request).domain}"
+        link = f"http://{get_current_site(request).domain}"
         print(link)
         user.save(update_fields=["is_active"])
 
@@ -339,7 +339,7 @@ def confirm_user(request, uid, token):
         return render(request, "emails/account-active.html", context={"link": link})
 
     
-    return HttpResponseRedirect(f"https://{get_current_site(request).domain}/api/login")
+    return HttpResponseRedirect(f"http://{get_current_site(request).domain}/api/login")
 
 class GetUserRole(APIView):
     authentication_classes = [JWTAuthentication]
