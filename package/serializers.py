@@ -57,7 +57,7 @@ class CourseListsSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Package
-        fields = ("id", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
+        fields = ("id","user_package","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
         "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
         "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
         "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")
@@ -66,6 +66,16 @@ class CourseListsSerializers(serializers.ModelSerializer):
 
 class EnrollmentSerializer(serializers.Serializer):
     package_id = serializers.IntegerField()
+    batch_id = serializers.IntegerField(required=False)
+    course_id = serializers.IntegerField(required=False)
+
+    class Meta:
+        model = Package
+        fields = ("id","user_package","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
+        "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
+        "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
+        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")
+        depth = 1
 
 # from rest_framework import serializers
 # from django.contrib.auth.models import User

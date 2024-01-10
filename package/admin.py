@@ -10,6 +10,7 @@ from .models import Package
 
 class PackageAdmin(ImportExportModelAdmin):
     list_display = [
+        "user_package",
         "package_name",
         "package_price",
         "PackageType",
@@ -45,6 +46,7 @@ class PackageAdmin(ImportExportModelAdmin):
             "Package",
             {
                 "fields": (
+                    "user_package",
                     "package_name",
                     "package_price",
                     "PackageType",

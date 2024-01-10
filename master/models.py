@@ -1,7 +1,7 @@
 # master/models.py
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -106,6 +106,7 @@ class Section(models.Model):
 
 
 class batch(models.Model):
+    batchuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     batch_name = models.CharField(max_length=200, null=True, blank=True)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
