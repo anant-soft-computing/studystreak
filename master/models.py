@@ -107,7 +107,7 @@ class Section(models.Model):
 
 class batch(models.Model):
     batchuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    batch_name = models.CharField(max_length=200, null=True, blank=True)
+    batch_name = models.CharField(max_length=200)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
     # batch_timing = models.CharField(max_length=200, null=True, blank=True)
