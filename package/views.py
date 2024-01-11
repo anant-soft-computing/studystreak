@@ -33,25 +33,16 @@ class CoursePackageView(generics.RetrieveAPIView):
     serializer_class = CoursePackageSerializer
    
 
-class ListofCourse(generics.ListAPIView):
+class UserWisePackageWithCourseID(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = CourseListsSerializers
+    serializer_class = PackageListSerializers
 
     def get_queryset(self):
         user = self.request.user
-        print(user)
-        try:
-            user_profile = user.userprofile  
-            print("***")
-        except UserProfile.DoesNotExist:
-            user_profile = None
-            
-        if user_profile:
-            packages = Package.objects.filter(user_profile=user_profile)
-            print(packages)
-            return packages
-        else:
-            return Package.objects.none()
+        return Package.objects.filter(user_package=user)   
+       
+        
+    # 
 
 # class EnrollPackageView(APIView):
 #     permission_classes = [IsAuthenticated]
@@ -136,3 +127,12 @@ class EnrollPackageView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#       // JavaScript for redirecting after 3 seconds
+#       setTimeout(function () {
+#         window.location.href = "{{link}}";
+#       }, 3000);
+#     </script>
+#   </body>
+# </html>
+
+# <a href="{{ link }}" target="_blank" >

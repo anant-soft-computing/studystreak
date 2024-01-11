@@ -44,7 +44,7 @@ from master.views import (
     batchListView,
     batchRetUpdDelView,
 )
-from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, ListofCourse, EnrollPackageView
+from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
@@ -269,7 +269,7 @@ urlpatterns = [
     path("api/getusers/", GetUserView.as_view(), name="GetUsers"),
 
     path('api/course/<int:pk>/packages/', CoursePackageView.as_view(), name='course-packages'),
-    path('api/listofcoursewithpackage/', ListofCourse.as_view(), name='listofcourse' ),
+    path('api/userwisepackagewithcourseid/', UserWisePackageWithCourseID.as_view(), name='listofcourse' ),
 
     path('api/enroll-package/', EnrollPackageView.as_view(), name='enroll-package'),
 ] + router.urls

@@ -7,6 +7,7 @@ class PackageListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = '__all__'
+        depth = 1
         
 class PackageRetUpdDelSerializers(serializers.ModelSerializer):
     class Meta:
