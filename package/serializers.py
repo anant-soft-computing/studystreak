@@ -4,6 +4,7 @@ from Courses.models import Course
 from master.models import Cupon, PackageType
 from students.models import Student
 class PackageListSerializers(serializers.ModelSerializer):
+   
     class Meta:
         model = Package
         fields = '__all__'
