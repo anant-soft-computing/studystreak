@@ -8,4 +8,8 @@ from rest_framework import generics
 class StudentView(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializers
+
+class StudentRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializers
     

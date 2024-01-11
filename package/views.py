@@ -102,9 +102,7 @@ class EnrollPackageView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = EnrollmentSerializer(data=request.data)
         if serializer.is_valid():
-            package_id = serializer.validated_data['package_id']
             batch_id = serializer.validated_data.get('batch_id')
-            course_id = serializer.validated_data.get('course_id')
             user = request.user
             print(user)
 
@@ -125,16 +123,6 @@ class EnrollPackageView(APIView):
             if not created:
                 student.course_to_enroll = package
                 student.save()
-
-          
-            if batch_id:
-                batch_obj = batch.objects.filter(batchuser=user, id=batch_id).first()
-                if batch_obj:
-                    student.create_batch = batch_obj
-                    student.save()
-                else:
-                    return Response({"error": "Batch not found"}, status=status.HTTP_404_NOT_FOUND)
-
            
             if course_id:
                 course_obj = Course.objects.filter(primary_instructor=user, id=course_id).first()

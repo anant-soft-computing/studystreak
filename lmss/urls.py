@@ -48,7 +48,7 @@ from package.views import PackageListView, PackageRetUpdDelView, CoursePackageVi
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
-from students.views import *  # noqa: F403
+from students.views import StudentView, StudentRetUpdDelView
 from studystreak_api.views import (
     ChangePasswordView,
     GetUserRole,
@@ -272,6 +272,8 @@ urlpatterns = [
     path('api/userwisepackagewithcourseid/', UserWisePackageWithCourseID.as_view(), name='listofcourse' ),
 
     path('api/enroll-package/', EnrollPackageView.as_view(), name='enroll-package'),
+    path('api/studentview/', StudentView.as_view(), name='studentview'),
+    path('api/studentretupddelview/<int:pk>/', StudentRetUpdDelView.as_view(), name='studentretupddelview')
 ] + router.urls
 
 
