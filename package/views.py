@@ -96,7 +96,11 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+################# new code ############
+
 # class EnrollPackageView(APIView):
+#     permission_classes = [IsAuthenticated]
+
 #     def post(self, request, *args, **kwargs):
 #         serializer = EnrollmentSerializer(data=request.data)
 #         if serializer.is_valid():
@@ -105,18 +109,46 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 #             try:
 #                 student = Student.objects.get(user=user)
 #             except Student.DoesNotExist:
-#                 return Response({"detail": "Student not found for the authenticated user."}, status=status.HTTP_404_NOT_FOUND)
-#             batch_ids = serializer.validated_data.get('batch_ids', [])
+#                 return Response(
+#                     {"detail": "Student not found for the authenticated user."},
+#                     status=status.HTTP_404_NOT_FOUND,
+#                 )
+#             batch_ids = serializer.validated_data.get("batch_ids", [])
 #             batches = batch.objects.filter(pk__in=batch_ids)
 #             print(f"User: {user}, Student: {student}, Batch IDs: {batch_ids}")
+#             already_enrolled_batches = student.create_batch.filter(pk__in=batch_ids)
+#             if already_enrolled_batches.exists():
+#                 return Response(
+#                     {"detail": f"Batch IDs are already enrolled."},
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+#             new_batches = batches.exclude(pk__in=already_enrolled_batches)
+#             student.create_batch.add(*new_batches)
+#             print(f"Batches added to create_batch: {new_batches}")
+#             for batch_obj in new_batches:
+               
+#                 course_obj, created = Course.objects.get_or_create(
+#                     name=f"{batch_obj.batch_name} Course"
+#                 )
+              
+#                 package_obj, created = Package.objects.get_or_create(
+#                     package_name=f"{batch_obj.batch_name} Package",
+#                     select_course=course_obj,
+#                 )
+#                 batch_obj.add_package = package_obj
+#                 batch_obj.save()
 
-#             student.create_batch.add(*batches)
-
-#             print(f"Batches added to create_batch: {batches}")
-
-#             return Response({"detail": f"Successfully enrolled in batches."}, status=status.HTTP_201_CREATED)
+#             return Response(
+#                 {"detail": f"Successfully enrolled in batches."},
+#                 status=status.HTTP_201_CREATED,
+#             )
 
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+######################### code working | ###############################
+
 class EnrollPackageView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
