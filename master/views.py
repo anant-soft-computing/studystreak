@@ -1,5 +1,8 @@
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 
 from .models import (
     Category,
@@ -198,3 +201,19 @@ class QuestionTypeView(generics.ListCreateAPIView):
 class TestTypeViewset(ModelViewSet):
     serializer_class = TestTypeSerializers
     queryset = TestType.objects.all()
+
+
+# class BatchListByPackageView(generics.ListAPIView):
+#     serializer_class = batchListSerializers
+#     print("11")
+
+#     def get_queryset(self):
+#         # package = self.kwargs['package']
+#         # print("00")
+#         # return batch.objects.filter(add_package=package)
+#         return batch.objects.filter(add_package = self.kwargs["package_id"])
+class BatchListByPackageView(generics.ListAPIView):
+    serializer_class = batchListSerializers
+
+    def get_queryset(self):
+        return batch.objects.filter(add_package=self.kwargs['package_id'])

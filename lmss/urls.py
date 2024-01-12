@@ -43,7 +43,8 @@ from master.views import (
     TestTypeViewset,
     batchListView,
     batchRetUpdDelView,
-    CountryInterestedListView
+    CountryInterestedListView,
+    BatchListByPackageView
 )
 from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView
 from QuestionBank.views import *  # noqa: F403
@@ -275,7 +276,9 @@ urlpatterns = [
 
     path('api/enroll-package/', EnrollPackageView.as_view(), name='enroll-package'),
     path('api/studentview/', StudentView.as_view(), name='studentview'),
-    path('api/studentretupddelview/<int:pk>/', StudentRetUpdDelView.as_view(), name='studentretupddelview')
+    path('api/studentretupddelview/<int:pk>/', StudentRetUpdDelView.as_view(), name='studentretupddelview'),
+
+    path('api/filterbatches/<int:package_id>/', BatchListByPackageView.as_view(), name='filter_batches'),
 ] + router.urls
 
 
