@@ -118,6 +118,7 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class EnrollPackageView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = EnrollmentSerializer(data=request.data)
         if serializer.is_valid():
