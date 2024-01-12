@@ -135,7 +135,7 @@ class EnrollPackageView(APIView):
 
             already_enrolled_batches = student.create_batch.filter(pk__in=batch_ids)
             if already_enrolled_batches.exists():
-                return Response({"detail": f"Batch are already enrolled."},
+                return Response({"detail": f"Batch IDs {list(already_enrolled_batches)} are already enrolled."},
                                 status=status.HTTP_400_BAD_REQUEST)
 
             new_batches = batches.exclude(pk__in=already_enrolled_batches)
@@ -143,6 +143,6 @@ class EnrollPackageView(APIView):
 
             print(f"Batches added to create_batch: {new_batches}")
 
-            return Response({"detail": f"Successfully enrolled in batches."}, status=status.HTTP_201_CREATED)
+            return Response({"detail": f"Successfully enrolled  in batches."}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
