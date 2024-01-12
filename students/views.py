@@ -17,9 +17,5 @@ class StudentRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentRetUpdDelSerializers
 
-    def get_queryset(self):
-        user = self.request.user
-        return Student.objects.filter(user=user)
-
     
     
