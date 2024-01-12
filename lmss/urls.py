@@ -43,6 +43,7 @@ from master.views import (
     TestTypeViewset,
     batchListView,
     batchRetUpdDelView,
+    CountryInterestedListView
 )
 from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView
 from QuestionBank.views import *  # noqa: F403
@@ -133,6 +134,7 @@ urlpatterns = [
     path("api/packagetyperetupddelview/<int:pk>/", PackageTypeRetUpdDelView.as_view()),
     path("api/countrylistview/", CountryListView.as_view()),
     path("api/countryretupddelview/<int:pk>/", CountryRetUpdDelView.as_view()),
+    path("api/countryinterestedlistview/", CountryInterestedListView.as_view()),
     path("api/statelistview/", StateListView.as_view()),
     path("api/StateRetUpdDelView/<int:pk>/", StateRetUpdDelView.as_view()),
     path("api/citylistview/", CityListView.as_view()),

@@ -45,6 +45,7 @@ from .serializers import (
     StateRetUpdDelSerializers,
     TestTypeSerializers,
     batchListSerializers,
+    CountryInterestedListSerializers
 )
 
 # Create your views here.
@@ -137,6 +138,9 @@ class CountryListView(generics.ListCreateAPIView):
     queryset = Country.objects.all()
     serializer_class = CountryListSerializers
 
+class CountryInterestedListView(generics.ListCreateAPIView):
+    queryset = Country.objects.all()
+    serializer_class = CountryInterestedListSerializers
 
 class CountryRetUpdDelView(generics.ListCreateAPIView):
     queryset = Country.objects.all()

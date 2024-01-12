@@ -106,7 +106,6 @@ class Section(models.Model):
 
 
 class batch(models.Model):
-    batchuser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     batch_name = models.CharField(max_length=200)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
@@ -115,9 +114,6 @@ class batch(models.Model):
     batch_end_timing = models.TimeField(null=True, blank=True)
     add_package = models.ForeignKey(
         "package.package", on_delete=models.CASCADE, related_name="+"
-    )
-    create_course = models.ForeignKey(
-        "Courses.Course", on_delete=models.CASCADE, related_name="+"
     )
 
     def __str__(self):

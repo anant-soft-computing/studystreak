@@ -136,6 +136,10 @@ class CountryRetUpdDelSerializers(serializers.ModelSerializer):
         model = Country
         fields = "__all__"
 
+class CountryInterestedListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = "__all__"
 
 class StateListSerializers(serializers.ModelSerializer):
     class Meta:

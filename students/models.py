@@ -76,12 +76,8 @@ class Student(models.Model):
         default=VisaCounsellingInterest.YES,
         null=True,
     )
-    course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True, blank=True)
-    create_batch = models.ForeignKey(
-        "master.batch", on_delete=models.CASCADE, null=True, blank=True
-    )
-    create_course = models.ForeignKey(
-        "Courses.Course", on_delete=models.CASCADE, null=True, blank=True
+    create_batch = models.ManyToManyField(
+        "master.batch", null=True, blank=True
     )
     referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

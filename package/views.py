@@ -96,52 +96,52 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class EnrollPackageView(APIView):
-    permission_classes = [IsAuthenticated]
+# class EnrollPackageView(APIView):
+#     def post(self, request, *args, **kwargs):
+#         serializer = EnrollmentSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = self.request.user
 
+#             try:
+#                 student = Student.objects.get(user=user)
+#             except Student.DoesNotExist:
+#                 return Response({"detail": "Student not found for the authenticated user."}, status=status.HTTP_404_NOT_FOUND)
+#             batch_ids = serializer.validated_data.get('batch_ids', [])
+#             batches = batch.objects.filter(pk__in=batch_ids)
+#             print(f"User: {user}, Student: {student}, Batch IDs: {batch_ids}")
+
+#             student.create_batch.add(*batches)
+
+#             print(f"Batches added to create_batch: {batches}")
+
+#             return Response({"detail": f"Successfully enrolled in batches."}, status=status.HTTP_201_CREATED)
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class EnrollPackageView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = EnrollmentSerializer(data=request.data)
         if serializer.is_valid():
-            batch_id = serializer.validated_data.get('batch_id')
-            user = request.user
-            print(user)
-
-            
-            existing_enrollment = Student.objects.filter(user=user, course_to_enroll__id=package_id).first()
-            if existing_enrollment:
-                return Response({"msg": "User is already enrolled in the package", "student_id": existing_enrollment.id}, status=status.HTTP_200_OK)
+            user = self.request.user
 
             try:
-                package = Package.objects.get(id=package_id)
-            except Package.DoesNotExist:
-                return Response({"error": "Package not found"}, status=status.HTTP_404_NOT_FOUND)
+                student = Student.objects.get(user=user)
+            except Student.DoesNotExist:
+                return Response({"detail": "Student not found for the authenticated user."}, status=status.HTTP_404_NOT_FOUND)
 
-            
-            student, created = Student.objects.get_or_create(user=user, defaults={'course_to_enroll': package})
+            batch_ids = serializer.validated_data.get('batch_ids', [])
+            batches = batch.objects.filter(pk__in=batch_ids)
+            print(f"User: {user}, Student: {student}, Batch IDs: {batch_ids}")
 
-          
-            if not created:
-                student.course_to_enroll = package
-                student.save()
-           
-            if course_id:
-                course_obj = Course.objects.filter(primary_instructor=user, id=course_id).first()
-                if course_obj:
-                    student.create_course = course_obj
-                    student.save()
-                else:
-                    return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
+            already_enrolled_batches = student.create_batch.filter(pk__in=batch_ids)
+            if already_enrolled_batches.exists():
+                return Response({"detail": f"Batch are already enrolled."},
+                                status=status.HTTP_400_BAD_REQUEST)
 
-            return Response({"msg": "Enrollment successful", "student_id": student.id}, status=status.HTTP_201_CREATED)
+            new_batches = batches.exclude(pk__in=already_enrolled_batches)
+            student.create_batch.add(*new_batches)
+
+            print(f"Batches added to create_batch: {new_batches}")
+
+            return Response({"detail": f"Successfully enrolled in batches."}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#       // JavaScript for redirecting after 3 seconds
-#       setTimeout(function () {
-#         window.location.href = "{{link}}";
-#       }, 3000);
-#     </script>
-#   </body>
-# </html>
-
-# <a href="{{ link }}" target="_blank" >

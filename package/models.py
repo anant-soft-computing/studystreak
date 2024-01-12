@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 # Section: Package
 class Package(models.Model):
-    user_package = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     package_name = models.CharField(max_length=255)
     package_price = models.CharField(
         max_length=100
