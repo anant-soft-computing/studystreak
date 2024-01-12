@@ -4,6 +4,15 @@ from Courses.models import Course
 from master.models import Cupon, PackageType
 from students.models import Student
 from master.models import batch
+
+class StudentListSerializers(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Student
+        fields = '__all__'
+        depth = 1
+        
+
 class PackageListSerializers(serializers.ModelSerializer):
    
     class Meta:
@@ -60,7 +69,7 @@ class CourseListsSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = Package
-        fields = ("id","user_package","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
+        fields = ("id","","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
         "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
         "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
         "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")

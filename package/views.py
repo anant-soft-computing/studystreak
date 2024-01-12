@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Package, UserProfile
-from .serializers import PackageListSerializers, PackageRetUpdDelSerializers, CoursePackageSerializer, CourseListsSerializers,EnrollmentSerializer
+from .serializers import PackageListSerializers, PackageRetUpdDelSerializers, CoursePackageSerializer, CourseListsSerializers,EnrollmentSerializer, StudentListSerializers
 from rest_framework import generics
 from Courses.models import Course
 from students.models import Student
@@ -18,9 +18,9 @@ class PackageListView(generics.ListCreateAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageListSerializers
 
-    def get_queryset(self):
-        user = self.request.user
-        return Package.objects.filter(user_package=user)
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return Package.objects.filter(user_package=user)
     
     
 class PackageRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
@@ -45,11 +45,11 @@ class CoursePackageView(generics.RetrieveAPIView):
 
 class UserWisePackageWithCourseID(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = PackageListSerializers
+    serializer_class = StudentListSerializers
 
     def get_queryset(self):
         user = self.request.user
-        return Package.objects.filter(user_package=user)
+        return Student.objects.filter(user=user)
 
     def get(self, request):
         queryset = self.get_queryset()
