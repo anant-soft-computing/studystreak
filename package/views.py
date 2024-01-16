@@ -10,9 +10,12 @@ from rest_framework import status
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from master.models import batch  # Replace with the actual import path
+from master.models import batch, CourseMaterial, AdditionalResource  # Replace with the actual import path
 from Courses.models import Course 
 from package.serializers import PackageListSerializers, PackageListForStudentSerializers
+from Courses.serializers import CourseListSerializers
+from master.serializers import AdditionalResourceListSerializers, CourseMaterialListSerializers
+
 # Create your views here.
 
 class PackageListView(generics.ListCreateAPIView):
@@ -43,6 +46,73 @@ class CoursePackageView(generics.RetrieveAPIView):
     queryset = Course.objects.all()
     serializer_class = CoursePackageSerializer
    
+################### code work ########################
+
+# class UserWisePackageWithCourseID(generics.ListAPIView):
+#     permission_classes = [IsAuthenticated]
+#     serializer_class = StudentListSerializers 
+
+#     def get_queryset(self):
+#         user = self.request.user
+#         return Student.objects.filter(user=user)
+
+#     def get(self, request):
+#         queryset = self.get_queryset()
+#         package_count = queryset.count()
+        
+#         package_list = []
+       
+#         for student in queryset:
+#             create_batch = student.create_batch.all() if student.create_batch else None
+
+#             if create_batch:
+#                 for batch in create_batch:
+                  
+#                     if batch.add_package:
+                       
+#                         package = batch.add_package
+
+                      
+#                         serialized_package = PackageListForStudentSerializers(package).data
+
+                       
+#                         package_list.append({
+#                             'student_id': student.id,
+#                             'student_name': student.user.username,
+#                             'selected_batch': batch.batch_name,
+#                             'package': serialized_package,
+#                         })
+#                     else:
+                       
+#                         package_list.append({
+#                             'student_id': student.id,
+#                             'student_name': student.user.username,
+#                             'selected_batch': batch.batch_name,
+#                             'package': None,
+#                         })
+#             else:
+               
+#                 package_list.append({
+#                     'student_id': student.id,
+#                     'student_name': student.user.username,
+#                     'selected_batch': None,
+#                     'package': None,
+#                 })
+
+#         data = {
+#             'package_count': package_count,
+#             'student_packages': package_list,
+#         }
+
+#         return Response(data)
+    
+#################### code work ########################
+
+
+
+
+
+
 
 
 class UserWisePackageWithCourseID(generics.ListAPIView):
@@ -64,35 +134,34 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 
             if create_batch:
                 for batch in create_batch:
-                  
                     if batch.add_package:
-                       
                         package = batch.add_package
+                        course = package.select_course  # Get the selected course
 
-                      
+                        serialized_course = CourseListSerializers(course).data
                         serialized_package = PackageListForStudentSerializers(package).data
 
-                       
                         package_list.append({
                             'student_id': student.id,
                             'student_name': student.user.username,
                             'selected_batch': batch.batch_name,
+                            'course': serialized_course,
                             'package': serialized_package,
                         })
                     else:
-                       
                         package_list.append({
                             'student_id': student.id,
                             'student_name': student.user.username,
                             'selected_batch': batch.batch_name,
+                            'course': None,
                             'package': None,
                         })
             else:
-               
                 package_list.append({
                     'student_id': student.id,
                     'student_name': student.user.username,
                     'selected_batch': None,
+                    'course': None,
                     'package': None,
                 })
 
@@ -102,87 +171,79 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
         }
 
         return Response(data)
-    # 
-
-# class EnrollPackageView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request, *args, **kwargs):
-#         serializer = EnrollmentSerializer(data=request.data)
-#         if serializer.is_valid():
-#             package_id = serializer.validated_data['package_id']
-#             user = request.user
-
-#             # Check if the user is already enrolled in the package
-#             existing_enrollment = Student.objects.filter(user=user, course_to_enroll__id=package_id).first()
-#             if existing_enrollment:
-#                 return Response({"msg": "User is already enrolled in the package", "student_id": existing_enrollment.id}, status=status.HTTP_200_OK)
-
-#             try:
-#                 package = Package.objects.get(id=package_id)
-#             except Package.DoesNotExist:
-#                 return Response({"error": "Package not found"}, status=status.HTTP_404_NOT_FOUND)
-
-#             # Check if the user has an existing student record
-#             student, created = Student.objects.get_or_create(user=user, defaults={'course_to_enroll': package})
-
-#             # If the student record already exists, update the course_to_enroll field
-#             if not created:
-#                 student.course_to_enroll = package
-#                 student.save()
-
-#             return Response({"msg": "Enrollment successful", "student_id": student.id}, status=status.HTTP_201_CREATED)
-
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 ################# new code ############
 
-# class EnrollPackageView(APIView):
+# class UserWisePackageWithCourseID(generics.ListAPIView):
 #     permission_classes = [IsAuthenticated]
+#     serializer_class = StudentListSerializers 
 
-#     def post(self, request, *args, **kwargs):
-#         serializer = EnrollmentSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = self.request.user
+#     def get_queryset(self):
+#         user = self.request.user
+#         return Student.objects.filter(user=user)
 
-#             try:
-#                 student = Student.objects.get(user=user)
-#             except Student.DoesNotExist:
-#                 return Response(
-#                     {"detail": "Student not found for the authenticated user."},
-#                     status=status.HTTP_404_NOT_FOUND,
-#                 )
-#             batch_ids = serializer.validated_data.get("batch_ids", [])
-#             batches = batch.objects.filter(pk__in=batch_ids)
-#             print(f"User: {user}, Student: {student}, Batch IDs: {batch_ids}")
-#             already_enrolled_batches = student.create_batch.filter(pk__in=batch_ids)
-#             if already_enrolled_batches.exists():
-#                 return Response(
-#                     {"detail": f"Batch IDs are already enrolled."},
-#                     status=status.HTTP_400_BAD_REQUEST,
-#                 )
-#             new_batches = batches.exclude(pk__in=already_enrolled_batches)
-#             student.create_batch.add(*new_batches)
-#             print(f"Batches added to create_batch: {new_batches}")
-#             for batch_obj in new_batches:
-               
-#                 course_obj, created = Course.objects.get_or_create(
-#                     name=f"{batch_obj.batch_name} Course"
-#                 )
-              
-#                 package_obj, created = Package.objects.get_or_create(
-#                     package_name=f"{batch_obj.batch_name} Package",
-#                     select_course=course_obj,
-#                 )
-#                 batch_obj.add_package = package_obj
-#                 batch_obj.save()
+#     def get(self, request):
+#         queryset = self.get_queryset()
+#         package_count = queryset.count()
+        
+#         package_list = []
+       
+#         for student in queryset:
+#             create_batch = student.create_batch.all() if student.create_batch else None
 
-#             return Response(
-#                 {"detail": f"Successfully enrolled in batches."},
-#                 status=status.HTTP_201_CREATED,
-#             )
+#             if create_batch:
+#                 for batch in create_batch:
+#                     if batch.add_package:
+#                         package = batch.add_package
+#                         course = package.select_course  # Get the selected course
 
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#                         # Serialize course information
+#                         serialized_course = CourseListSerializers(course).data
+
+#                         # Get and serialize CourseMaterial and AdditionalResource data
+#                         course_material_data = CourseMaterial.objects.filter(course=course)
+#                         additional_resource_data = AdditionalResource.objects.filter(course=course)
+
+#                         serialized_course_material = CourseMaterialListSerializers(course_material_data, many=True).data
+#                         serialized_additional_resource = AdditionalResourceListSerializers(additional_resource_data, many=True).data
+#                         serialized_package = PackageListForStudentSerializers(package).data
+
+#                         package_list.append({
+#                             'student_id': student.id,
+#                             'student_name': student.user.username,
+#                             'selected_batch': batch.batch_name,
+#                             'course': serialized_course,
+#                             'course_material': serialized_course_material,
+#                             'additional_resources': serialized_additional_resource,
+#                             'package': serialized_package,
+#                         })
+#                     else:
+#                         package_list.append({
+#                             'student_id': student.id,
+#                             'student_name': student.user.username,
+#                             'selected_batch': batch.batch_name,
+#                             'course': None,
+#                             'course_material': None,
+#                             'additional_resources': None,
+#                             'package': None,
+#                         })
+#             else:
+#                 package_list.append({
+#                     'student_id': student.id,
+#                     'student_name': student.user.username,
+#                     'selected_batch': None,
+#                     'course': None,
+#                     'course_material': None,
+#                     'additional_resources': None,
+#                     'package': None,
+#                 })
+
+#         data = {
+#             'package_count': package_count,
+#             'student_packages': package_list,
+#         }
+
+#         return Response(data)
 
 
 

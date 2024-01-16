@@ -16,7 +16,13 @@ from .models import (
     State,
     TestType,
     batch,
+    CourseMaterial,
+    AdditionalResource,
+    LessonAssignment,
+    LessonAttachment
 )
+
+
 
 # from .models import
 
@@ -202,3 +208,30 @@ class TestTypeSerializers(serializers.ModelSerializer):
     class Meta:
         model = TestType
         fields = "__all__"
+
+
+class CourseMaterialListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CourseMaterial
+        fields = "__all__"
+
+
+class CourseMaterialRetUpdDelSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CourseMaterial
+        fields = "__all__"
+
+class AdditionalResourceListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalResource
+        fields = "__all__"
+
+class LessonAssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonAssignment
+        fields = '__all__'
+
+class LessonAttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonAttachment
+        fields = '__all__'

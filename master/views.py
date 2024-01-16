@@ -20,6 +20,10 @@ from .models import (
     State,
     TestType,
     batch,
+    CourseMaterial,
+    AdditionalResource,
+    LessonAttachment,
+    LessonAssignment
 )
 from .serializers import (
     CategoryListSerializers,
@@ -48,7 +52,12 @@ from .serializers import (
     StateRetUpdDelSerializers,
     TestTypeSerializers,
     batchListSerializers,
-    CountryInterestedListSerializers
+    CountryInterestedListSerializers,
+    CourseMaterialListSerializers,
+    CourseMaterialRetUpdDelSerializers,
+    AdditionalResourceListSerializers,
+    LessonAssignmentSerializer,
+    LessonAttachmentSerializer
 )
 
 # Create your views here.
@@ -217,3 +226,61 @@ class BatchListByPackageView(generics.ListAPIView):
 
     def get_queryset(self):
         return batch.objects.filter(add_package=self.kwargs['package_id'])
+
+class CourseMaterialListView(generics.ListAPIView):
+    serializer_class = CourseMaterialListSerializers
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return CourseMaterial.objects.filter(course_id=course_id)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({'count': count, 'data': serializer.data})
+    
+class CourseMaterialRetUpdDelView(generics.ListCreateAPIView):
+    queryset = CourseMaterial.objects.all()
+    serializer_class = CourseMaterialRetUpdDelSerializers
+
+
+class AdditionalResourceListAPIView(generics.ListAPIView):
+    serializer_class = AdditionalResourceListSerializers
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return AdditionalResource.objects.filter(course_id=course_id)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({'count': count, 'data': serializer.data})
+
+
+class LessonAssignmentListAPIView(generics.ListAPIView):
+    serializer_class = LessonAssignmentSerializer
+
+    def get_queryset(self):
+        lesson_id = self.kwargs['lesson_id']
+        return LessonAssignment.objects.filter(lesson_id=lesson_id)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({'count': count, 'data': serializer.data})
+
+class LessonAttachmentListAPIView(generics.ListAPIView):
+    serializer_class = LessonAttachmentSerializer
+
+    def get_queryset(self):
+        lesson_id = self.kwargs['lesson_id']
+        return LessonAttachment.objects.filter(lesson_id=lesson_id)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        count = queryset.count()
+        return Response({'count': count, 'data': serializer.data})
