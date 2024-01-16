@@ -25,7 +25,7 @@ class PackageListForStudentSerializers(serializers.ModelSerializer):
    
     class Meta:
         model = Package
-        fields = ("id", "package_name")
+        fields = '__all__'
         depth = 1
         
 class PackageRetUpdDelSerializers(serializers.ModelSerializer):
