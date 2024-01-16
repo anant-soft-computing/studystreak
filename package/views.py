@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from master.models import batch  # Replace with the actual import path
 from Courses.models import Course 
+from package.serializers import PackageListSerializers, PackageListForStudentSerializers
 # Create your views here.
 
 class PackageListView(generics.ListCreateAPIView):
@@ -43,9 +44,10 @@ class CoursePackageView(generics.RetrieveAPIView):
     serializer_class = CoursePackageSerializer
    
 
+
 class UserWisePackageWithCourseID(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = StudentListSerializers
+    serializer_class = StudentListSerializers 
 
     def get_queryset(self):
         user = self.request.user
@@ -53,16 +55,53 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
 
     def get(self, request):
         queryset = self.get_queryset()
-        package_count = queryset.count()  
-        serializer = self.serializer_class(queryset, many=True)
-        print(serializer)
+        package_count = queryset.count()
+        
+        package_list = []
+       
+        for student in queryset:
+            create_batch = student.create_batch.all() if student.create_batch else None
+
+            if create_batch:
+                for batch in create_batch:
+                  
+                    if batch.add_package:
+                       
+                        package = batch.add_package
+
+                      
+                        serialized_package = PackageListForStudentSerializers(package).data
+
+                       
+                        package_list.append({
+                            'student_id': student.id,
+                            'student_name': student.user.username,
+                            'selected_batch': batch.batch_name,
+                            'package': serialized_package,
+                        })
+                    else:
+                       
+                        package_list.append({
+                            'student_id': student.id,
+                            'student_name': student.user.username,
+                            'selected_batch': batch.batch_name,
+                            'package': None,
+                        })
+            else:
+               
+                package_list.append({
+                    'student_id': student.id,
+                    'student_name': student.user.username,
+                    'selected_batch': None,
+                    'package': None,
+                })
+
         data = {
             'package_count': package_count,
-            'packages': serializer.data,
+            'student_packages': package_list,
         }
-        return Response(data)
 
-        
+        return Response(data)
     # 
 
 # class EnrollPackageView(APIView):

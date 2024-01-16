@@ -19,6 +19,14 @@ class PackageListSerializers(serializers.ModelSerializer):
         model = Package
         fields = '__all__'
         depth = 1
+
+################ only create foe Student batch wise package get ###############
+class PackageListForStudentSerializers(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Package
+        fields = ("id", "package_name")
+        depth = 1
         
 class PackageRetUpdDelSerializers(serializers.ModelSerializer):
     class Meta:
