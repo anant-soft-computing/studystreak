@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ef08c221.css",
-    "main.js": "/static/js/main.400181bc.js",
+    "main.css": "/static/css/main.91aa4984.css",
+    "main.js": "/static/js/main.b3641e66.js",
     "static/media/register__bg.png": "/static/media/register__bg.8f3340b40d006c7271d9.png",
     "static/media/blog_7.png": "/static/media/blog_7.ad28b4e16bb1b8845095.png",
     "static/media/blog_6.png": "/static/media/blog_6.d2b53c8250f4c3df1d44.png",
@@ -16,7 +16,6 @@
     "static/media/blog_3.png": "/static/media/blog_3.5fc631e493bceaf7944c.png",
     "static/media/blog_19.png": "/static/media/blog_19.2b10ad70e00d9e53a971.png",
     "static/media/blog_23.png": "/static/media/blog_23.e49318c11d30aba45560.png",
-    "static/media/grid_1.png": "/static/media/grid_1.3f3a23058614a25ec029.png",
     "static/media/blog_4.png": "/static/media/blog_4.45e139f4a6f5e1712f2a.png",
     "static/media/duolingo.png": "/static/media/duolingo.983c9fe6ee0aedf254ee.png",
     "static/media/blog_20.png": "/static/media/blog_20.34f73f8907c98501f65d.png",
@@ -42,11 +41,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.ef08c221.css.map": "/static/css/main.ef08c221.css.map",
-    "main.400181bc.js.map": "/static/js/main.400181bc.js.map"
+    "main.91aa4984.css.map": "/static/css/main.91aa4984.css.map",
+    "main.b3641e66.js.map": "/static/js/main.b3641e66.js.map"
   },
   "entrypoints": [
-    "static/css/main.ef08c221.css",
-    "static/js/main.400181bc.js"
+    "static/css/main.91aa4984.css",
+    "static/js/main.b3641e66.js"
   ]
 }
