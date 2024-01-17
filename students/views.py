@@ -12,14 +12,14 @@ class StudentView(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializers
 
-    def get_queryset(self):
-        user = self.request.user
+    # def get_queryset(self):
+    #     user = self.request.user
 
        
-        if isinstance(user, AnonymousUser):
-            return Student.objects.none() 
+    #     if isinstance(user, AnonymousUser):
+    #         return Student.objects.none() 
 
-        return Student.objects.filter(user=user)
+    #     return Student.objects.filter(user=user)
 class StudentRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     queryset = Student.objects.all()
