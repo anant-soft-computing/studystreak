@@ -230,8 +230,10 @@ class LessonAssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonAssignment
         fields = '__all__'
+        depth=1
 
 class LessonAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonAttachment
         fields = '__all__'
+        depth=1
