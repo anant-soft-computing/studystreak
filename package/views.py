@@ -149,23 +149,23 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                         serialized_package = PackageListForStudentSerializers(package).data
 
                        
-                        lessons = course.lessons.all()
+                        # lessons = course.lessons.all()
 
-                        lesson_attachment_count = LessonAttachment.objects.filter(lesson__in=lessons).count()
-                        lesson_assignment_count = LessonAssignment.objects.filter(lesson__in=lessons).count()
+                        # lesson_attachment_count = LessonAttachment.objects.filter(lesson__in=lessons).count()
+                        # lesson_assignment_count = LessonAssignment.objects.filter(lesson__in=lessons).count()
 
                       
-                        attachment_instance = LessonAttachment.objects.filter(lesson__in=lessons).first()
-                        assignment_instance = LessonAssignment.objects.filter(lesson__in=lessons).first()
+                        # attachment_instance = LessonAttachment.objects.filter(lesson__in=lessons).first()
+                        # assignment_instance = LessonAssignment.objects.filter(lesson__in=lessons).first()
 
                        
-                        quiz_questions = Quiz_Question.objects.filter(lesson__in=lessons)
-                        quiz_options = QuizOption.objects.filter(name__in=quiz_questions)
+                        # quiz_questions = Quiz_Question.objects.filter(lesson__in=lessons)
+                        # quiz_options = QuizOption.objects.filter(name__in=quiz_questions)
 
-                        serialized_attachment = LessonAttachmentSerializer(attachment_instance).data
-                        serialized_assignment = LessonAssignmentSerializer(assignment_instance).data
-                        serialized_quiz_questions = Quiz_QuestionListSerializers(quiz_questions, many=True).data
-                        serialized_quiz_options = QuizOptionListSerializers(quiz_options, many=True).data
+                        # serialized_attachment = LessonAttachmentSerializer(attachment_instance).data
+                        # serialized_assignment = LessonAssignmentSerializer(assignment_instance).data
+                        # serialized_quiz_questions = Quiz_QuestionListSerializers(quiz_questions, many=True).data
+                        # serialized_quiz_options = QuizOptionListSerializers(quiz_options, many=True).data
 
                         package_list.append({
                             'student_id': student.id,
@@ -173,12 +173,12 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                             'selected_batch': batch.batch_name,
                             'course': serialized_course,
                             'package': serialized_package,
-                            'lesson_attachment_count': lesson_attachment_count,
-                            'lesson_assignment_count': lesson_assignment_count,
-                            'attachment_lession': serialized_attachment,
-                            'assignment_lession': serialized_assignment,
-                            'quiz_questions': serialized_quiz_questions,
-                            'quiz_options': serialized_quiz_options,
+                            # 'lesson_attachment_count': lesson_attachment_count,
+                            # 'lesson_assignment_count': lesson_assignment_count,
+                            # 'attachment_lession': serialized_attachment,
+                            # 'assignment_lession': serialized_assignment,
+                            # 'quiz_questions': serialized_quiz_questions,
+                            # 'quiz_options': serialized_quiz_options,
                         })
                     else:
                         package_list.append({
@@ -187,12 +187,12 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                             'selected_batch': batch.batch_name,
                             'course': None,
                             'package': None,
-                            'lesson_attachment_count': None,
-                            'lesson_assignment_count': None,
-                            'attachment_lession': None,
-                            'assignment_lession': None,
-                            'quiz_questions': None,
-                            'quiz_options': None,
+                            # 'lesson_attachment_count': None,
+                            # 'lesson_assignment_count': None,
+                            # 'attachment_lession': None,
+                            # 'assignment_lession': None,
+                            # 'quiz_questions': None,
+                            # 'quiz_options': None,
                         })
             else:
                 package_list.append({
@@ -201,12 +201,12 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                     'selected_batch': None,
                     'course': None,
                     'package': None,
-                    'lesson_attachment_count': None,
-                    'lesson_assignment_count': None,
-                    'attachment_lession': None,
-                    'assignment_lession': None,
-                    'quiz_questions': None,
-                    'quiz_options': None,
+                    # 'lesson_attachment_count': None,
+                    # 'lesson_assignment_count': None,
+                    # 'attachment_lession': None,
+                    # 'assignment_lession': None,
+                    # 'quiz_questions': None,
+                    # 'quiz_options': None,
                 })
 
         data = {
