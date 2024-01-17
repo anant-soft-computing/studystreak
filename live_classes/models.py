@@ -19,7 +19,7 @@ class LiveClass(models.Model):
     meeting_description = models.TextField()  # If you're using django-ckeditor or similar, this can be replaced with RichTextField
     start_time = models.TimeField()
     end_time = models.TimeField()
-    zoom_meeting_id = models.CharField(max_length=100)
+    zoom_meeting_id = models.CharField(max_length=100, null=True)
     zoom_meeting_password = models.CharField(max_length=100)
 
     def __str__(self):
