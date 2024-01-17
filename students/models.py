@@ -79,6 +79,9 @@ class Student(models.Model):
     create_batch = models.ManyToManyField(
         "master.batch", null=True, blank=True
     )
+    create_package = models.ManyToManyField(
+        "package.Package", null=True, blank=True
+    )
     referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

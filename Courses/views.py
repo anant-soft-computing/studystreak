@@ -11,6 +11,11 @@ from .serializers import (
 from master.models import CourseMaterial, AdditionalResource
 from master.serializers import CourseMaterialListSerializers, AdditionalResourceListSerializers
 from rest_framework.response import Response
+from master.serializers import (AdditionalResourceListSerializers, CourseMaterialListSerializers,
+LessonAttachmentSerializer,LessonAssignmentSerializer,)
+from coursedetail.models import Quiz_Question, QuizOption
+from coursedetail.serializers import QuizOptionListSerializers, Quiz_QuestionListSerializers
+from master.models import batch, CourseMaterial, AdditionalResource,LessonAttachment, LessonAssignment 
 
 class CourseListView(generics.ListCreateAPIView):
     queryset = Course.objects.all()
@@ -45,5 +50,7 @@ class CourseListView(generics.ListCreateAPIView):
 class CourseRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseRetUpdDelSerializers
+
+    
 
 

@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import Course
 from master.serializers import AdditionalResourceListSerializers, CourseMaterialListSerializers
-from coursedetail.serializers import LessonListSerializers
+from coursedetail.serializers import LessonListSerializers, LessonDetailSerializer
 
 class CourseListSerializers(serializers.ModelSerializer):
     lessons = LessonListSerializers(many=True, read_only=True)
@@ -23,10 +23,20 @@ class CourseCreateSerializers(serializers.ModelSerializer):
 
 
 class CourseRetUpdDelSerializers(serializers.ModelSerializer):
+    lessons = LessonDetailSerializer(many=True, read_only=True)
+
     class Meta:
         model = Course
-        fields = "__all__"
+        fields = '__all__'
+        depth = 3
 
-        depth = 2
+    # def get_tutor(self, obj):
+    #     tutors = obj.tutor.all()
+    #     return UserSerializer(tutors, many=True).data if tutors else None
+    # class Meta:
+    #     model = Course
+    #     fields = "__all__"
+
+        
 
 
