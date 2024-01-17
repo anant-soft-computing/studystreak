@@ -322,3 +322,48 @@ class EnrollPackageView(APIView):
             return Response({"detail": f"Successfully enrolled  in batches."}, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+##########################################################
+################### packagewiesewnroll ###################
+##########################################################
+
+# class EnrollPackageView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request, *args, **kwargs):
+#         serializer = EnrollmentSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = self.request.user
+
+#             try:
+#                 student = Student.objects.get(user=user)
+#             except Student.DoesNotExist:
+#                 return Response(
+#                     {"detail": "Student not found for the authenticated user."},
+#                     status=status.HTTP_404_NOT_FOUND,
+#                 )
+
+#             package_ids = serializer.validated_data.get("package_ids", [])
+#             packages = Package.objects.filter(pk__in=package_ids)
+
+#             already_enrolled_packages = student.create_package.filter(
+#                 pk__in=package_ids
+#             )
+#             if already_enrolled_packages.exists():
+#                 return Response(
+#                     {
+#                         "detail": f"We are sorry, but you are already enrolled in a package"
+#                     },
+#                     status=status.HTTP_400_BAD_REQUEST,
+#                 )
+
+#             new_packages = packages.exclude(pk__in=already_enrolled_packages)
+#             student.create_package.add(*new_packages)
+
+#             return Response(
+#                 {"detail": f"Successfully enrolled in packages."},
+#                 status=status.HTTP_201_CREATED,
+#             )
+
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
