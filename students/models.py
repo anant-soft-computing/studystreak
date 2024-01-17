@@ -76,10 +76,10 @@ class Student(models.Model):
         default=VisaCounsellingInterest.YES,
         null=True,
     )
-    create_batch = models.ManyToManyField(
+    select_batch = models.ManyToManyField(
         "master.batch", null=True, blank=True
     )
-    create_package = models.ManyToManyField(
+    select_package = models.ManyToManyField(
         "package.Package", null=True, blank=True
     )
     referal_code = models.CharField(max_length=20, null=True)

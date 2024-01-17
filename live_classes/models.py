@@ -3,9 +3,11 @@
 from django.db import models
 
 from Courses.models import Course
-
+from master.models import LiveClassType
 
 class LiveClass(models.Model):
+    live_class_name = models.CharField(max_length=200, null=True,blank=True)
+    live_class_type = models.ForeignKey(LiveClassType, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     package = models.ForeignKey(
         "package.Package", on_delete=models.CASCADE, null=True, blank=True

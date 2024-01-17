@@ -22,7 +22,7 @@ class CourseListView(generics.ListCreateAPIView):
     serializer_class = CourseListSerializers
 
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ['Category__name', 'Level__name']
+    filterset_fields = ['Category__name', 'Level__name', ]
     search_fields = ['Course_Title', ]
 
     def get_serializer_class(self):

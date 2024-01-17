@@ -52,7 +52,7 @@ from master.views import (
     LessonAttachmentListAPIView
 
 )
-from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView
+from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView,EnrollPackageStudentView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
@@ -293,6 +293,8 @@ urlpatterns = [
 
     path('api/lesson-assignments/<int:lesson_id>/', LessonAssignmentListAPIView.as_view(), name='lesson-assignment-list'),
     path('api/lesson-attachments/<int:lesson_id>/', LessonAttachmentListAPIView.as_view(), name='lesson-attachment-list'),
+
+    path('api/enrollpackagestudentview/', EnrollPackageStudentView.as_view(), name='enrollpackagestudentview'),
 
 
 ] + router.urls
