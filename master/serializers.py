@@ -16,7 +16,13 @@ from .models import (
     State,
     TestType,
     batch,
+    CourseMaterial,
+    AdditionalResource,
+    LessonAssignment,
+    LessonAttachment
 )
+
+
 
 # from .models import
 
@@ -136,6 +142,10 @@ class CountryRetUpdDelSerializers(serializers.ModelSerializer):
         model = Country
         fields = "__all__"
 
+class CountryInterestedListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = "__all__"
 
 class StateListSerializers(serializers.ModelSerializer):
     class Meta:
@@ -198,3 +208,32 @@ class TestTypeSerializers(serializers.ModelSerializer):
     class Meta:
         model = TestType
         fields = "__all__"
+
+
+class CourseMaterialListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CourseMaterial
+        fields = "__all__"
+
+
+class CourseMaterialRetUpdDelSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = CourseMaterial
+        fields = "__all__"
+
+class AdditionalResourceListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalResource
+        fields = "__all__"
+
+class LessonAssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonAssignment
+        fields = '__all__'
+        depth=1
+
+class LessonAttachmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LessonAttachment
+        fields = '__all__'
+        depth=1

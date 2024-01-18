@@ -1,7 +1,7 @@
 # live_classes/admin.py
 
 from django.contrib import admin
-from .models import LiveClass
+from .models import LiveClass, LiveClassType
 
 class LiveClassAdmin(admin.ModelAdmin):
     list_display = ['meeting_title', 'start_time', 'end_time']
@@ -10,3 +10,10 @@ class LiveClassAdmin(admin.ModelAdmin):
     ordering = ['start_time']
 
 admin.site.register(LiveClass, LiveClassAdmin)
+
+class LiveClassTypeAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    list_filter = ['name']
+    search_fields = ['name']
+
+admin.site.register(LiveClassType, LiveClassTypeAdmin)

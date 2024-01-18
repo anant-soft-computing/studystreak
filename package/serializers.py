@@ -3,12 +3,30 @@ from .models import Package
 from Courses.models import Course
 from master.models import Cupon, PackageType
 from students.models import Student
+from master.models import batch
+
+class StudentListSerializers(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Student
+        fields = '__all__'
+        depth = 1
+        
+
 class PackageListSerializers(serializers.ModelSerializer):
    
     class Meta:
         model = Package
         fields = '__all__'
         depth = 1
+
+################ only create foe Student batch wise package get ###############
+class PackageListForStudentSerializers(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Package
+        fields = '__all__'
+        # depth = 1
         
 class PackageRetUpdDelSerializers(serializers.ModelSerializer):
     class Meta:
@@ -54,29 +72,21 @@ class CoursePackageSerializer(serializers.ModelSerializer):
 
 
 
-class CourseListsSerializers(serializers.ModelSerializer):
-    # user_profile = serializers.PrimaryKeyRelatedField(queryset=UserProfile.objects.all())
+class EnrollmentPackageSerializer(serializers.ModelSerializer):
+    package_ids = serializers.ListField(child=serializers.CharField(), required=True)
 
     class Meta:
         model = Package
-        fields = ("id","user_package","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
-        "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
-        "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
-        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")
+        fields ="__all__"
         depth = 1
 
 
 class EnrollmentSerializer(serializers.Serializer):
-    package_id = serializers.IntegerField()
-    batch_id = serializers.IntegerField(required=False)
-    course_id = serializers.IntegerField(required=False)
-
+    batch_ids = serializers.ListField(child=serializers.CharField(), required=True)
+   
     class Meta:
-        model = Package
-        fields = ("id","user_package","user_package", "package_name", "package_price", "PackageType", "select_course", "soft_copy", "hard_copy", "full_length_test", 
-        "full_length_test_count", "practice_test", "practice_test_count", "speaking_test", "speaking_test_count", "writing_evaluation", 
-        "live_classes_membership", "online_membership", "offline_membership", "group_doubt_solving", "group_doubt_solving_count",
-        "one_to_one_doubt_solving", "one_to_one_doubt_solving_count", "validity", "duration", "coupon_code", "user_profile")
+        model = batch
+        fields = ("id", "batch_name", "batch_startdate", "batch_enddate", "batch_start_timing", "batch_end_timing", "add_package",)
         depth = 1
 
 # from rest_framework import serializers

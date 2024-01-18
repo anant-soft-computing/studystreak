@@ -50,7 +50,6 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
     list_display = (
         "first_name",
         "last_name",
-        "course_to_enroll",
         "whatsapp_no",
         "last_education",
         "ielts_taken_before",
@@ -59,11 +58,53 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
         "toefl_taken_before",
         "country_interested_in",
         "remark",
+        'get_batch_names',
         "interested_in_visa_counselling",
-        "create_batch",
-        "create_course",
         "referal_code",
     )
+
+    # fieldsets = (
+    #     (
+    #         "Registration",
+    #         {
+    #             "fields": (
+    #                 "gender",
+    #                 "country",
+    #                 "state",
+    #                 "city",
+    #                 "phone_no",
+    #                 "whatsapp_no",
+    #                 "reference_by",
+    #             )
+    #         },
+    #     ),
+    #     (
+    #         "Profile",
+    #         {
+    #             "fields": ("country_interested_in",
+    #                 "last_education",
+    #                 "ielts_taken_before",
+    #                 "duolingo_taken_before",
+    #                 "pte_taken_before",
+    #                 "toefl_taken_before",
+    #                 "gre_taken_before",
+    #                 "gmat_taken_before",
+    #                 "remark",
+    #                 "biography",
+    #                 "user_image",
+    #                 "interested_in_visa_counselling",
+    #                 "select_batch",
+    #                 "select_package",
+    #                 "referal_code",
+    #               ),
+    #         },
+    #     ),
+        
+    # )
+
+    def get_batch_names(self, obj):
+        return ", ".join([batch.batch_name for batch in obj.select_batch.all()])
+        get_batch_names.short_description = 'Batch Names'
 
     admin.display(empty_value="???")
 
@@ -75,7 +116,6 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
 
     empty_value_display = "-empty-"
     list_filter = [
-        "course_to_enroll",
         "gender",
         "country_interested_in",
         "state",
@@ -87,8 +127,7 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
         "gre_taken_before",
         "gmat_taken_before",
         "interested_in_visa_counselling",
-        "create_batch",
-        "create_course",
+        "select_batch",
     ]
 
     search_fields = (
@@ -96,101 +135,7 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
         "user__last_name",
     )
     readonly_fields = ("referal_code",)
-    # # Jazzmin fieldsets
-    # fieldsets = (
-    #     (
-    #         "Basic Info",
-    #         {
-    #             "fields": (
-    #                 "first_name",
-    #                 "middle_name",
-    #                 "last_name",
-    #                 "username",
-    #                 # "email",
-    #                 "date_of_birth",
-    #                 "gender",
-    #                 # "password",
-    #                 "is_staff",
-    #             )
-    #         },
-    #     ),
-    #     (
-    #         "Contact Info",
-    #         {
-    #             "fields": (
-    #                 "country",
-    #                 "state",
-    #                 "city",
-    #                 "whatsapp_no",
-    #             )
-    #         },
-    #     ),
-    #     (
-    #         "Other Info",
-    #         {
-    #             "fields": (
-    #                 "reference_by",
-    #                 "country_interested_in",
-    #                 "last_education",
-    #                 "ielts_taken_before",
-    #                 "duolingo_taken_before",
-    #                 "pte_taken_before",
-    #                 "toefl_taken_before",
-    #                 "gre_taken_before",
-    #                 "gmat_taken_before",
-    #                 "interested_in_visa_counselling",
-    #             )
-    #         },
-    #     ),
-    #     ("Login Credential", {"fields": ("email", "password")}),
-    #     (
-    #         "Course To Enroll",
-    #         {
-    #             "fields": (
-    #                 "course_to_enroll",
-    #                 "remark",
-    #             )
-    #         },
-    #     ),
-    #     (
-    #         "Permissions",
-    #         {
-    #             "fields": (
-    #                 "groups",
-    #                 # "user_permissions",
-    #             )
-    #         },
-    #     ),
-    # )
-
-    # # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
-    # add_fieldsets = (
-    #     (
-    #         None,
-    #         {
-    #             # "classes": ("wide",),
-    #             "fields": (
-    #                 "first_name",
-    #                 "username",
-    #                 "email",
-    #                 "date_of_birth",
-    #                 "password1",
-    #                 "password2",
-    #             ),
-    #         },
-    #     ),
-    # )
-    # exclude = (
-    #     # "is_superuser",
-    #     # "is_staff",
-    #     # "groups",
-    #     "user_permissions",
-    # )
-
-    # readonly_fields = ("last_login",)
-
-
+ 
 admin.site.register(Student, StudentAdmin)
 
-# Register your models here.
+

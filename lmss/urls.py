@@ -43,12 +43,20 @@ from master.views import (
     TestTypeViewset,
     batchListView,
     batchRetUpdDelView,
+    CountryInterestedListView,
+    BatchListByPackageView,
+    CourseMaterialListView,
+    CourseMaterialRetUpdDelView,
+    AdditionalResourceListAPIView,
+    LessonAssignmentListAPIView,
+    LessonAttachmentListAPIView
+
 )
-from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView
+from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView,EnrollPackageStudentView
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
-from students.views import StudentView, StudentRetUpdDelView
+from students.views import StudentView, StudentRetUpdDelView, StudentRetUpdDelUserView
 from studystreak_api.views import (
     ChangePasswordView,
     GetUserRole,
@@ -136,6 +144,7 @@ urlpatterns = [
     path("api/packagetyperetupddelview/<int:pk>/", PackageTypeRetUpdDelView.as_view()),
     path("api/countrylistview/", CountryListView.as_view()),
     path("api/countryretupddelview/<int:pk>/", CountryRetUpdDelView.as_view()),
+    path("api/countryinterestedlistview/", CountryInterestedListView.as_view()),
     path("api/statelistview/", StateListView.as_view()),
     path("api/StateRetUpdDelView/<int:pk>/", StateRetUpdDelView.as_view()),
     path("api/citylistview/", CityListView.as_view()),
@@ -276,7 +285,21 @@ urlpatterns = [
 
     path('api/enroll-package/', EnrollPackageView.as_view(), name='enroll-package'),
     path('api/studentview/', StudentView.as_view(), name='studentview'),
-    path('api/studentretupddelview/<int:pk>/', StudentRetUpdDelView.as_view(), name='studentretupddelview')
+    path('api/studentretupddelview/<int:pk>/', StudentRetUpdDelView.as_view(), name='studentretupddelview'),
+    path('api/studentretupddeluserview/<int:pk>/', StudentRetUpdDelUserView.as_view(), name='studentretupddelview'),
+
+    path('api/filterbatches/<int:package_id>/', BatchListByPackageView.as_view(), name='filter_batches'),
+
+    path('api/course-materials/<int:course_id>/', CourseMaterialListView.as_view(), name='coursemateriallistview'),
+
+    path('api/additional-resources/<int:course_id>/', AdditionalResourceListAPIView.as_view(), name='additional-resource-list'),
+
+    path('api/lesson-assignments/<int:lesson_id>/', LessonAssignmentListAPIView.as_view(), name='lesson-assignment-list'),
+    path('api/lesson-attachments/<int:lesson_id>/', LessonAttachmentListAPIView.as_view(), name='lesson-attachment-list'),
+
+    path('api/enrollpackagestudentview/', EnrollPackageStudentView.as_view(), name='enrollpackagestudentview'),
+
+
 ] + router.urls
 
 
