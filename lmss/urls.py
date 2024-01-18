@@ -13,7 +13,7 @@ from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
 from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
-from live_classes.views import LiveClassListView, LiveClassRetUpdDelView
+from live_classes.views import LiveClassListView, LiveClassUsersView
 from master.views import (
     CategoryListView,
     CategoryRetUpdDelView,
@@ -94,6 +94,8 @@ router.register(
 router.register("api/test-types", TestTypeViewset, basename="test-types")
 
 urlpatterns = [
+    path('live-classes/', LiveClassListView.as_view(), name='live-classes-list'),
+    path('live-classes-users/', LiveClassUsersView.as_view(), name='live-classes-users'),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
@@ -113,8 +115,9 @@ urlpatterns = [
         CourseRetUpdDelView.as_view(),
     ),
     # path('api/LiveClassView/', LiveClassView.as_view()),
+    path('live-classes/', LiveClassListView.as_view(), name='live-class-list'),
     path("api/liveclassview/", LiveClassListView.as_view()),
-    path("api/liveclassretupddelview/<int:pk>/", LiveClassRetUpdDelView.as_view()),
+    #path("api/liveclassretupddelview/<int:pk>/", LiveClassRetUpdDelView.as_view()),
     path("api/categoryview/", CategoryListView.as_view()),
     path("api/categoryretupddelview/<int:pk>/", CategoryRetUpdDelView.as_view()),
     path("api/levelView/", LevelListView.as_view()),
