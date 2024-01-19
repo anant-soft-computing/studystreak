@@ -352,7 +352,9 @@ class UserResetPasswordView(TemplateView):
                 new_password = form.cleaned_data['password']
                 user.set_password(new_password)
                 user.save()
-                return HttpResponse("Successfully reset the password")
+
+                # Redirect to the login page
+                return redirect('login')  # Replace 'login' with the actual URL name of your login view
             else:
                 return render(request, self.template_name, {"form": form})
         else:

@@ -426,32 +426,26 @@
                     <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation">
                       <form method="post" action="">
                         {% csrf_token %}
+                
                         <div style="display: flex; flex-direction: column; justify-content: space-around;">
-                            {{ form.as_p }}
-
-                        </div>
-
-                        <br>
-
-                        <!-- <div style="padding: 23px;">
-                          <div style="margin-bottom: 11px ;">
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" required>
-                            <br>
-  
-                          </div>
-  
                           <div>
-                            <label for="confirm-password">Confirm Password:</label>
-                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <label for="{{ form.password.id_for_label }}">Password:</label>
+                            {{ form.password }}
                             <br>
-  
                           </div>
-
-                        </div> -->
-
-
-
+                
+                          <div>
+                            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+                            {{ form.password2 }}
+                            <br>
+                          </div>
+                        </div>
+                
+                        <br>
+                
+                        <!-- Other form fields or HTML elements -->
+                
+                        <button type="submit">Reset Password</button>
                       </form>
                     </table>
                   </td>
@@ -460,25 +454,7 @@
 
 
 
-                <tr>
-                  <td align="center">
-                    <!-- Header Button -->
-                    <table border="0" cellspacing="0" cellpadding="0" role="presentation" align="center"
-                      class="center-float">
-                      <tr>
-                        <td align="center" bgcolor="#d6df58" style="border-radius: 6px;">
-
-                          <!-- <a href=" {{ link }} " target="_blank"
-                            style="font-family:'Roboto Slab',Arial,Helvetica,sans-serif;font-size:16px;line-height:19px;font-weight:700;font-style:normal;color:#000000;text-decoration:none;letter-spacing:0px;padding: 20px 50px 20px 50px;display: inline-block;"><span>RESET
-                              PASSWORD</span></a> -->
-                              <button type="submit">Reset Password</button>
-
-                        </td>
-                      </tr>
-                    </table>
-                    <!-- Header Button -->
-                  </td>
-                </tr>
+               
 
 
 
