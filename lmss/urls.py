@@ -81,6 +81,7 @@ from website.views import (
     HomepageSliderRetUpdDelView,
 )
 from Writing_Exam.views import *  # noqa: F403
+from payment.views import start_payment, handle_payment_success
 
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
@@ -255,12 +256,16 @@ urlpatterns = [
     path("api/registration/", RegistrationView.as_view(), name="registration"),
     path("api/profile/", ProfileView.as_view(), name="profileview"),
     path("api/changepassword/", ChangePasswordView.as_view(), name="change-password"),
+
+    ########## api send via mail 
     path("api/resetpassword/", SendPasswordResetView.as_view(), name="reset-password"),
     path(
         "api/resetpassword/<uid>/<token>/",
         PasswordResetView.as_view(),
         name="reset-with-link",
     ),
+
+    ########## reset password user id with token 
     path("api/user/resetpassword/<uid>/<token>/", userresetpassword),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
@@ -298,6 +303,9 @@ urlpatterns = [
     path('api/lesson-attachments/<int:lesson_id>/', LessonAttachmentListAPIView.as_view(), name='lesson-attachment-list'),
 
     path('api/enrollpackagestudentview/', EnrollPackageStudentView.as_view(), name='enrollpackagestudentview'),
+
+    path('api/pay/', start_payment, name="payment"),
+    path('api/payment/success/', handle_payment_success, name="payment_success"),
 
 
 ] + router.urls

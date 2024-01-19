@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "drf_spectacular",
     "django_filters",
+    'payment',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [

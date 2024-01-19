@@ -215,24 +215,26 @@ class RedirectLinkView(APIView):
             )
 
 
-def userresetpassword(request, uid, token):
-    try:
-        id = smart_str(urlsafe_base64_decode(uid))
-        user = User.objects.get(id=id)
-    except Exception:
-        return HttpResponse("user not found")
-        # return "user not found"
-        print("")
+############################## old working code
 
-    if PasswordResetTokenGenerator().check_token(user, token):
-        form = RedirectForm
-        if form.is_valid():
-            form.save()
-            # return render(request, "successful.html")
-            return HttpResponse("successgull")
-            # templates success=mess
-        else:
-            return HttpResponse("form is not valid")
+# def userresetpassword(request, uid, token):
+#     try:
+#         id = smart_str(urlsafe_base64_decode(uid))
+#         user = User.objects.get(id=id)
+#     except Exception:
+#         return HttpResponse("user not found")
+#         # return "user not found"
+#         print("")
+
+#     if PasswordResetTokenGenerator().check_token(user, token):
+#         form = RedirectForm
+#         if form.is_valid():
+#             form.save()
+#             # return render(request, "successful.html")
+#             return HttpResponse("successgull")
+#             # templates success=mess
+#         else:
+#             return HttpResponse("form is not valid")
             # return render({"form":"password and password2 not match"})
         # if password == password2:
         #         user.set_password(password)
@@ -249,6 +251,51 @@ def userresetpassword(request, uid, token):
     # except DjangoUnicodeDecodeError as indentifier:
     #     PasswordResetTokenGenerator().check_token(user,token)
     #     raise serializers.ValidationError("Token is not valid or expired.")
+
+####################################################################
+
+#new code
+from django import forms
+
+class RedirectForm(forms.Form):
+    password = forms.CharField(label="Password", max_length=100, widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirm Password", max_length=100, widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
+
+        if password and password2 and password != password2:
+            raise forms.ValidationError("Passwords do not match")
+
+        return cleaned_data
+
+
+def userresetpassword(request, uid, token):
+    try:
+        id = smart_str(urlsafe_base64_decode(uid))
+        user = User.objects.get(id=id)
+    except Exception:
+        return HttpResponse("User not found")
+
+    if PasswordResetTokenGenerator().check_token(user, token):
+        if request.method == "POST":
+            form = RedirectForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponse("Successfully reset the password")
+            else:
+                return HttpResponse("Form is not valid")
+        else:
+            form = RedirectForm()
+            # render a template with the form for GET requests
+            return render(request, "your_template.html", {"form": form})
+
+    return HttpResponse("Token is not valid or expired")
+
+#####################################################################
+
 
 
 @ensure_csrf_cookie
