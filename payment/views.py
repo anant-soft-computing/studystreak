@@ -4,13 +4,15 @@ import json
 import razorpay
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from .models import Order
 from .serializers import OrderSerializer
 
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+# config = dotenv_values(".env")
+
+# from lmss.settings import KEY_ID, KEY_SECRET
+from django.conf import settings
 
 @api_view(['POST'])
 def start_payment(request):
@@ -19,7 +21,7 @@ def start_payment(request):
     name = request.data['name']
 
     # setup razorpay client
-    client = razorpay.Client(auth=(config['KEY_ID'], config['KEY_SECRET']))
+    client = razorpay.Client(auth=(settings.KEY_ID, settings.KEY_SECRET))
 
     # create razorpay order
     payment = client.order.create({"amount": int(amount) * 100, 

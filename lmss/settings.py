@@ -114,6 +114,8 @@ DATABASES = {
 }
 
 
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -270,3 +272,6 @@ DEFAULTS = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+KEY_ID="rzp_test_QyWQWfJeARzOZG"
+KEY_SECRET="CbjpLbEoily2YroYWMuvNfxG"
