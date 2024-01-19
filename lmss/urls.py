@@ -68,7 +68,7 @@ from studystreak_api.views import (
     SendPasswordResetView,
     confirm_user,
     get_csrf_token,
-    userresetpassword,
+    UserResetPasswordView,
 )
 from website.views import (
     BlogListView,
@@ -266,7 +266,7 @@ urlpatterns = [
     ),
 
     ########## reset password user id with token 
-    path("api/user/resetpassword/<uid>/<token>/", userresetpassword),
+    path("api/user/resetpassword/<uid>/<token>/", UserResetPasswordView.as_view(), name='password_reset'),
     path("froala_editor/", include("froala_editor.urls")),
     path("api/QuestionType", QuestionTypeView.as_view()),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),

@@ -201,19 +201,36 @@ class PasswordResetView(APIView):
             )
 
 
+# class RedirectLinkView(APIView):
+#     renderer_classes = [UserRenderes]
+
+#     def post(self, request, uid, token, format=None):
+#         serializer = RedirectLinkSerializer(
+#             data=request.data, context={"uid": uid, "token": token}
+#         )
+
+#         if serializer.is_valid(raise_exception=True):
+#             return Response(
+#                 {"msg": "password reset successfully"}, status=status.HTTP_200_OK
+#             )
+
 class RedirectLinkView(APIView):
     renderer_classes = [UserRenderes]
 
     def post(self, request, uid, token, format=None):
-        serializer = RedirectLinkSerializer(
-            data=request.data, context={"uid": uid, "token": token}
-        )
-
-        if serializer.is_valid(raise_exception=True):
-            return Response(
-                {"msg": "password reset successfully"}, status=status.HTTP_200_OK
+        try:
+            serializer = RedirectLinkSerializer(
+                data=request.data, context={"uid": uid, "token": token}
             )
 
+            if serializer.is_valid(raise_exception=True):
+                return Response(
+                    {"msg": "password reset successfully"}, status=status.HTTP_200_OK
+                )
+        except serializers.ValidationError as e:
+            print("Validation error:", e.detail)
+
+        return Response({"msg": "password reset failed"}, status=status.HTTP_400_BAD_REQUEST)
 
 ############################## old working code
 
@@ -272,28 +289,74 @@ class RedirectForm(forms.Form):
         return cleaned_data
 
 
-def userresetpassword(request, uid, token):
-    try:
-        id = smart_str(urlsafe_base64_decode(uid))
-        user = User.objects.get(id=id)
-    except Exception:
-        return HttpResponse("User not found")
+from django.shortcuts import render
 
-    if PasswordResetTokenGenerator().check_token(user, token):
-        if request.method == "POST":
+# def userresetpassword(request, uid, token):
+#     try:
+#         id = smart_str(urlsafe_base64_decode(uid))
+#         user = User.objects.get(id=id)
+#     except Exception:
+#         return HttpResponse("User not found")
+
+#     if PasswordResetTokenGenerator().check_token(user, token):
+#         if request.method == "POST":
+#             form = RedirectForm(request.POST)
+#             if form.is_valid():
+#                 new_password = form.cleaned_data['password']
+#                 user.set_password(new_password)
+#                 user.save()
+#                 return HttpResponse("Successfully reset the password")
+#             else:
+#                 return HttpResponse("Form is not valid")
+#         elif request.method == "GET":
+#             form = RedirectForm()
+          
+#             return render(request, "emails/your_template.html", {"form": form})
+#         else:
+#             return HttpResponse("Method not allowed", status=405)
+
+#     return HttpResponse("Token is not valid or expired")
+from django.views import View
+from django.views.generic import TemplateView
+
+class UserResetPasswordView(TemplateView):
+    template_name = 'emails/your_template.html'
+
+    def get_user(self, uid, token):
+        try:
+            id = smart_str(urlsafe_base64_decode(uid))
+            user = User.objects.get(id=id)
+            return user
+        except (User.DoesNotExist, DjangoUnicodeDecodeError):
+            return None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        uid = self.kwargs.get('uid')
+        token = self.kwargs.get('token')
+        user = self.get_user(uid, token)
+        
+        if user and PasswordResetTokenGenerator().check_token(user, token):
+            context['form'] = RedirectForm()
+        else:
+            context['error_message'] = "Your Reset link has Expired"
+
+        return context
+
+    def post(self, request, uid, token):
+        user = self.get_user(uid, token)
+
+        if user and PasswordResetTokenGenerator().check_token(user, token):
             form = RedirectForm(request.POST)
             if form.is_valid():
-                form.save()
+                new_password = form.cleaned_data['password']
+                user.set_password(new_password)
+                user.save()
                 return HttpResponse("Successfully reset the password")
             else:
-                return HttpResponse("Form is not valid")
+                return render(request, self.template_name, {"form": form})
         else:
-            form = RedirectForm()
-            # render a template with the form for GET requests
-            return render(request, "your_template.html", {"form": form})
-
-    return HttpResponse("Token is not valid or expired")
-
+            return HttpResponse("Your Reset link has Expired")
 #####################################################################
 
 
