@@ -180,7 +180,7 @@ class SendPasswordResetView(APIView):
 
     def post(self, request, format=None):
         # try:
-        serializer = PasswordResetSerializer(data=request.data)
+        serializer = PasswordResetSerializer(data=request.data, context={"request":self.request})
         if serializer.is_valid(raise_exception=True):
             return Response(
                 {"msg": "Password reset link is sent if it is registered"},
@@ -193,7 +193,7 @@ class PasswordResetView(APIView):
 
     def post(self, request, uid, token, format=None):
         serializer = ResetPasswordSerializer(
-            data=request.data, context={"uid": uid, "token": token}
+            data=request.data, context={"uid": uid, "token": token,"request":self.request}
         )
         if serializer.is_valid(raise_exception=True):
             return Response(
