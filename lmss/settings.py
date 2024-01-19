@@ -149,7 +149,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_ROOT = "/var/www/static/"
 MEDIA_ROOT = "/var/www/media/"
 MEDIA_URL = "media/"
-PASSWORD_RESET_TIMEOUT = 900
+PASSWORD_RESET_TIMEOUT = 3600
 
 
 # Email setting

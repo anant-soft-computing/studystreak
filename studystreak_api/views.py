@@ -318,49 +318,10 @@ class RedirectForm(forms.Form):
 
 # #     return HttpResponse("Token is not valid or expired")
 # from django.views import View
-# from django.views.generic import TemplateView
 
-# class UserResetPasswordView(TemplateView):
-#     template_name = 'emails/your_template.html'
+############################################################
 
-#     def get_user(self, uid, token):
-#         try:
-#             id = smart_str(urlsafe_base64_decode(uid))
-#             user = User.objects.get(id=id)
-#             return user
-#         except (User.DoesNotExist, DjangoUnicodeDecodeError):
-#             return None
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         uid = self.kwargs.get('uid')
-#         token = self.kwargs.get('token')
-#         user = self.get_user(uid, token)
-        
-#         if user and PasswordResetTokenGenerator().check_token(user, token):
-#             context['form'] = RedirectForm()
-#         else:
-#             context['error_message'] = "Your Reset link has Expired"
-
-#         return context
-
-#     def post(self, request, uid, token):
-#         user = self.get_user(uid, token)
-
-#         if user and PasswordResetTokenGenerator().check_token(user, token):
-#             form = RedirectForm(request.POST)
-#             if form.is_valid():
-#                 new_password = form.cleaned_data['password']
-#                 user.set_password(new_password)
-#                 user.save()
-#                 return HttpResponse("Successfully reset the password")
-#             else:
-#                 return render(request, self.template_name, {"form": form})
-#         else:
-#             return HttpResponse("Your Reset link has Expired")
-#####################################################################
-
-# new code 2
+from django.views.generic import TemplateView
 
 class UserResetPasswordView(TemplateView):
     template_name = 'emails/your_template.html'
@@ -378,7 +339,7 @@ class UserResetPasswordView(TemplateView):
         uid = self.kwargs.get('uid')
         token = self.kwargs.get('token')
         user = self.get_user(uid, token)
-
+        
         if user and PasswordResetTokenGenerator().check_token(user, token):
             context['form'] = RedirectForm()
         else:
@@ -400,6 +361,48 @@ class UserResetPasswordView(TemplateView):
                 return render(request, self.template_name, {"form": form})
         else:
             return HttpResponse("Your Reset link has Expired")
+#####################################################################
+
+# new code 2
+
+# class UserResetPasswordView(TemplateView):
+#     template_name = 'emails/your_template.html'
+
+#     def get_user(self, uid, token):
+#         try:
+#             id = smart_str(urlsafe_base64_decode(uid))
+#             user = User.objects.get(id=id)
+#             return user
+#         except (User.DoesNotExist, DjangoUnicodeDecodeError):
+#             return None
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         uid = self.kwargs.get('uid')
+#         token = self.kwargs.get('token')
+#         user = self.get_user(uid, token)
+
+#         if user and PasswordResetTokenGenerator().check_token(user, token):
+#             context['form'] = RedirectForm()
+#         else:
+#             context['error_message'] = "Your Reset link has Expired"
+
+#         return context
+
+#     def post(self, request, uid, token):
+#         user = self.get_user(uid, token)
+
+#         if user and PasswordResetTokenGenerator().check_token(user, token):
+#             form = RedirectForm(request.POST)
+#             if form.is_valid():
+#                 new_password = form.cleaned_data['password']
+#                 user.set_password(new_password)
+#                 user.save()
+#                 return HttpResponse("Successfully reset the password")
+#             else:
+#                 return render(request, self.template_name, {"form": form})
+#         else:
+#             return HttpResponse("Your Reset link has Expired")
 
 ######################################################################
 
