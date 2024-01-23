@@ -10,7 +10,7 @@ class StudentListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'
-        depth = 1
+        depth = 2
         
 
 class PackageListSerializers(serializers.ModelSerializer):
