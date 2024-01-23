@@ -24,7 +24,7 @@ class Student(models.Model):
         User,
         on_delete=models.CASCADE,
         help_text="Create a student user first and then add the student details",
-        related_name="student",
+        related_name="student"
     )
 
     class Gender(models.TextChoices):
@@ -76,12 +76,11 @@ class Student(models.Model):
         default=VisaCounsellingInterest.YES,
         null=True,
     )
-    course_to_enroll = models.ForeignKey(Package, on_delete=models.CASCADE, null=True)
-    create_batch = models.ForeignKey(
-        "master.batch", on_delete=models.CASCADE, null=True
+    select_batch = models.ManyToManyField(
+        "master.batch", null=True, blank=True
     )
-    create_course = models.ForeignKey(
-        "Courses.Course", on_delete=models.CASCADE, null=True
+    select_package = models.ManyToManyField(
+        "package.Package", null=True, blank=True
     )
     referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

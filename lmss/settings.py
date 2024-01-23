@@ -2,9 +2,11 @@ import os
 from pathlib import Path
 
 from dotenv import dotenv_values
-
+import os 
+import datetime
+from datetime import timedelta
 config = dotenv_values(".env")
-
+from django.conf import settings
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -21,6 +23,14 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = ["65.20.73.247", "localhost", "127.0.0.1"]
+# settings.py
+
+ZOOM_API_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1NDg5NTE5LCJpYXQiOjE3MDU0ODkyMTksImp0aSI6IjQ3MjY3NDE3MWViMjRkZGNiMTM2OGRjMTU5M2RhZTdkIiwidXNlcl9pZCI6Mn0.Gq4SNpGYNqI-nrU6G8iP902vX9SOnFIGjF_z66pzRe4'
+
+JWT_AUTH = {
+    # Authorization:Token xxx
+    'JWT_AUTH_HEADER_PREFIX':'JWT',
+}
 
 
 INSTALLED_APPS = [
@@ -57,6 +67,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "drf_spectacular",
     "django_filters",
+    'payment',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
@@ -103,6 +114,8 @@ DATABASES = {
 }
 
 
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -136,7 +149,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_ROOT = "/var/www/static/"
 MEDIA_ROOT = "/var/www/media/"
 MEDIA_URL = "media/"
-PASSWORD_RESET_TIMEOUT = 900
+PASSWORD_RESET_TIMEOUT = 3600
 
 
 # Email setting
@@ -234,3 +247,31 @@ REST_FRAMEWORK = {
     ]
 }
 
+DEFAULTS = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': settings.SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+KEY_ID="rzp_test_QyWQWfJeARzOZG"
+KEY_SECRET="CbjpLbEoily2YroYWMuvNfxG"

@@ -1,7 +1,14 @@
 # master/models.py
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.contrib.auth.models import User
 
+
+class LiveClassType(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -106,17 +113,14 @@ class Section(models.Model):
 
 
 class batch(models.Model):
-    batch_name = models.CharField(max_length=200, null=True, blank=True)
+    batch_name = models.CharField(max_length=200)
     batch_startdate = models.DateField(null=True, blank=True)
     batch_enddate = models.DateField(null=True, blank=True)
     # batch_timing = models.CharField(max_length=200, null=True, blank=True)
     batch_start_timing = models.TimeField(null=True, blank=True)
     batch_end_timing = models.TimeField(null=True, blank=True)
     add_package = models.ForeignKey(
-        "package.package", on_delete=models.CASCADE, related_name="+"
-    )
-    create_course = models.ForeignKey(
-        "Courses.Course", on_delete=models.CASCADE, related_name="+"
+        "package.package", on_delete=models.CASCADE, related_name="+", null=True, blank=True
     )
 
     def __str__(self):
@@ -151,8 +155,12 @@ class LessonAssignment(Attachment):
 
 
 class CourseMaterial(models.Model):
+    material_name = models.CharField(max_length=255)
     course = models.ForeignKey("Courses.Course", on_delete=models.CASCADE)
     course_material = models.FileField(upload_to="course_materials/")
+
+    def __str__(self):
+        return self.material_name
 
 
 class AdditionalResource(models.Model):

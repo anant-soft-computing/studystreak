@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.da39e198.css",
-    "main.js": "/static/js/main.9855770b.js",
+    "main.css": "/static/css/main.cb1558f5.css",
+    "main.js": "/static/js/main.44f879a7.js",
     "static/media/register__bg.png": "/static/media/register__bg.8f3340b40d006c7271d9.png",
     "static/media/blog_7.png": "/static/media/blog_7.ad28b4e16bb1b8845095.png",
     "static/media/blog_6.png": "/static/media/blog_6.d2b53c8250f4c3df1d44.png",
@@ -16,7 +16,6 @@
     "static/media/blog_3.png": "/static/media/blog_3.5fc631e493bceaf7944c.png",
     "static/media/blog_19.png": "/static/media/blog_19.2b10ad70e00d9e53a971.png",
     "static/media/blog_23.png": "/static/media/blog_23.e49318c11d30aba45560.png",
-    "static/media/grid_1.png": "/static/media/grid_1.3f3a23058614a25ec029.png",
     "static/media/blog_4.png": "/static/media/blog_4.45e139f4a6f5e1712f2a.png",
     "static/media/duolingo.png": "/static/media/duolingo.983c9fe6ee0aedf254ee.png",
     "static/media/blog_20.png": "/static/media/blog_20.34f73f8907c98501f65d.png",
@@ -24,11 +23,15 @@
     "static/media/about_10.png": "/static/media/about_10.c6fba820cc5e8886a5dd.png",
     "static/media/output.png": "/static/media/output.e559f09119a4e649a8e4.png",
     "static/media/Logo.png": "/static/media/Logo.9cbe0dbaf5b0b8bad502.png",
+    "static/media/2.jpg": "/static/media/2.804b2cadd1a8488bf1df.jpg",
     "static/media/gmat.png": "/static/media/gmat.f8698c960dcbc482ed1d.png",
     "static/media/gre.png": "/static/media/gre.24a7c007d86f05cc32fb.png",
     "static/media/blog_12.png": "/static/media/blog_12.38afbd3d080819585681.png",
+    "static/media/1.jpg": "/static/media/1.432390f40f4cd12d083a.jpg",
     "static/media/blog_13.png": "/static/media/blog_13.0205c3ef7065cf345583.png",
+    "static/media/3.jpg": "/static/media/3.699dc5c81c209dc0b687.jpg",
     "static/media/service__shape__bg__1.png": "/static/media/service__shape__bg__1.27682fe3e62419d474c8.png",
+    "static/media/4.jpg": "/static/media/4.98f8e9ae5fb1a83e1127.jpg",
     "static/media/blog_11.png": "/static/media/blog_11.b9cec6c289588bfe4d07.png",
     "static/media/about_8.png": "/static/media/about_8.c8a91d4af1c724e9872e.png",
     "static/media/blog_14.png": "/static/media/blog_14.d47a04360bd12bab1740.png",
@@ -42,11 +45,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.da39e198.css.map": "/static/css/main.da39e198.css.map",
-    "main.9855770b.js.map": "/static/js/main.9855770b.js.map"
+    "main.cb1558f5.css.map": "/static/css/main.cb1558f5.css.map",
+    "main.44f879a7.js.map": "/static/js/main.44f879a7.js.map"
   },
   "entrypoints": [
-    "static/css/main.da39e198.css",
-    "static/js/main.9855770b.js"
+    "static/css/main.cb1558f5.css",
+    "static/js/main.44f879a7.js"
   ]
 }

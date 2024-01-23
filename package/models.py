@@ -7,9 +7,10 @@ from django.contrib.auth.models import User
 
 # Section: Package
 class Package(models.Model):
-    package_name = models.CharField(max_length=255)
+    user_package = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    package_name = models.CharField(max_length=255, blank=True)
     package_price = models.CharField(
-        max_length=100
+        max_length=100, null=True, blank=True
     )  # Should this be DecimalField or IntegerField for an actual price?
     PackageType = models.ForeignKey(PackageType, on_delete=models.CASCADE)
     select_course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -38,7 +39,7 @@ class Package(models.Model):
     one_to_one_doubt_solving = models.BooleanField(default=False)
     one_to_one_doubt_solving_count = models.PositiveIntegerField(default=0)
     validity = models.DateTimeField(null=True, blank=True)
-    duration = models.PositiveIntegerField(help_text="in_months")
+    duration = models.PositiveIntegerField(help_text="in_months", null=True, blank=True)
     coupon_code = models.ForeignKey(
         "master.Cupon", on_delete=models.SET_NULL, null=True
     )

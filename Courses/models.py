@@ -3,7 +3,7 @@
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-
+from ckeditor.fields import RichTextField
 from coursedetail.models import Lesson
 from master.models import Category, Language, Level, Outcomes, Requirements
 
@@ -21,10 +21,10 @@ class course_delivery(models.TextChoices):
 class Course(models.Model):
     # Course Detail
     Course_Title = models.CharField(max_length=200)
-    Short_Description = models.TextField()
+    Short_Description = RichTextField()
     Description = (
-        models.TextField()
-    )  # If using a rich-text editor like CKEditor, this will be a RichTextField instead
+        RichTextField()
+    ) 
     Category = models.ForeignKey(Category, on_delete=models.CASCADE)
     Level = models.ForeignKey(Level, on_delete=models.CASCADE)
     Language = models.ForeignKey(Language, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class Course(models.Model):
     EnrollmentEndDate = models.DateField()
     max_enrollments = models.IntegerField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
-    faqs = models.TextField(null=True, blank=True)
+    faqs = RichTextField()
     Featured = models.BooleanField(default=False)
     Support_Available = models.BooleanField(default=False)
 
