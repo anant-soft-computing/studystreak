@@ -190,6 +190,7 @@ class batchListSerializers(serializers.ModelSerializer):
     class Meta:
         model = batch
         fields = "__all__"
+        depth = 1
 
 
 class batchRetUpdDelSerializers(serializers.ModelSerializer):
