@@ -21,7 +21,7 @@ class AnswerAdmin(admin.ModelAdmin):
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
-
+    list_display = ['exam_name']
     fieldsets = (
         (
             None,
