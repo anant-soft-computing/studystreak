@@ -13,8 +13,8 @@ from master.serializers import CourseMaterialListSerializers, AdditionalResource
 from rest_framework.response import Response
 from master.serializers import (AdditionalResourceListSerializers, CourseMaterialListSerializers,
 LessonAttachmentSerializer,LessonAssignmentSerializer,)
-from coursedetail.models import Quiz_Question, QuizOption
-from coursedetail.serializers import QuizOptionListSerializers, Quiz_QuestionListSerializers
+# from coursedetail.models import Quiz_Question, QuizOption
+# from coursedetail.serializers import QuizOptionListSerializers, Quiz_QuestionListSerializers
 from master.models import batch, CourseMaterial, AdditionalResource,LessonAttachment, LessonAssignment 
 
 class CourseListView(generics.ListCreateAPIView):

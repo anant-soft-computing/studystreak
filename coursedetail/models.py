@@ -66,26 +66,28 @@ class Lesson(models.Model):
         max_length=200, null=True, blank=True, default=None
     )
     active = models.BooleanField(default=False)
+    lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment")
+    lesson_quiz = models.ManyToManyField(Exam)
 
     def __str__(self):
         return self.Lesson_Title
 
 
-class QuizOption(models.Model):
-    name = models.ForeignKey("Quiz_Question", on_delete=models.CASCADE)
-    Answers = models.CharField(max_length=200, null=True, blank=True)
-    correct_answer = models.BooleanField(verbose_name="Is this correct?", default=False)
+# class QuizOption(models.Model):
+#     name = models.ForeignKey("Quiz_Question", on_delete=models.CASCADE)
+#     Answers = models.CharField(max_length=200, null=True, blank=True)
+#     correct_answer = models.BooleanField(verbose_name="Is this correct?", default=False)
 
-    def __str__(self):
-        return str(self.Answers)
+#     def __str__(self):
+#         return str(self.Answers)
 
 
-class Quiz_Question(models.Model):
-    Question = models.CharField(max_length=200, null=True, blank=True)
-    lesson = models.ForeignKey(Exam, on_delete=models.CASCADE)  # Corrected ForeignKey
+# class Quiz_Question(models.Model):
+#     Question = models.CharField(max_length=200, null=True, blank=True)
+#     lesson = models.ForeignKey(Exam, on_delete=models.CASCADE)  # Corrected ForeignKey
 
-    def __str__(self):
-        return str(self.Question)
+#     def __str__(self):
+#         return str(self.Question)
 
     # class Meta:
     #      verbose_name = "L"

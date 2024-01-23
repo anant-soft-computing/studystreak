@@ -4,7 +4,7 @@ from nested_admin import NestedModelAdmin
 
 from master.models import LessonAssignment, LessonAttachment
 
-from .models import Lesson, Quiz_Question, QuizOption
+from .models import Lesson
 
 
 # class LessonAssignmentInline(nested_admin.NestedStackedInline):
@@ -19,12 +19,12 @@ class LessonAttachmentInline(nested_admin.NestedStackedInline):
     fk_name = "lesson"
 
 
-class QuizOptionAdmin(admin.ModelAdmin):
-    # model = QuizOption
-    list_display = ['name', 'Answers', 'correct_answer']
-    list_filter = ['name']
-admin.site.register(QuizOption, QuizOptionAdmin)
-    # extra = 1
+# class QuizOptionAdmin(admin.ModelAdmin):
+#     # model = QuizOption
+#     list_display = ['name', 'Answers', 'correct_answer']
+#     list_filter = ['name']
+# admin.site.register(QuizOption, QuizOptionAdmin)
+#     # extra = 1
 
 
 # class QuestionInline(nested_admin.NestedStackedInline):
@@ -58,14 +58,14 @@ class Quiz_QuestionAdmin(NestedModelAdmin):
 
 admin.site.register(Lesson, Quiz_QuestionAdmin)
 
-class Quiz_QuestionAdmin(admin.ModelAdmin):
-    # model = Lesson
-    list_display = ['Question', 'lesson',]
-    list_filter = ['Question', 'lesson',]
-    # search_fields = ['Lesson_Title']
-    # inlines = [QuestionInline]
+# class Quiz_QuestionAdmin(admin.ModelAdmin):
+#     # model = Lesson
+#     list_display = ['Question', 'lesson',]
+#     list_filter = ['Question', 'lesson',]
+#     # search_fields = ['Lesson_Title']
+#     # inlines = [QuestionInline]
 
-admin.site.register(Quiz_Question, Quiz_QuestionAdmin)
+# admin.site.register(Quiz_Question, Quiz_QuestionAdmin)
 
 # class SiteAddressInline(admin.StackedInline):
 #     model = SiteAddress

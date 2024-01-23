@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import  Lesson, QuizOption, Quiz_Question
+from .models import  Lesson
 from rest_framework import generics
 from master.serializers import (AdditionalResourceListSerializers, CourseMaterialListSerializers,
 LessonAttachmentSerializer,LessonAssignmentSerializer,)
-from coursedetail.models import Quiz_Question, QuizOption
+# from coursedetail.models import Quiz_Question, QuizOption
 from master.models import batch, CourseMaterial, AdditionalResource,LessonAttachment, LessonAssignment 
 # from coursedetail.serializers import QuizOptionListSerializers, Quiz_QuestionListSerializers
 class LessonListSerializers(serializers.ModelSerializer):
@@ -65,16 +65,16 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
         fields = '__all__'
 
 
-class QuizOptionListSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = QuizOption
-        fields = '__all__'
+# class QuizOptionListSerializers(serializers.ModelSerializer):
+#     class Meta:
+#         model = QuizOption
+#         fields = '__all__'
 
     
-class Quiz_QuestionListSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Quiz_Question
-        fields = '__all__'
+# class Quiz_QuestionListSerializers(serializers.ModelSerializer):
+#     class Meta:
+#         model = Quiz_Question
+#         fields = '__all__'
 
 
 
