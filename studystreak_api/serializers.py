@@ -7,6 +7,8 @@ from django.utils.html import strip_tags
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
+from django.contrib.sites.shortcuts import get_current_site
+
 ############# Login Serializer ############
 
 
@@ -117,12 +119,15 @@ class PasswordResetSerializer(serializers.Serializer):
     def validate(self, attrs):
         email = attrs["email_id"]
         if User.objects.filter(email=email).exists():
+            request = self.context.get("request")
             user = User.objects.get(email=email)
+            # request = 
             uid = urlsafe_base64_encode(force_bytes(user.id))
             print(uid)
             token = PasswordResetTokenGenerator().make_token(user)
-            print(token)
-            link = "http://localhost:8000/api/user/resetpassword/" + uid + "/" + token
+            link = f"http://{get_current_site(request).domain}"
+            print(link)
+            link = f"{link}/api/user/resetpassword/{uid}/{token}"
             print(link)
             # send email
 
@@ -131,7 +136,6 @@ class PasswordResetSerializer(serializers.Serializer):
                 "emails/forgot-password.html", context=context
             )
             plain_message = strip_tags(html_message)
-            print("done okk")
 
             send_mail(
                 subject="Reset Your Password",
@@ -141,26 +145,6 @@ class PasswordResetSerializer(serializers.Serializer):
                 fail_silently=True,
                 html_message=html_message,
             )
-
-            # send_mail(
-            #     subject="Reset Your Password",
-            #     message=f"Click on the below link to reset your password:\n{link}",
-            #     from_email=settings.EMAIL_HOST_USER,
-            #     context = {},
-            #     recipient_list=[user.email],
-            #     fail_silently=True,
-            #     html_message = render_to_string(
-            #         "emails/forgot-password.html", context=context
-            # )
-            #     plain_message = strip_tags(html_message)
-            # )
-
-            # data={
-            #     'subject':"Reset Your Password",
-            #     'body': "Click on the below link to reset your password \n" + link,
-            #     'to_email': [user.email]
-            # }
-            # (data)  # type: ignore
             return attrs
         raise serializers.ValidationError("This email is not registered!")
 

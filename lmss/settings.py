@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "drf_spectacular",
     "django_filters",
+    'payment',
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
@@ -113,6 +114,8 @@ DATABASES = {
 }
 
 
+
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -146,7 +149,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATIC_ROOT = "/var/www/static/"
 MEDIA_ROOT = "/var/www/media/"
 MEDIA_URL = "media/"
-PASSWORD_RESET_TIMEOUT = 900
+PASSWORD_RESET_TIMEOUT = 3600
 
 
 # Email setting
@@ -269,3 +272,6 @@ DEFAULTS = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+KEY_ID="rzp_test_QyWQWfJeARzOZG"
+KEY_SECRET="CbjpLbEoily2YroYWMuvNfxG"
