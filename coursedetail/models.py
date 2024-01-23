@@ -66,8 +66,8 @@ class Lesson(models.Model):
         max_length=200, null=True, blank=True, default=None
     )
     active = models.BooleanField(default=False)
-    lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment")
-    lesson_quiz = models.ManyToManyField(Exam)
+    # lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment")
+    # lesson_quiz = models.ManyToManyField(Exam)
 
     def __str__(self):
         return self.Lesson_Title
