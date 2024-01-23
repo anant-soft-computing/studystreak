@@ -150,8 +150,9 @@ class LessonAttachment(Attachment):
     lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
 
 
+
 class LessonAssignment(Attachment):
-    lesson = models.ForeignKey("coursedetail.Lesson", on_delete=models.CASCADE)
+    lesson = models.ForeignKey("exam.Exam", on_delete=models.CASCADE)
 
 
 class CourseMaterial(models.Model):

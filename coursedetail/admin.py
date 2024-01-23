@@ -7,10 +7,10 @@ from master.models import LessonAssignment, LessonAttachment
 from .models import Lesson, Quiz_Question, QuizOption
 
 
-class LessonAssignmentInline(nested_admin.NestedStackedInline):
-    model = LessonAssignment
-    extra = 1
-    fk_name = "lesson"
+# class LessonAssignmentInline(nested_admin.NestedStackedInline):
+#     model = LessonAssignment
+#     extra = 1
+#     fk_name = "lesson"
 
 
 class LessonAttachmentInline(nested_admin.NestedStackedInline):
@@ -19,16 +19,19 @@ class LessonAttachmentInline(nested_admin.NestedStackedInline):
     fk_name = "lesson"
 
 
-class OptionsInline(nested_admin.NestedStackedInline):
-    model = QuizOption
-    extra = 1
+class QuizOptionAdmin(admin.ModelAdmin):
+    # model = QuizOption
+    list_display = ['name', 'Answers', 'correct_answer']
+    list_filter = ['name']
+admin.site.register(QuizOption, QuizOptionAdmin)
+    # extra = 1
 
 
-class QuestionInline(nested_admin.NestedStackedInline):
-    model = Quiz_Question
-    extra = 2
-    # fk_name = 'name'
-    inlines = [OptionsInline]
+# class QuestionInline(nested_admin.NestedStackedInline):
+#     model = Quiz_Question
+#     extra = 2
+#     # fk_name = 'name'
+#     inlines = [OptionsInline]
 
 
 class Quiz_QuestionAdmin(NestedModelAdmin):
@@ -50,19 +53,19 @@ class Quiz_QuestionAdmin(NestedModelAdmin):
         "active",
     ]
     search_fields = ["Lesson_Title"]
-    inlines = [QuestionInline, LessonAttachmentInline, LessonAssignmentInline]
+    inlines = [LessonAttachmentInline]
 
 
 admin.site.register(Lesson, Quiz_QuestionAdmin)
 
-# class Quiz_QuestionAdmin(NestedModelAdmin):
-#     model = Lesson
-#     list_display = ['section', 'Lesson_Title', 'Lesson_Description', 'Lesson_Video', 'Lesson_Duration', 'Lesson_attachment', 'active']
-#     list_filter = ['section', 'Lesson_Title', 'Lesson_Description', 'Lesson_Video', 'Lesson_Duration', 'Lesson_attachment', 'active']
-#     search_fields = ['Lesson_Title']
-#     inlines = [QuestionInline]
+class Quiz_QuestionAdmin(admin.ModelAdmin):
+    # model = Lesson
+    list_display = ['Question', 'lesson',]
+    list_filter = ['Question', 'lesson',]
+    # search_fields = ['Lesson_Title']
+    # inlines = [QuestionInline]
 
-# admin.site.register(Lesson, Quiz_QuestionAdmin)
+admin.site.register(Quiz_Question, Quiz_QuestionAdmin)
 
 # class SiteAddressInline(admin.StackedInline):
 #     model = SiteAddress

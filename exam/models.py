@@ -75,12 +75,12 @@ class FullLengthTest(models.Model):
     )
     difficulty_level = models.CharField(max_length=20, choices=Difficulty.choices)
     reading = models.ManyToManyField(
-        Exam, limit_choices_to={"exam_type": "Reading"}, related_name="reading"
+        Exam, limit_choices_to={"exam_type": "Reading"}, related_name="reading", null=True, blank=True
     )
     listening = models.ManyToManyField(
-        Exam, limit_choices_to={"exam_type": "Listening"}, related_name="listening"
+        Exam, limit_choices_to={"exam_type": "Listening"}, related_name="listening", null=True, blank=True
     )
     writing = models.ManyToManyField(
-        Exam, limit_choices_to={"exam_type": "Writing"}, related_name="writing"
+        Exam, limit_choices_to={"exam_type": "Writing"}, related_name="writing", null=True, blank=True
     )
-    speaking = models.ManyToManyField(Exam, limit_choices_to={"exam_type": "Speaking"})
+    speaking = models.ManyToManyField(Exam, limit_choices_to={"exam_type": "Speaking"}, null=True, blank=True)

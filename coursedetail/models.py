@@ -1,14 +1,15 @@
 from django.db import models
 
 from master.models import Section
-
+from exam.models import Exam
 # from Courses.models import Course
 # Create your models here.
 
 
 # class Lession_Quiz(models.Model):
 #     name = models.CharField(max_length=200)
-#     quiz = models.ForeignKey("Lesson", on_delete=models.CASCADE, related_name='quizzes')
+#     
+#  = models.ForeignKey("Lesson", on_delete=models.CASCADE, related_name='quizzes')
 #     def __str__(self):
 #          return f"{self.name}"
 
@@ -81,7 +82,13 @@ class QuizOption(models.Model):
 
 class Quiz_Question(models.Model):
     Question = models.CharField(max_length=200, null=True, blank=True)
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)  # Corrected ForeignKey
+    lesson = models.ForeignKey(Exam, on_delete=models.CASCADE)  # Corrected ForeignKey
 
     def __str__(self):
         return str(self.Question)
+
+    # class Meta:
+    #      verbose_name = "L"
+
+    
+    

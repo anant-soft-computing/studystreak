@@ -99,3 +99,7 @@ class EnrollmentSerializer(serializers.Serializer):
 #         user_profile = UserProfile.objects.create(user=user)
 
 #         return user
+class PackageCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = "__all__"

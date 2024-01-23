@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from master.models import batch, CourseMaterial, AdditionalResource,LessonAttachment, LessonAssignment 
 from Courses.models import Course 
-from package.serializers import PackageListSerializers, PackageListForStudentSerializers
+from package.serializers import PackageListSerializers, PackageListForStudentSerializers, PackageCreateSerializers
 from Courses.serializers import CourseListSerializers
 from master.serializers import (AdditionalResourceListSerializers, CourseMaterialListSerializers,
 LessonAttachmentSerializer,LessonAssignmentSerializer,)
@@ -386,3 +386,11 @@ class EnrollPackageStudentView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#     print(serializer_class)
+     
+class PackageCreateView(generics.CreateAPIView):
+
+    queryset = Package.objects.all()
+    serializer_class = PackageCreateSerializers
+    print(serializer_class)
+    print("**")

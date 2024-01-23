@@ -52,7 +52,8 @@ from master.views import (
     LessonAttachmentListAPIView
 
 )
-from package.views import PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, EnrollPackageView,EnrollPackageStudentView
+from package.views import (PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, 
+ EnrollPackageView,EnrollPackageStudentView, PackageCreateView )
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
@@ -116,7 +117,7 @@ urlpatterns = [
         CourseRetUpdDelView.as_view(),
     ),
     # path('api/LiveClassView/', LiveClassView.as_view()),
-    path('live-classes/', LiveClassListView.as_view(), name='live-class-list'),
+    path('api/list-live-classes/', LiveClassListView.as_view(), name='live-class-list'),
     path("api/liveclassview/", LiveClassListView.as_view()),
     #path("api/liveclassretupddelview/<int:pk>/", LiveClassRetUpdDelView.as_view()),
     path("api/categoryview/", CategoryListView.as_view()),
@@ -142,6 +143,7 @@ urlpatterns = [
         SEOMetakeywordsRetUpdDelView.as_view(),
     ),
     path("api/packagetypeview/", PackageTypeListView.as_view()),
+    path("api/packagecreateview/", PackageCreateView.as_view(), name = "package-create"),
     path("api/packagetyperetupddelview/<int:pk>/", PackageTypeRetUpdDelView.as_view()),
     path("api/countrylistview/", CountryListView.as_view()),
     path("api/countryretupddelview/<int:pk>/", CountryRetUpdDelView.as_view()),

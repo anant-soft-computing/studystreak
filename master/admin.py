@@ -2,6 +2,7 @@
 
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from .models import LessonAssignment
 
 from .models import (
     Category,
@@ -138,3 +139,8 @@ class batchAdmin(ImportExportModelAdmin):
 @admin.register(Cupon)
 class CuponAdmin(admin.ModelAdmin):
     pass
+
+class LessonAssignmentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'lesson']
+
+admin.site.register(LessonAssignment, LessonAssignmentAdmin)
