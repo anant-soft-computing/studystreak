@@ -6,6 +6,7 @@ from .serializers import (
     CourseCreateSerializers,
     CourseListSerializers,
     CourseRetUpdDelSerializers,
+    Course_List_Serializers_forpackage
    
 )
 from master.models import CourseMaterial, AdditionalResource
@@ -51,6 +52,12 @@ class CourseRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseRetUpdDelSerializers
 
+
+################# List of all course to use in package model ##################
+
+class Course_list_forpackage(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = Course_List_Serializers_forpackage
     
 
 

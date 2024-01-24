@@ -38,5 +38,11 @@ class CourseRetUpdDelSerializers(serializers.ModelSerializer):
     #     fields = "__all__"
 
         
+############################# Course List Serializers // for use in package model ########################
 
-
+class Course_List_Serializers_forpackage(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = "__all__"
+        depth=2
+       

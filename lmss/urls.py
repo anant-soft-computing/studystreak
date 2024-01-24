@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
-from Courses.views import CourseListView, CourseRetUpdDelView
+from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
 from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from live_classes.views import LiveClassListView, LiveClassUsersView
@@ -310,6 +310,7 @@ urlpatterns = [
     path('api/pay/', start_payment, name="payment"),
     path('api/payment/success/', handle_payment_success, name="payment_success"),
     path('api/cuponlistview/', CuponListView.as_view(), name="cuponlistview"),
+    path('api/courselistforpackage/', Course_list_forpackage.as_view(), name="courselistforpackage"),
     
 
 
