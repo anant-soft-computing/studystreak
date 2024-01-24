@@ -59,7 +59,7 @@ from package.views import (PackageListView, PackageRetUpdDelView, CoursePackageV
 from QuestionBank.views import *  # noqa: F403
 from Reading_Exam.views import *  # noqa: F403
 from Speaking_Exam.views import *  # noqa: F403
-from students.views import StudentView, StudentRetUpdDelView, StudentRetUpdDelUserView
+from students.views import StudentView, StudentRetUpdDelView, StudentRetUpdDelUserView, Student_List_View_Dashboard
 from studystreak_api.views import (
     ChangePasswordView,
     GetUserRole,
@@ -72,6 +72,7 @@ from studystreak_api.views import (
     confirm_user,
     get_csrf_token,
     UserResetPasswordView,
+    
 )
 from website.views import (
     BlogListView,
@@ -316,6 +317,7 @@ urlpatterns = [
     # path('accounts/google/login/', include('allauth.urls')),
     path('api/liveclass_list_view/', liveclass_list_view.as_view(), name='liveclass_list_view'),
     path('api/liveclass_create_view/', Liveclass_Create_View.as_view(), name='liveclass_create_view'),
+    path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
 
     
     

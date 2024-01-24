@@ -36,3 +36,8 @@ class StudentRetUpdDelUserView(generics.RetrieveUpdateDestroyAPIView):
         user = User.objects.create_user(**validated_data)
         return user
     
+
+class Student_List_View_Dashboard(generics.ListAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializers
+
