@@ -13,7 +13,7 @@ from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
 from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
-from live_classes.views import LiveClassListView, LiveClassUsersView
+from live_classes.views import LiveClassListView, LiveClassUsersView, liveclass_list_view
 from master.views import (
     CategoryListView,
     CategoryRetUpdDelView,
@@ -314,6 +314,8 @@ urlpatterns = [
     path('api/courselistforpackage/', Course_list_forpackage.as_view(), name="courselistforpackage"),
     path('api/create-batch/', CreateBatchAPIView.as_view(), name='create-batch'),
     # path('accounts/google/login/', include('allauth.urls')),
+    path('api/liveclass_list_view/', liveclass_list_view.as_view(), name='liveclass_list_view'),
+
     
     
 

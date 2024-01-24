@@ -292,6 +292,6 @@ class CuponListView(generics.ListAPIView):
     serializer_class = CuponListSerializers
 
 
-class CreateBatchAPIView(generics.CreateAPIView):
+class CreateBatchAPIView(generics.ListCreateAPIView):
     queryset = batch.objects.all()                                        ####createbatchview
     serializer_class = batchListSerializers
