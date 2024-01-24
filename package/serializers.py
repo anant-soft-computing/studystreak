@@ -81,6 +81,11 @@ class EnrollmentPackageSerializer(serializers.ModelSerializer):
         depth = 1
 
 
+class PackageCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = "__all__"
+
 class EnrollmentSerializer(serializers.Serializer):
     batch_ids = serializers.ListField(child=serializers.CharField(), required=True)
    
@@ -99,7 +104,3 @@ class EnrollmentSerializer(serializers.Serializer):
 #         user_profile = UserProfile.objects.create(user=user)
 
 #         return user
-class PackageCreateSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Package
-        fields = "__all__"

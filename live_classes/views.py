@@ -2,10 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import JsonResponse
-
+from rest_framework import generics
 import requests, json
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
+
 
 from zoomus import ZoomClient
 Account_id = "gZOcFtX-S3GRietpBWVT-Q"
@@ -34,4 +35,4 @@ class LiveClassListView(APIView):
         return JsonResponse(data= meeting_list.json(), status=200)
         
         
-        
+# class liveclass_list_view(generics)

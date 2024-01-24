@@ -335,7 +335,12 @@ class EnrollPackageView(APIView):
 
 
 #################################################################
+class PackageCreateView(generics.CreateAPIView):
 
+    queryset = Package.objects.all()
+    serializer_class = PackageCreateSerializers
+    print(serializer_class)
+    print("**")
 
 class EnrollPackageStudentView(APIView):
     permission_classes = [IsAuthenticated]
@@ -388,9 +393,3 @@ class EnrollPackageStudentView(APIView):
 
 #     print(serializer_class)
      
-class PackageCreateView(generics.CreateAPIView):
-
-    queryset = Package.objects.all()
-    serializer_class = PackageCreateSerializers
-    print(serializer_class)
-    print("**")

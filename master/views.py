@@ -23,7 +23,8 @@ from .models import (
     CourseMaterial,
     AdditionalResource,
     LessonAttachment,
-    LessonAssignment
+    LessonAssignment,
+    Cupon
 )
 from .serializers import (
     CategoryListSerializers,
@@ -57,7 +58,8 @@ from .serializers import (
     CourseMaterialRetUpdDelSerializers,
     AdditionalResourceListSerializers,
     LessonAssignmentSerializer,
-    LessonAttachmentSerializer
+    LessonAttachmentSerializer,
+    CuponListSerializers
 )
 
 # Create your views here.
@@ -284,3 +286,7 @@ class LessonAttachmentListAPIView(generics.ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         count = queryset.count()
         return Response({'count': count, 'data': serializer.data})
+
+class CuponListView(generics.ListAPIView):
+    queryset = Cupon.objects.all()
+    serializer_class = CuponListSerializers

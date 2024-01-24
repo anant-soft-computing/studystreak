@@ -49,7 +49,8 @@ from master.views import (
     CourseMaterialRetUpdDelView,
     AdditionalResourceListAPIView,
     LessonAssignmentListAPIView,
-    LessonAttachmentListAPIView
+    LessonAttachmentListAPIView,
+    CuponListView
 
 )
 from package.views import (PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, 
@@ -308,6 +309,8 @@ urlpatterns = [
 
     path('api/pay/', start_payment, name="payment"),
     path('api/payment/success/', handle_payment_success, name="payment_success"),
+    path('api/cuponlistview/', CuponListView.as_view(), name="cuponlistview"),
+    
 
 
 ] + router.urls

@@ -138,7 +138,8 @@ class batchAdmin(ImportExportModelAdmin):
 
 @admin.register(Cupon)
 class CuponAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id', 'cupon_name', 'campaign_name', 'cupon_code', 'discount', 'start_date', 'end_date']
+    list_filter = ['cupon_name', 'campaign_name', 'cupon_code']
 
 class LessonAssignmentAdmin(admin.ModelAdmin):
     list_display = ['id', 'lesson']

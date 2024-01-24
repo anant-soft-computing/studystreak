@@ -19,7 +19,8 @@ from .models import (
     CourseMaterial,
     AdditionalResource,
     LessonAssignment,
-    LessonAttachment
+    LessonAttachment,
+    Cupon
 )
 
 
@@ -238,3 +239,8 @@ class LessonAttachmentSerializer(serializers.ModelSerializer):
         model = LessonAttachment
         fields = '__all__'
         depth=1
+
+class CuponListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Cupon
+        fields = '__all__'
