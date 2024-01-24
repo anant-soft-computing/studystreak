@@ -68,6 +68,12 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "django_filters",
     'payment',
+    # "allauth",
+    # "allauth.account",
+    # "allauth.socialaccount",
+    # "allauth.socialaccount.providers.google",                      
+    # "dj_rest_auth",
+    # "dj_rest_auth.registration",
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
@@ -99,6 +105,26 @@ TEMPLATES = [
         },
     },
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": "1041538556743-t4ql9a9p8r6eb9407j96lup5m3tckb01.apps.googleusercontent.com",
+            "secret": "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",
+            "key": "",  # leave empty
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+        "VERIFIED_EMAIL": True,
+    },
+}
+
+
 
 WSGI_APPLICATION = "lmss.wsgi.application"
 

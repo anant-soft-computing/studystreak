@@ -50,7 +50,8 @@ from master.views import (
     AdditionalResourceListAPIView,
     LessonAssignmentListAPIView,
     LessonAttachmentListAPIView,
-    CuponListView
+    CuponListView,
+    CreateBatchAPIView
 
 )
 from package.views import (PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, 
@@ -311,6 +312,9 @@ urlpatterns = [
     path('api/payment/success/', handle_payment_success, name="payment_success"),
     path('api/cuponlistview/', CuponListView.as_view(), name="cuponlistview"),
     path('api/courselistforpackage/', Course_list_forpackage.as_view(), name="courselistforpackage"),
+    path('api/create-batch/', CreateBatchAPIView.as_view(), name='create-batch'),
+    # path('accounts/google/login/', include('allauth.urls')),
+    
     
 
 

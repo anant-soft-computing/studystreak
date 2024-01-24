@@ -290,3 +290,8 @@ class LessonAttachmentListAPIView(generics.ListAPIView):
 class CuponListView(generics.ListAPIView):
     queryset = Cupon.objects.all()
     serializer_class = CuponListSerializers
+
+
+class CreateBatchAPIView(generics.CreateAPIView):
+    queryset = batch.objects.all()                                        ####createbatchview
+    serializer_class = batchListSerializers
