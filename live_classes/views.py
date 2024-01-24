@@ -7,7 +7,7 @@ import requests, json
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
 from .models import LiveClass
-from .serializers import LiveClassListSerializer
+from .serializers import LiveClassListSerializer, LiveClassCreateSerializer
 
 from zoomus import ZoomClient
 Account_id = "gZOcFtX-S3GRietpBWVT-Q"
@@ -39,3 +39,8 @@ class LiveClassListView(APIView):
 class liveclass_list_view(generics.ListAPIView):
     queryset = LiveClass.objects.all()
     serializer_class = LiveClassListSerializer
+
+
+class Liveclass_Create_View(generics.ListCreateAPIView):
+    queryset = LiveClass.objects.all()
+    serializer_class = LiveClassCreateSerializer

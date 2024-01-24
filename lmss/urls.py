@@ -13,7 +13,7 @@ from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
 from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
-from live_classes.views import LiveClassListView, LiveClassUsersView, liveclass_list_view
+from live_classes.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
     CategoryListView,
     CategoryRetUpdDelView,
@@ -158,7 +158,7 @@ urlpatterns = [
     path("api/batchRetUpdDelView/<int:pk>/", batchRetUpdDelView.as_view()),
     path("api/sectionlistview/", SectionListView.as_view()),
     path("api/sectionretupddelview/<int:pk>/", SectionRetUpdDelView.as_view()),
-    path("api/batchview/", batchListView.as_view()),
+    # path("api/batchview/", batchListView.as_view()),
     path("api/batchRetUpdDelView/<int:pk>/", batchRetUpdDelView.as_view()),
     path("api/packagelistview/", PackageListView.as_view()),
     path("api/packageretupddelview/<int:pk>/", PackageRetUpdDelView.as_view()),
@@ -315,6 +315,7 @@ urlpatterns = [
     path('api/create-batch/', CreateBatchAPIView.as_view(), name='create-batch'),
     # path('accounts/google/login/', include('allauth.urls')),
     path('api/liveclass_list_view/', liveclass_list_view.as_view(), name='liveclass_list_view'),
+    path('api/liveclass_create_view/', Liveclass_Create_View.as_view(), name='liveclass_create_view'),
 
     
     
