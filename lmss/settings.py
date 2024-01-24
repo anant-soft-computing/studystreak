@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "jazzmin",
     "master",
     "Courses",
-    "live_classes",
+    # "live_classes",
     "package",
     "students",
     "assessment",
