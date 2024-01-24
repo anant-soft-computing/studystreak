@@ -23,6 +23,7 @@ from .models import (
     State,
     TestType,
     batch,
+    Live_Class_Type,
 )
 
 
@@ -145,3 +146,5 @@ class LessonAssignmentAdmin(admin.ModelAdmin):
     list_display = ['id', 'lesson']
 
 admin.site.register(LessonAssignment, LessonAssignmentAdmin)
+
+admin.site.register(Live_Class_Type)

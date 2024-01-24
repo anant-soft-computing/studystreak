@@ -1,9 +1,10 @@
 from django.db import models
-from master.models import batch
+from master.models import batch, Live_Class_Type
 from Courses.models import Course 
 
 class Live_Class(models.Model):
-    batch = models.ForeignKey(batch, on_delete=models.CASCADE, null=True, blank=True)
+    select_batch = models.ForeignKey(batch, on_delete=models.CASCADE, null=True, blank=True)
+    liveclasstype = models.ForeignKey(Live_Class_Type, on_delete=models.CASCADE)
     meeting_title = models.CharField(max_length=255)
     meeting_description = models.TextField()
     start_time = models.DateTimeField()
