@@ -13,7 +13,7 @@ from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
 from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
-from live_classes.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
+from LiveClass.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
     CategoryListView,
     CategoryRetUpdDelView,

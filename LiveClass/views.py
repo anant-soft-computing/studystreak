@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -6,7 +9,7 @@ from rest_framework import generics
 import requests, json
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
-from .models import LiveClass
+from .models import Live_Class
 from .serializers import LiveClassListSerializer, LiveClassCreateSerializer
 
 from zoomus import ZoomClient
@@ -36,11 +39,11 @@ class LiveClassListView(APIView):
         return JsonResponse(data= meeting_list.json(), status=200)
         
         
-# class liveclass_list_view(generics.ListAPIView):
-#     queryset = LiveClass.objects.all()
-#     serializer_class = LiveClassListSerializer
+class liveclass_list_view(generics.ListAPIView):
+    queryset = Live_Class.objects.all()
+    serializer_class = LiveClassListSerializer
 
 
-# class Liveclass_Create_View(generics.ListCreateAPIView):
-#     queryset = LiveClass.objects.all()
-#     serializer_class = LiveClassCreateSerializer
+class Liveclass_Create_View(generics.ListCreateAPIView):
+    queryset = Live_Class.objects.all()
+    serializer_class = LiveClassCreateSerializer

@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "django_filters",
     'payment',
+    'LiveClass',
     # "allauth",
     # "allauth.account",
     # "allauth.socialaccount",
