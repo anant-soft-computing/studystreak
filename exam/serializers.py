@@ -36,3 +36,10 @@ class FullLengthTestSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data["test_type"] = instance.test_type.__str__()
         return data
+
+class ExamListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Exam
+        fields = '__all__'
+        depth = 1
+

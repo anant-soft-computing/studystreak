@@ -3,8 +3,8 @@ from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 
 # Create your views here.
 from .models import Answer, Exam, FullLengthTest
-from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer
-
+from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer, ExamListSerializers
+from rest_framework import generics 
 
 class ExamViewSet(viewsets.ModelViewSet):
     queryset = Exam.objects.all()
@@ -25,3 +25,8 @@ class AnswerViewSet(viewsets.ModelViewSet):
 class FullLengthTestViewSet(viewsets.ModelViewSet):
     queryset = FullLengthTest.objects.all()
     serializer_class = FullLengthTestSerializer
+
+
+class ExamListView(generics.ListAPIView):
+    queryset = Exam.objects.all()
+    serializer_class =  ExamListSerializers
