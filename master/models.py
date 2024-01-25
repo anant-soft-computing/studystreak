@@ -120,7 +120,7 @@ class batch(models.Model):
     batch_start_timing = models.TimeField(null=True, blank=True)
     batch_end_timing = models.TimeField(null=True, blank=True)
     add_package = models.ForeignKey(
-        "package.package", on_delete=models.CASCADE, related_name="+", null=True, blank=True
+        "package.package", on_delete=models.CASCADE, related_name="+", null=False, blank=True
     )
 
     def __str__(self):

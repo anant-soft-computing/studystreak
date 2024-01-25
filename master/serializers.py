@@ -202,22 +202,22 @@ class batchListSerializersCreateBatch(serializers.ModelSerializer):
         depth = 1
 
 class batchListSerializersCreateBatch(serializers.ModelSerializer):
-    add_package = PackageListSerializers()
+    # add_package = PackageListSerializers()
 
     class Meta:
         model = batch
         fields = "__all__"
 
-    def create(self, validated_data):
-        add_package_data = validated_data.pop('add_package')
-        batch_instance = batch.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     add_package_data = validated_data.pop('add_package')
+    #     batch_instance = batch.objects.create(**validated_data)
 
-        # Assuming 'add_package' is a ForeignKey field in the batch model
-        package_instance = PackageListSerializers.create(PackageListSerializers(), validated_data=add_package_data)
-        batch_instance.add_package = package_instance
-        batch_instance.save()
+    #     # Assuming 'add_package' is a ForeignKey field in the batch model
+    #     package_instance = PackageListSerializers.create(PackageListSerializers(), validated_data=add_package_data)
+    #     batch_instance.add_package = package_instance
+    #     batch_instance.save()
 
-        return batch_instance
+    #     return batch_instance
 
 
 class QuestionTypeSerializers(serializers.ModelSerializer):
