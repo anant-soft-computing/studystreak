@@ -41,5 +41,5 @@ class ExamListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Exam
         fields = '__all__'
-        depth = 1
+        depth = 2
 
