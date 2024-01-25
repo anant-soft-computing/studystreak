@@ -23,7 +23,7 @@ class CourseCreateSerializers(serializers.ModelSerializer):
 
 
 class CourseRetUpdDelSerializers(serializers.ModelSerializer):
-    lessons = LessonDetailSerializer(many=True, read_only=True)
+    # lessons = LessonDetailSerializer(many=True, read_only=True)
 
     class Meta:
         model = Course
