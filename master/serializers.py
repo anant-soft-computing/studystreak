@@ -270,3 +270,4 @@ class Live_Class_Type_List_Serializers(serializers.ModelSerializer):
     class Meta:
         model = Live_Class_Type
         fields = '__all__'
+        depth = 1
