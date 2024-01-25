@@ -88,6 +88,8 @@ from website.views import (
 from Writing_Exam.views import *  # noqa: F403
 from payment.views import start_payment, handle_payment_success
 
+from django.views.generic import TemplateView
+
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
 router.register(
@@ -321,6 +323,9 @@ urlpatterns = [
     path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
     path('api/live_class_type_list_view/', Live_Class_Type_List_View.as_view(), name='live_class_type_list_view'),
     path('api/examlistview/', ExamListView.as_view(), name='examlistview'),
+    path('', TemplateView.as_view(template_name='dashboard/home.html'), name='home'),
+    path('login', TemplateView.as_view(template_name='account/login.html'), name='login'),  
+    path('accounts/', include('allauth.urls')),
 
     
     

@@ -69,11 +69,11 @@ INSTALLED_APPS = [
     "django_filters",
     'payment',
     'LiveClass',
-    # "allauth",
-    # "allauth.account",
-    # "allauth.socialaccount",
-    # "allauth.socialaccount.providers.google",                      
-    # "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",                      
+    "dj_rest_auth",
     # "dj_rest_auth.registration",
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware'
     
 ]
 
@@ -274,6 +275,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 DEFAULTS = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
@@ -299,6 +303,33 @@ DEFAULTS = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+ACCOUNT_LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+# {"web":
+#     {"client_id":"246152471027-8ql9ui19kphk2t0hp2pd57lb7bd1op3v.apps.googleusercontent.com",
+#      "project_id":"fresh-ocean-412305",
+#      "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+#      "token_uri":"https://oauth2.googleapis.com/token",
+#      "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+#      "client_secret":"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",
+#      "redirect_uris":["http://127.0.0.1:8000/accounts/google/login/callback/",
+#                       "http://localhost:8000/accounts/google/login/callback/"],
+#      "javascript_origins":["http://127.0.0.1:8000","http://localhost:8000"]}
+#     }
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+    
 }
 
 KEY_ID="rzp_test_QyWQWfJeARzOZG"
