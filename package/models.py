@@ -12,7 +12,7 @@ class Package(models.Model):
     package_price = models.CharField(
         max_length=100, null=True, blank=True
     )  # Should this be DecimalField or IntegerField for an actual price?
-    PackageType = models.ForeignKey(PackageType, on_delete=models.CASCADE)
+    PackageType = models.ForeignKey(PackageType, on_delete=models.CASCADE, null=False)
     select_course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     # Section: MATERIAL

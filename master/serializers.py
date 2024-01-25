@@ -20,10 +20,11 @@ from .models import (
     AdditionalResource,
     LessonAssignment,
     LessonAttachment,
-    Cupon
+    Cupon,
+    Live_Class_Type
 )
 
-
+from package.serializers import PackageListSerializers
 
 # from .models import
 
@@ -193,11 +194,30 @@ class batchListSerializers(serializers.ModelSerializer):
         fields = "__all__"
         depth = 1
 
-
-class batchRetUpdDelSerializers(serializers.ModelSerializer):
+class batchListSerializersCreateBatch(serializers.ModelSerializer):
+    add_package = PackageListSerializers()
     class Meta:
         model = batch
         fields = "__all__"
+        depth = 1
+
+class batchListSerializersCreateBatch(serializers.ModelSerializer):
+    add_package = PackageListSerializers()
+
+    class Meta:
+        model = batch
+        fields = "__all__"
+
+    def create(self, validated_data):
+        add_package_data = validated_data.pop('add_package')
+        batch_instance = batch.objects.create(**validated_data)
+
+        # Assuming 'add_package' is a ForeignKey field in the batch model
+        package_instance = PackageListSerializers.create(PackageListSerializers(), validated_data=add_package_data)
+        batch_instance.add_package = package_instance
+        batch_instance.save()
+
+        return batch_instance
 
 
 class QuestionTypeSerializers(serializers.ModelSerializer):
@@ -243,4 +263,10 @@ class LessonAttachmentSerializer(serializers.ModelSerializer):
 class CuponListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Cupon
+        fields = '__all__'
+
+
+class Live_Class_Type_List_Serializers(serializers.ModelSerializer):
+    class Meta:
+        model = Live_Class_Type
         fields = '__all__'

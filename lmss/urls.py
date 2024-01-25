@@ -51,7 +51,8 @@ from master.views import (
     LessonAssignmentListAPIView,
     LessonAttachmentListAPIView,
     CuponListView,
-    CreateBatchAPIView
+    CreateBatchAPIView,
+    Live_Class_Type_List_View
 
 )
 from package.views import (PackageListView, PackageRetUpdDelView, CoursePackageView, UserWisePackageWithCourseID, 
@@ -318,6 +319,7 @@ urlpatterns = [
     path('api/liveclass_list_view/', liveclass_list_view.as_view(), name='liveclass_list_view'),
     path('api/liveclass_create_view/', Liveclass_Create_View.as_view(), name='liveclass_create_view'),
     path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
+    path('api/live_class_type_list_view/', Live_Class_Type_List_View.as_view(), name='live_class_type_list_view'),
 
     
     

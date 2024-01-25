@@ -24,7 +24,8 @@ from .models import (
     AdditionalResource,
     LessonAttachment,
     LessonAssignment,
-    Cupon
+    Cupon,
+    Live_Class_Type
 )
 from .serializers import (
     CategoryListSerializers,
@@ -59,7 +60,9 @@ from .serializers import (
     AdditionalResourceListSerializers,
     LessonAssignmentSerializer,
     LessonAttachmentSerializer,
-    CuponListSerializers
+    CuponListSerializers,
+    batchListSerializersCreateBatch,
+    Live_Class_Type_List_Serializers
 )
 
 # Create your views here.
@@ -294,4 +297,9 @@ class CuponListView(generics.ListAPIView):
 
 class CreateBatchAPIView(generics.ListCreateAPIView):
     queryset = batch.objects.all()                                        ####createbatchview
-    serializer_class = batchListSerializers
+    serializer_class = batchListSerializersCreateBatch
+
+
+class Live_Class_Type_List_View(generics.ListCreateAPIView):
+    queryset = Live_Class_Type.objects.all()                                        ####createbatchview
+    serializer_class = Live_Class_Type_List_Serializers
