@@ -8,7 +8,7 @@ from master.models import ExamType, TestType
 class BlockType(models.TextChoices):
     practice = "Practice", "Practice"
     full_length = "Full Length", "Full Length"
-    both = "Both", "Both"
+    # both = "Both", "Both"
 
 
 class Difficulty(models.TextChoices):
@@ -33,7 +33,7 @@ class Exam(models.Model):
         default=ExamType.reading,
         help_text="(Reading, Listening, Speaking, Writing)",
     )
-    test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True)
+    # test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True)
     # question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextUploadingField("contents", null=True, blank=True)
     no_of_questions = models.IntegerField(default=4)
