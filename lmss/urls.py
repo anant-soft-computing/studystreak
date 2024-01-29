@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView, LessonCreateView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
-from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView, ExamListFilterView
+from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView, ExamListFilterView, AnswerListView
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from LiveClass.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
@@ -323,7 +323,7 @@ urlpatterns = [
     path('api/examlistview/', ExamListView.as_view(), name='examlistview'),
     path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
-    # path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
+    path('api/answerlistview/', AnswerListView.as_view(), name='lessoncreateview'),
 
     
     
