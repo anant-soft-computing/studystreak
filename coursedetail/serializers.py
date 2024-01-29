@@ -10,6 +10,7 @@ class LessonListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
+        depth = 1
 
 class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession_count = serializers.SerializerMethodField()
@@ -76,6 +77,12 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
 #     class Meta:
 #         model = Quiz_Question
 #         fields = '__all__'
+
+class LessonCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = "__all__"
+        depth=2
 
 
 
