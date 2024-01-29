@@ -31,7 +31,7 @@ class ExamAdmin(admin.ModelAdmin):
                 "fields": (
                     "exam_name",
                     "exam_type",
-                    "type_of_module",
+                  
                     "exam_category",
                    
                 ),

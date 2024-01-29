@@ -323,7 +323,7 @@ urlpatterns = [
     path('api/examlistview/', ExamListView.as_view(), name='examlistview'),
     path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
-
+    # path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
 
     
     

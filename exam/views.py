@@ -43,3 +43,16 @@ class ExamListFilterView(generics.ListAPIView):
             queryset = queryset.filter(block_type=block_type)
 
         return queryset
+
+
+
+class ExamListFilterView(generics.ListAPIView):
+    serializer_class = ExamListSerializers
+
+    def get_queryset(self):
+        block_type = self.request.query_params.get('block_type', None)
+        queryset = Exam.objects.all()
+
+        if block_type:
+            queryset = queryset.filter(block_type = block_type)
+            
