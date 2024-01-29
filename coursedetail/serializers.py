@@ -36,7 +36,7 @@ class LessonDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
-        depth = 2
+        depth = 3
 
     def get_attachment_lession(self, lesson):
         return LessonAttachment.objects.filter(lesson=lesson)
