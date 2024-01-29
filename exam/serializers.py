@@ -44,3 +44,9 @@ class ExamListSerializers(serializers.ModelSerializer):
         fields = '__all__'
         depth = 2
 
+
+class AnswerListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = "__all__"
+        depth = 2

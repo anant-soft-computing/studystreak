@@ -13,9 +13,11 @@ class AnswerInline(admin.TabularInline):
     fk_name = "exam"
 
 
-@admin.register(Answer)
+# @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("question_number", "answer_text", "exam")
+    list_filter = ("question_number", "exam")
+admin.site.register(Answer, AnswerAdmin)
 
 
 @admin.register(Exam)
