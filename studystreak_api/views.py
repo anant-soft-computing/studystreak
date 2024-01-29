@@ -104,7 +104,7 @@ class RegistrationView(APIView):
             message.send()
             print("8888")
             return Response(
-                {"msg": "Registration successful"}, status=status.HTTP_201_CREATED
+                {"msg": "Registration Successfull, Please Check Your Mail For Verification"}, status=status.HTTP_201_CREATED
             )
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -142,7 +142,7 @@ class LoginView(APIView):
                 )
 
             return Response(
-                {"errors": "User not found"}, status=status.HTTP_404_NOT_FOUND
+                {"errors": "It's seems to you that verify your email"}, status=status.HTTP_404_NOT_FOUND
             )
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
