@@ -4,8 +4,9 @@ from master.models import Section
 from exam.models import Exam
 # from Courses.models import Course
 # Create your models here.
-
-
+from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
+from exam.models import ExamType, Difficulty
 # class Lession_Quiz(models.Model):
 #     name = models.CharField(max_length=200)
 #     
@@ -66,7 +67,7 @@ class Lesson(models.Model):
         max_length=200, null=True, blank=True, default=None
     )
     active = models.BooleanField(default=False)
-    # lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment")
+    lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment", null=True, blank=True)
     # lesson_quiz = models.ManyToManyField(Exam)
 
     def __str__(self):
@@ -92,5 +93,6 @@ class Quiz_Question(models.Model):
     # class Meta:
     #      verbose_name = "L"
 
+
     
-    
+

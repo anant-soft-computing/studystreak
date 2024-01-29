@@ -21,9 +21,9 @@ class AnswerAdmin(admin.ModelAdmin):
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
     inlines = [AnswerInline]
-    list_display = ['exam_name', 'exam_type', 'no_of_questions', 'block_type', 
+    list_display = ['exam_name', 'exam_type', 'no_of_questions', 'block_type', "exam_category",
     'difficulty_level', 'block_threshold', ]
-    list_filter = ["exam_name", "exam_type", 'block_type', 'difficulty_level',]
+    list_filter = ["exam_name", "exam_type", 'block_type', 'difficulty_level','exam_category']
     fieldsets = (
         (
             None,
@@ -32,6 +32,7 @@ class ExamAdmin(admin.ModelAdmin):
                     "exam_name",
                     "exam_type",
                     "type_of_module",
+                    "exam_category",
                    
                 ),
             },

@@ -78,5 +78,11 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
 #         model = Quiz_Question
 #         fields = '__all__'
 
+class LessonCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = "__all__"
+        depth=2
+
 
 

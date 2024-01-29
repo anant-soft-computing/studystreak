@@ -99,6 +99,15 @@ class QuestionInline(nested_admin.NestedStackedInline):
     extra = 2
     inlines = [OptionsInline]
 
+# class AnswerInline(admin.TabularInline):
+#     """Tabular Inline View for Answer"""
+
+#     model = Assignment_Answer
+#     extra = 1
+    # fk_name = "lesson"
+
+# @admin.register(Assignment_Answer)
+
 class LessonAdmin(NestedModelAdmin):
     model = Lesson
     list_display = [
@@ -108,6 +117,7 @@ class LessonAdmin(NestedModelAdmin):
         "Lesson_Video",
         "Lesson_Duration",
         "active",
+    
     ]
     list_filter = [
         "section",
@@ -121,3 +131,9 @@ class LessonAdmin(NestedModelAdmin):
     inlines = [LessonAttachmentInline, QuestionInline]
 
 admin.site.register(Lesson, LessonAdmin)
+
+# admin.site.register(Assignment_Question)
+
+# admin.site.register(Assignment_Answer)
+
+

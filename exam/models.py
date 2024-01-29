@@ -2,13 +2,13 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-from master.models import ExamType, TestType
+from master.models import ExamType, TestType, Category
 
 
 class BlockType(models.TextChoices):
     practice = "Practice", "Practice"
     full_length = "Full Length", "Full Length"
-    # both = "Both", "Both"
+    assignments = "Assignments", "Assignments"
 
 
 class Difficulty(models.TextChoices):
@@ -46,6 +46,7 @@ class Exam(models.Model):
     type_of_module = models.ForeignKey(
         "master.ModuleType", on_delete=models.SET_NULL, null=True
     )
+    exam_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     audio_file = models.FileField(upload_to="examblockaudio/", null=True, blank=True)
 
     def __str__(self):
