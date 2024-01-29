@@ -9,9 +9,9 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from assessment.views import assessmentListView, assessmentRetUpdDelView
-from coursedetail.views import LessionRetUpdDelView, LessonListView
+from coursedetail.views import LessionRetUpdDelView, LessonListView, LessonCreateView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
-from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView
+from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView, ExamListFilterView
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from LiveClass.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
@@ -112,7 +112,7 @@ urlpatterns = [
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/assessmentview/", assessmentListView.as_view()),
     path("api/assessmentretupddelview/<int:pk>/", assessmentRetUpdDelView.as_view()),
-    path("api/lssonview/", LessonListView.as_view()),
+    path("api/lessonview/", LessonListView.as_view()),
     path("api/lessionretupddelview/<int:pk>/", LessionRetUpdDelView.as_view()),
     path(
         "api/courselistview/",
@@ -323,10 +323,17 @@ urlpatterns = [
     path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
     path('api/live_class_type_list_view/', Live_Class_Type_List_View.as_view(), name='live_class_type_list_view'),
     path('api/examlistview/', ExamListView.as_view(), name='examlistview'),
+<<<<<<< HEAD
     path('', TemplateView.as_view(template_name='dashboard/home.html'), name='home'),
     path('login', TemplateView.as_view(template_name='account/login.html'), name='login'),  
     path('accounts/', include('allauth.urls')),
+=======
+    path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
+    path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
+    # path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
+>>>>>>> 9ae2c892f79ac6f8a84e1576571dea39870bd98e
 
+    
     
     
 

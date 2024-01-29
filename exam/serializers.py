@@ -15,6 +15,7 @@ class ExamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exam
         fields = "__all__"
+        depth = 2
 
     def create(self, validated_data):
         answers_data = validated_data.pop("answers", None)

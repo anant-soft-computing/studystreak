@@ -104,7 +104,7 @@ class RegistrationView(APIView):
             message.send()
             print("8888")
             return Response(
-                {"msg": "Registration successful"}, status=status.HTTP_201_CREATED
+                {"msg": "Registration Successfull, Please Check Your Mail For Verification"}, status=status.HTTP_201_CREATED
             )
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -142,7 +142,7 @@ class LoginView(APIView):
                 )
 
             return Response(
-                {"errors": "User not found"}, status=status.HTTP_404_NOT_FOUND
+                {"errors": "It's seems to you that verify your email"}, status=status.HTTP_404_NOT_FOUND
             )
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -323,48 +323,6 @@ class RedirectForm(forms.Form):
 
 from django.views.generic import TemplateView
 
-class UserResetPasswordView(TemplateView):
-    template_name = 'emails/your_template.html'
-
-    def get_user(self, uid, token):
-        try:
-            id = smart_str(urlsafe_base64_decode(uid))
-            user = User.objects.get(id=id)
-            return user
-        except (User.DoesNotExist, DjangoUnicodeDecodeError):
-            return None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        uid = self.kwargs.get('uid')
-        token = self.kwargs.get('token')
-        user = self.get_user(uid, token)
-        
-        if user and PasswordResetTokenGenerator().check_token(user, token):
-            context['form'] = RedirectForm()
-        else:
-            context['error_message'] = "Your Reset link has Expired"
-
-        return context
-
-    def post(self, request, uid, token):
-        user = self.get_user(uid, token)
-
-        if user and PasswordResetTokenGenerator().check_token(user, token):
-            form = RedirectForm(request.POST)
-            if form.is_valid():
-                new_password = form.cleaned_data['password']
-                user.set_password(new_password)
-                user.save()
-                return HttpResponse("Successfully reset the password")
-            else:
-                return render(request, self.template_name, {"form": form})
-        else:
-            return HttpResponse("Your Reset link has Expired")
-#####################################################################
-
-# new code 2
-
 # class UserResetPasswordView(TemplateView):
 #     template_name = 'emails/your_template.html'
 
@@ -381,7 +339,7 @@ class UserResetPasswordView(TemplateView):
 #         uid = self.kwargs.get('uid')
 #         token = self.kwargs.get('token')
 #         user = self.get_user(uid, token)
-
+        
 #         if user and PasswordResetTokenGenerator().check_token(user, token):
 #             context['form'] = RedirectForm()
 #         else:
@@ -403,6 +361,50 @@ class UserResetPasswordView(TemplateView):
 #                 return render(request, self.template_name, {"form": form})
 #         else:
 #             return HttpResponse("Your Reset link has Expired")
+#####################################################################
+
+# new code 2
+from django.views import View
+from django.contrib.auth import get_user_model
+from django.shortcuts import redirect
+
+class UserResetPasswordView(View):
+    template_name = 'emails/your_template.html'
+
+    def get_user(self, uid, token):
+        try:
+            id = smart_str(urlsafe_base64_decode(uid))
+            user = get_user_model().objects.get(id=id)
+            return user
+        except (get_user_model().DoesNotExist, DjangoUnicodeDecodeError):
+            return None
+
+    def get(self, request, uid, token):
+        user = self.get_user(uid, token)
+
+        if user and PasswordResetTokenGenerator().check_token(user, token):
+            context = {'uid': uid, 'token': token}
+            return render(request, self.template_name, context)
+        else:
+            return HttpResponse("Your Reset link has Expired")
+
+    def post(self, request, uid, token):
+        user = self.get_user(uid, token)
+
+        if user and PasswordResetTokenGenerator().check_token(user, token):
+            password = request.POST.get('password')
+            password2 = request.POST.get('password2')
+
+            if password != password2:
+                context = {'uid': uid, 'token': token, 'error_message': "Passwords do not match"}
+                return render(request, self.template_name, context)
+            else:
+                user.set_password(password)
+                user.save()
+                return redirect('/api/login') 
+                # return HttpResponse("Successfully reset the password")
+        else:
+            return HttpResponse("Your Reset link has Expired")
 
 ######################################################################
 
