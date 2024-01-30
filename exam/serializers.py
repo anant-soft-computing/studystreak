@@ -56,3 +56,10 @@ class AnswerRetUpdDelSerializers(serializers.ModelSerializer):
         model = Answer
         fields = "__all__"
         depth = 2
+
+
+class ExamRetUpdDelSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Exam
+        fields = "__all__"
+        depth=4

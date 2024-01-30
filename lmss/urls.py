@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView, LessonCreateView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
-from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView,AnswerListView,ExamListFilterView, AnswerRetUpdDelView
+from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView,AnswerListView,ExamListFilterView, AnswerRetUpdDelView, ExamRetUpdDelView
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from LiveClass.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
@@ -323,10 +323,13 @@ urlpatterns = [
     path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
     path('api/live_class_type_list_view/', Live_Class_Type_List_View.as_view(), name='live_class_type_list_view'),
     path('api/examlistview/', ExamListView.as_view(), name='examlistview'),
+    path('api/examretupddelview/<int:pk>/', ExamRetUpdDelView.as_view(), name='examretupddelview'),
+
     path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
     path('api/answerlistview/', AnswerListView.as_view(), name='lessoncreateview'),
     path('api/answerretupddelview/<int:pk>/', AnswerRetUpdDelView.as_view(), name='answerretupddelview'),
+    path('answers/<int:exam_id>/', AnswerListView.as_view(), name='answer-list'),
 
 
 

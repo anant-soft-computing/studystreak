@@ -3,7 +3,7 @@ from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 
 # Create your views here.
 from .models import Answer, Exam, FullLengthTest
-from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer, ExamListSerializers, AnswerListSerializers, AnswerRetUpdDelSerializers
+from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer, ExamListSerializers, AnswerListSerializers, AnswerRetUpdDelSerializers, ExamRetUpdDelSerializers
 from rest_framework import generics 
 
 class ExamViewSet(viewsets.ModelViewSet):
@@ -31,6 +31,18 @@ class ExamListView(generics.ListAPIView):
     queryset = Exam.objects.all()
     serializer_class =  ExamListSerializers
 
+from django.shortcuts import get_object_or_404
+from rest_framework import generics
+
+# class AnswerListView(generics.ListAPIView):
+#     serializer_class = AnswerListSerializers
+
+#     def get_queryset(self):
+#         exam_id = self.kwargs.get('exam_id')
+#         exam = get_object_or_404(Exam, id=exam_id)
+#         queryset = Answer.objects.filter(exam=exam)
+#         return queryset
+
 
 class ExamListFilterView(generics.ListAPIView):
     serializer_class = ExamListSerializers
@@ -46,9 +58,21 @@ class ExamListFilterView(generics.ListAPIView):
 
 
 class AnswerListView(generics.ListAPIView):
-    queryset = Answer.objects.all()
     serializer_class = AnswerListSerializers
+    # queryset = Answer.objects.all()
+    print("***")
+    def get_queryset(self):
+        exam_id = self.kwargs.get('exam_id')
+        queryset = Answer.objects.filter(exam=exam_id)
+        exam = get_object_or_404(Exam, id=exam_id)
+        queryset = Answer.objects.filter(exam=exam)
+        return queryset
 
 class AnswerRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerRetUpdDelSerializers
+
+
+class ExamRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Exam.objects.all()
+    serializer_class = ExamRetUpdDelSerializers
