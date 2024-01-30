@@ -28,8 +28,6 @@ class LessonCreateSerializers(serializers.ModelSerializer):
         fields = "__all__"
         depth=2
 
-############################## old code working ##########################
-
 class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession_count = serializers.SerializerMethodField()
     # assignment_lession_count = serializers.SerializerMethodField()
