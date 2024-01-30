@@ -45,7 +45,10 @@ class ExamListFilterView(generics.ListAPIView):
         return queryset
 
 
+<<<<<<< HEAD
+=======
 class AnswerListView(generics.ListAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerListSerializers
 
+>>>>>>> 05f767c463e4a10a5911900a2366df1105c03b48

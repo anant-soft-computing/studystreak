@@ -22,9 +22,11 @@ class LessonListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
-        depth = 4
-
-############################## old code working ##########################
+class LessonCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = "__all__"
+        depth=2
 
 class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession_count = serializers.SerializerMethodField()
@@ -133,6 +135,12 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
         model = Lesson
         fields = '__all__'
         depth = 2
+
+class LessonCreateSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = "__all__"
+        depth=2
 
 class LessonCreateSerializers(serializers.ModelSerializer):
     class Meta:
