@@ -5,7 +5,7 @@ from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from .models import Answer, Exam, FullLengthTest
 from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer, ExamListSerializers, AnswerListSerializers, AnswerRetUpdDelSerializers, ExamRetUpdDelSerializers
 from rest_framework import generics 
-
+from django.shortcuts import get_object_or_404
 class ExamViewSet(viewsets.ModelViewSet):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
@@ -62,8 +62,11 @@ class AnswerListView(generics.ListAPIView):
     # queryset = Answer.objects.all()
     print("***")
     def get_queryset(self):
+        # exam_id = self.kwargs.get('exam_id')
+        # queryset = Answer.objects.filter(exam=exam_id)
+        # exam = get_object_or_404(Exam, id=exam_id)
+        # queryset = Answer.objects.filter(exam=exam)
         exam_id = self.kwargs.get('exam_id')
-        queryset = Answer.objects.filter(exam=exam_id)
         exam = get_object_or_404(Exam, id=exam_id)
         queryset = Answer.objects.filter(exam=exam)
         return queryset
