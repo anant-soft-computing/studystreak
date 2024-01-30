@@ -329,7 +329,7 @@ urlpatterns = [
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
     # path('api/answerlistview/', AnswerListView.as_view(), name='lessoncreateview'),
     path('api/answerretupddelview/<int:pk>/', AnswerRetUpdDelView.as_view(), name='answerretupddelview'),
-    path('answers/<int:exam_id>/', AnswerListView.as_view(), name='answer-list'),
+    path('api/answerslistview/<int:exam_id>/', AnswerListView.as_view(), name='answer-list'),
 
 
 
