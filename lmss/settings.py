@@ -87,8 +87,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'allauth.account.middleware.AccountMiddleware'
-    
 ]
 
 ROOT_URLCONF = "lmss.urls"
@@ -275,7 +273,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
+
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -304,9 +304,12 @@ DEFAULTS = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+SITE_ID = 1
 
-ACCOUNT_LOGIN_REDIRECT_URL = 'home'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'accounts/login/'
+
+# ACCOUNT_LOGIN_REDIRECT_URL = 'home'
+# ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 # {"web":
 #     {"client_id":"246152471027-8ql9ui19kphk2t0hp2pd57lb7bd1op3v.apps.googleusercontent.com",
 #      "project_id":"fresh-ocean-412305",
@@ -318,19 +321,19 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
 #                       "http://localhost:8000/accounts/google/login/callback/"],
 #      "javascript_origins":["http://127.0.0.1:8000","http://localhost:8000"]}
 #     }
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
-        'OAUTH_PKCE_ENABLED': True,
-    }
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         },
+#         'OAUTH_PKCE_ENABLED': True,
+#     }
     
-}
+# }
 
 KEY_ID="rzp_test_QyWQWfJeARzOZG"
 KEY_SECRET="CbjpLbEoily2YroYWMuvNfxG"

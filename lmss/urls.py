@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView, LessonCreateView
 from Courses.views import CourseListView, CourseRetUpdDelView, Course_list_forpackage
-from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet, ExamListView,AnswerListView,ExamListFilterView
+from exam.views import AnswerViewSet, ExamViewSet, FullLengthTestViewSet,ExamListView,AnswerListView,ExamListFilterView
 from Listening_Exam.views import ListeningExamListView, ListeningExamRetUpdDelViews
 from LiveClass.views import LiveClassListView, LiveClassUsersView, liveclass_list_view, Liveclass_Create_View
 from master.views import (
@@ -317,7 +317,7 @@ urlpatterns = [
     path('api/cuponlistview/', CuponListView.as_view(), name="cuponlistview"),
     path('api/courselistforpackage/', Course_list_forpackage.as_view(), name="courselistforpackage"),
     path('api/create-batch/', CreateBatchAPIView.as_view(), name='create-batch'),
-    # path('accounts/google/login/', include('allauth.urls')),
+    path('accounts/google/login/', include('allauth.urls')),
     path('api/liveclass_list_view/', liveclass_list_view.as_view(), name='liveclass_list_view'),
     path('api/liveclass_create_view/', Liveclass_Create_View.as_view(), name='liveclass_create_view'),
     path('api/student_list_view_dashboard/', Student_List_View_Dashboard.as_view(), name='Student_List_view_dashboard'),
@@ -326,6 +326,9 @@ urlpatterns = [
     path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
     path('api/answerlistview/', AnswerListView.as_view(), name='lessoncreateview'),
+    path('api/accounts',include('allauth.urls')),
+    path('api/accounts/login/',TemplateView.as_view(),name='googlelogin')   ###allauth
+
 
 
     
