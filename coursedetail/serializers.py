@@ -11,6 +11,12 @@ class Quiz_QuestionListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Quiz_Question
         fields = '__all__'
+
+class QuizOptionListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = QuizOption
+        fields = '__all__'
+        
 class LessonListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Lesson
@@ -23,11 +29,11 @@ class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession = serializers.SerializerMethodField()
     # assignment_lession = serializers.SerializerMethodField()
     quiz_questions = serializers.SerializerMethodField()
-    # quiz_options = serializers.SerializerMethodField()
+    quiz_options = serializers.SerializerMethodField()
     attachment_lession = LessonAttachmentSerializer(many=True, read_only=True)
     # assignment_lession = LessonAssignmentSerializer(many=True, read_only=True)
     # quiz_questions_detail = Quiz_QuestionListSerializers(many=True, read_only=True)
-    # quiz_options_detail = QuizOptionListSerializers(many=True, read_only=True)
+    quiz_options_detail = QuizOptionListSerializers(many=True, read_only=True)
 
     class Meta:
         model = Lesson
@@ -62,9 +68,10 @@ class LessonDetailSerializer(serializers.ModelSerializer):
     def get_quiz_questions(self, lesson):
         quiz_questions = Quiz_Question.objects.filter(lesson=lesson)
         return Quiz_QuestionListSerializers(quiz_questions, many=True).data
-    # def get_quiz_options(self, lesson):
-    #     quiz_options = QuizOption.objects.filter(name__lesson=lesson)
-    #     return QuizOptionListSerializers(quiz_options, many=True).data
+    
+    def get_quiz_options(self, lesson):
+        quiz_options = QuizOption.objects.filter(name__lesson=lesson)
+        return QuizOptionListSerializers(quiz_options, many=True).data
 
 
     
@@ -75,10 +82,7 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
         depth = 2
 
 
-# class QuizOptionListSerializers(serializers.ModelSerializer):
-#     class Meta:
-#         model = QuizOption
-#         fields = '__all__'
+
 
     
 
