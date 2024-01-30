@@ -21,3 +21,9 @@ class LiveClassRetRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
         
         depth = 2
         
+    
+class LiveClassListWithIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Live_Class
+        fields = '__all__'
+        depth = 2
