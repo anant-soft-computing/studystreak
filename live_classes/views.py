@@ -53,6 +53,11 @@ class liveclass_listwithid_view(generics.ListAPIView):
     # queryset = LiveClass.objects.all()
     serializer_class = LiveClassListWithIDSerializer
 
+    # def get_queryset(self):
+    #     self.batch_id = get_object_or_404(batch, id=self.kwargs['batch_id'])
+    #     return LiveClass.objects.filter(batch=self.batch_id)
+
     def get_queryset(self):
-        self.batch_id = get_object_or_404(batch, id=self.kwargs['batch_id'])
-        return LiveClass.objects.filter(batch=self.batch_id)
+        batch_id = self.kwargs.get('batch_id')
+        batch_instance = get_object_or_404(batch, id=batch_id)
+        return LiveClass.objects.filter(batch=batch_instance)
