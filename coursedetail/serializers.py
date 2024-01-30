@@ -15,11 +15,6 @@ class LessonListSerializers(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
-<<<<<<< HEAD
-        depth = 1
-=======
-        depth = 2
->>>>>>> 05f767c463e4a10a5911900a2366df1105c03b48
 
 class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession_count = serializers.SerializerMethodField()
@@ -36,7 +31,7 @@ class LessonDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = '__all__'
-        depth = 2
+        depth = 4
 
     def get_attachment_lession(self, lesson):
         return LessonAttachment.objects.filter(lesson=lesson)
@@ -76,6 +71,7 @@ class LessionRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     class Meta:
         model = Lesson
         fields = '__all__'
+        depth = 2
 
 
 # class QuizOptionListSerializers(serializers.ModelSerializer):
