@@ -87,6 +87,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = "lmss.urls"
@@ -306,7 +307,7 @@ DEFAULTS = {
 }
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = 'accounts/login/'
+LOGIN_REDIRECT_URL = 'socialaccount/google'
 
 # ACCOUNT_LOGIN_REDIRECT_URL = 'home'
 # ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'

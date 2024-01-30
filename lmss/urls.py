@@ -326,10 +326,8 @@ urlpatterns = [
     path('api/examlistfilterview/', ExamListFilterView.as_view(), name='examlistfilterview'),
     path('api/lessoncreateview/', LessonCreateView.as_view(), name='lessoncreateview'),
     path('api/answerlistview/', AnswerListView.as_view(), name='lessoncreateview'),
-    path('api/accounts',include('allauth.urls')),
-    path('api/accounts/login/',TemplateView.as_view(),name='googlelogin')   ###allauth
-
-
+    path('accounts/',include('allauth.urls')),
+    path('socialaccount/google',TemplateView.as_view(template_name='socialaccount/google.html'),name='google')   ###allauth
 
     
     
