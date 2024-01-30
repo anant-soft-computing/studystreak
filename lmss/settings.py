@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "jazzmin",
     "master",
     "Courses",
-    # "live_classes",
+    "live_classes",
     "package",
     "students",
     "assessment",
@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",                      
     # "dj_rest_auth",
+    #  'rest_framework.authtoken',
     # "dj_rest_auth.registration",
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"

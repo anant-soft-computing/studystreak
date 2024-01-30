@@ -6,6 +6,8 @@ from .models import Answer, Exam, FullLengthTest
 from .serializers import AnswerSerializer, ExamSerializer, FullLengthTestSerializer, ExamListSerializers, AnswerListSerializers, AnswerRetUpdDelSerializers, ExamRetUpdDelSerializers
 from rest_framework import generics 
 from django.shortcuts import get_object_or_404
+from rest_framework import generics
+
 class ExamViewSet(viewsets.ModelViewSet):
     queryset = Exam.objects.all()
     serializer_class = ExamSerializer
@@ -26,13 +28,15 @@ class FullLengthTestViewSet(viewsets.ModelViewSet):
     queryset = FullLengthTest.objects.all()
     serializer_class = FullLengthTestSerializer
 
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ExamListView(generics.ListAPIView):
     queryset = Exam.objects.all()
     serializer_class =  ExamListSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['exam_name'] 
 
-from django.shortcuts import get_object_or_404
-from rest_framework import generics
+
 
 # class AnswerListView(generics.ListAPIView):
 #     serializer_class = AnswerListSerializers
@@ -61,15 +65,25 @@ class AnswerListView(generics.ListAPIView):
     serializer_class = AnswerListSerializers
     # queryset = Answer.objects.all()
     print("***")
+    # def get_queryset(self):
+    #     # exam_id = self.kwargs.get('exam_id')
+    #     # queryset = Answer.objects.filter(exam=exam_id)
+    #     # exam = get_object_or_404(Exam, id=exam_id)
+    #     # queryset = Answer.objects.filter(exam=exam)
+    #     exam_id = self.kwargs.get('exam_id')
+    #     exam = get_object_or_404(Exam, id=exam_id)
+    #     queryset = Answer.objects.filter(exam=exam)
+    #     return queryset
+    
+    # def get_queryset(self):
+    #     exam_id = self.kwargs.get('exam_id')
+    #     question_number = self.kwargs.get('question_number')
+    #     exam = get_object_or_404(Exam, id=exam_id)
+    #     queryset = Answer.objects.filter(exam=exam, question_number=question_number)
+    
     def get_queryset(self):
-        # exam_id = self.kwargs.get('exam_id')
-        # queryset = Answer.objects.filter(exam=exam_id)
-        # exam = get_object_or_404(Exam, id=exam_id)
-        # queryset = Answer.objects.filter(exam=exam)
-        exam_id = self.kwargs.get('exam_id')
-        exam = get_object_or_404(Exam, id=exam_id)
-        queryset = Answer.objects.filter(exam=exam)
-        return queryset
+        self.exam_id = get_object_or_404(Exam, id=self.kwargs['exam_id'])
+        return Answer.objects.filter(exam=self.exam_id)
 
 class AnswerRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()

@@ -7,9 +7,11 @@ import requests, json
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
 from .models import LiveClass
-from .serializers import LiveClassListSerializer, LiveClassCreateSerializer
-
+from .serializers import LiveClassListSerializer, LiveClassCreateSerializer,LiveClassListWithIDSerializer
+from django.shortcuts import get_object_or_404
+from master.models import batch
 from zoomus import ZoomClient
+
 Account_id = "gZOcFtX-S3GRietpBWVT-Q"
 client_id='vy_n2AFIQJyEIF_4d8g9A'
 client_secret='kdxcpDLmMyj4QZcOawul86ktHJm7bMVv'
@@ -44,3 +46,13 @@ class LiveClassListView(APIView):
 # class Liveclass_Create_View(generics.ListCreateAPIView):
 #     queryset = LiveClass.objects.all()
 #     serializer_class = LiveClassCreateSerializer
+    
+    
+
+class liveclass_listwithid_view(generics.ListAPIView):
+    # queryset = LiveClass.objects.all()
+    serializer_class = LiveClassListWithIDSerializer
+
+    def get_queryset(self):
+        self.batch_id = get_object_or_404(batch, id=self.kwargs['batch_id'])
+        return LiveClass.objects.filter(batch=self.batch_id)

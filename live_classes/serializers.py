@@ -6,7 +6,12 @@ class LiveClassListSerializer(serializers.ModelSerializer):
     class Meta:
         model = LiveClass
         fields = '__all__'
-        
+        depth = 2
+
+class LiveClassListWithIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LiveClass
+        fields = '__all__'
         depth = 2
         
 class LiveClassCreateSerializer(serializers.ModelSerializer):
@@ -18,6 +23,5 @@ class LiveClassRetRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     class Meta:
         model = LiveClass
         fields = '__all__'
-        
         depth = 2
         
