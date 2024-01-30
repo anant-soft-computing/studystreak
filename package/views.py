@@ -152,6 +152,7 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                             'student_id': student.id,
                             'student_name': student.user.username,
                             'selected_batch': batch.batch_name,
+                            'batch_id': batch.id,
                             'course': serialized_course,
                             'package': serialized_package,
                         })
@@ -160,6 +161,7 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                             'student_id': student.id,
                             'student_name': student.user.username,
                             'selected_batch': batch.batch_name,
+                            'batch_id': batch.id,
                             'course': None,
                             'package': None,
                         })
@@ -168,6 +170,7 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                     'student_id': student.id,
                     'student_name': student.user.username,
                     'selected_batch': None,
+                    'batch_id': None,
                     'course': None,
                     'package': None,
                 })
