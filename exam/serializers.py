@@ -50,3 +50,9 @@ class AnswerListSerializers(serializers.ModelSerializer):
         model = Answer
         fields = "__all__"
         depth = 2
+
+class AnswerRetUpdDelSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = "__all__"
+        depth = 2

@@ -68,6 +68,7 @@ class Lesson(models.Model):
     )
     active = models.BooleanField(default=False)
     lesson_assignment = models.ManyToManyField(Exam, related_name="lesson_assignment", null=True, blank=True)
+    # lesson_attachment = 
     # lesson_quiz = models.ManyToManyField(Exam)
 
     def __str__(self):
