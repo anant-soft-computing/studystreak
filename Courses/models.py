@@ -1,6 +1,6 @@
 # Courses/models.py
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from ckeditor.fields import RichTextField
@@ -57,11 +57,11 @@ class Course(models.Model):
         max_length=200, null=True, blank=True, choices=course_type.choices
     )
 
-    primary_instructor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    primary_instructor = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
     course_identifier = models.CharField(
         max_length=200, null=True, blank=True, unique=True
     )
-    tutor = models.ManyToManyField(User, related_name="tutor", null=False)
+    tutor = models.ManyToManyField(Group, related_name="tutor", null=False)
 
     def __str__(self):
         return self.Course_Title
