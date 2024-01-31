@@ -74,6 +74,7 @@ from rest_framework.permissions import AllowAny
 
 ################## code work ########################
 class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Student.objects.all()
     serializer_class = StudentSerializers
 
@@ -97,6 +98,36 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
         except Student.DoesNotExist:
             return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
         
+
+
+# from rest_framework import generics, status
+# from rest_framework.response import Response
+# # from .models import Live_Class, Student
+# # from .serializers import StudentSerializers
+
+# class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
+#     queryset = Student.objects.all()
+#     serializer_class = StudentSerializers
+
+#     def post(self, request, *args, **kwargs):
+#         live_class_id = request.data.get('live_class_id')
+
+#         try:
+#             live_class_instance = Live_Class.objects.get(id=live_class_id)
+#             student_instance = self.get_object()  # Assumes you have overridden get_object method
+
+#             # Add the Live_Class instance to the Live_class_enroll field
+#             student_instance.Live_class_enroll.add(live_class_instance)
+
+#             serializer = StudentSerializers(student_instance)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+#         except Live_Class.DoesNotExist:
+#             return Response({"error": "Live_Class not found"}, status=status.HTTP_404_NOT_FOUND)
+
+#         except Student.DoesNotExist:
+#             return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
+
 
 ####################################
 # class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
