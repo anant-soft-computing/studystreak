@@ -99,28 +99,29 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
             return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
         
 
-
-# from rest_framework import generics, status
-# from rest_framework.response import Response
-# # from .models import Live_Class, Student
-# # from .serializers import StudentSerializers
-
-# class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
+########################### new code #################################
+# class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
+#     permission_classes = [IsAuthenticated]
 #     queryset = Student.objects.all()
 #     serializer_class = StudentSerializers
 
 #     def post(self, request, *args, **kwargs):
 #         live_class_id = request.data.get('live_class_id')
+#         student_id = request.data.get('student_id')
 
 #         try:
 #             live_class_instance = Live_Class.objects.get(id=live_class_id)
-#             student_instance = self.get_object()  # Assumes you have overridden get_object method
+#             student_instance = Student.objects.get(id=student_id)
+
+#             # Check if the student is already enrolled in the live class
+#             if live_class_instance in student_instance.Live_class_enroll.all():
+#                 return Response({"error": "Student is already enrolled in this Live_Class"}, status=status.HTTP_400_BAD_REQUEST)
 
 #             # Add the Live_Class instance to the Live_class_enroll field
 #             student_instance.Live_class_enroll.add(live_class_instance)
 
 #             serializer = StudentSerializers(student_instance)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#             return Response(serializer.data, status=status.HTTP_200_OK)
 
 #         except Live_Class.DoesNotExist:
 #             return Response({"error": "Live_Class not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -129,29 +130,8 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
 #             return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
-####################################
-# class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
-#     serializer_class = LiveClassListSerializer
-#     permission_classes = [IsAuthenticated]
+###########################################################################
 
-#     def perform_create(self, serializer):
-#         user = self.request.user
-#         live_class_name = serializer.validated_data.get('meeting_title')
-
-#         if hasattr(user, 'student'):
-#             student = user.student
-
-#             live_class, created = Live_Class.objects.get_or_create(meeting_title=live_class_name)
-
-#             if not created and student.live_class_enroll.filter(id=live_class.id).exists():
-#                 return Response({"message": "Student already enrolled in this live class"}, status=status.HTTP_400_BAD_REQUEST)
-
-#             student.live_class_enroll.add(live_class)
-#             student.save()
-#             return Response({"message": "Enrollment success"}, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response({"message": "User has no associated student"}, status=status.HTTP_400_BAD_REQUEST)
-            
 
 # class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
 #     serializer_class = LiveClassListSerializer
