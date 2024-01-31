@@ -8,6 +8,7 @@ from django.db import models
 from master.models import City  # For the City, State, and Country ForeignKey
 from master.models import Country, State
 from package.models import Package
+from LiveClass.models import Live_Class
 
 
 class StudentManager(BaseUserManager):
@@ -66,6 +67,7 @@ class Student(models.Model):
     gre_taken_before = models.BooleanField(default=False)
     gmat_taken_before = models.BooleanField(default=False)
     remark = models.TextField(null=True)
+    Live_class_enroll = models.ManyToManyField(Live_Class, null = True, blank = True)
     biography = models.TextField(
         null=True
     )  # If you're using django-ckeditor or similar, this can be replaced with RichTextField

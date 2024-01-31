@@ -17,6 +17,8 @@ from package.serializers import PackageListSerializers, PackageListForStudentSer
 from Courses.serializers import CourseListSerializers
 from master.serializers import (AdditionalResourceListSerializers, CourseMaterialListSerializers,
 LessonAttachmentSerializer,LessonAssignmentSerializer,)
+from LiveClass.models import Live_Class
+from LiveClass.serializers import LiveClassListSerializer
 # from coursedetail.models import Quiz_Question, QuizOption
 # from coursedetail.serializers import QuizOptionListSerializers, Quiz_QuestionListSerializers
 

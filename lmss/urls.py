@@ -88,7 +88,7 @@ from website.views import (
 from Writing_Exam.views import *  # noqa: F403
 from payment.views import start_payment, handle_payment_success
 from django.views.generic import TemplateView
-from LiveClass.views import liveclass_listwithid_view
+from LiveClass.views import liveclass_listwithid_view,StudentLiveClassEnrollmentAPIView
 
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
@@ -331,6 +331,7 @@ urlpatterns = [
     path('api/answerretupddelview/<int:pk>/', AnswerRetUpdDelView.as_view(), name='answerretupddelview'),
     path('api/answerslistview/<int:exam_id>/', AnswerListView.as_view(), name='answer-list'),
     path('api/liveclass_listwithid_view/<int:batch_id>/', liveclass_listwithid_view.as_view(), name='liveclass_listwithid_view'),
+    path('api/enroll-live-class/', StudentLiveClassEnrollmentAPIView.as_view(), name='enroll-live-class'),
     # path('accounts/',include('allauth.urls')),
     # path('socialaccount/google',TemplateView.as_view(template_name='socialaccount/google.html'),name='google')
 
