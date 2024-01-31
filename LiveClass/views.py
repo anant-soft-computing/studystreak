@@ -55,6 +55,7 @@ class Liveclass_Create_View(generics.ListCreateAPIView):
 
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
+from students.serializers import StudentSerializers
 
 class liveclass_listwithid_view(generics.ListAPIView):
     serializer_class = LiveClassListWithIDSerializer
@@ -66,35 +67,38 @@ class liveclass_listwithid_view(generics.ListAPIView):
 
 
 from django.db import IntegrityError
-
-class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
-    serializer_class = LiveClassListSerializer
-    permission_classes = [IsAuthenticated]
-
-    def perform_create(self, serializer):
-        user = self.request.user
-        print(user)
-
-        if hasattr(user, 'student'):
-            student = user.student
-            # student = user.student
-            print("***")
-            live_class = serializer.save()
-            print("5545")
-
-            try:
-                student.Live_class_enroll.add(live_class)
-                student.save()
-                print("////")
-                return Response({"message": "enrollment success"}, status=status.HTTP_201_CREATED)
-            except IntegrityError:
-                return Response({"message": "student already enroll"}, status=status.HTTP_400_BAD_REQUEST)
-                print("5545")
-        else:
-            return Response({"message": "User has no associated student"}, status=status.HTTP_400_BAD_REQUEST)
+from package.serializers import EnrollmentSerializer
+from rest_framework.decorators import api_view
+from rest_framework.permissions import AllowAny
 
 
+################## code work ########################
+class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializers
 
+    def post(self, request, *args, **kwargs):
+        live_class_id = request.data.get('live_class_id')
+        student_id = request.data.get('student_id')
+
+        try:
+            live_class_instance = Live_Class.objects.get(id=live_class_id)
+            student_instance = Student.objects.get(id=student_id)
+
+            # Add the Live_Class instance to the Live_class_enroll field
+            student_instance.Live_class_enroll.add(live_class_instance)
+
+            serializer = StudentSerializers(student_instance)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Live_Class.DoesNotExist:
+            return Response({"error": "Live_Class not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        except Student.DoesNotExist:
+            return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+
+####################################
 # class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
 #     serializer_class = LiveClassListSerializer
 #     permission_classes = [IsAuthenticated]
