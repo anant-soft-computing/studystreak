@@ -86,7 +86,10 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
             live_class_instance = Live_Class.objects.get(id=live_class_id)
             student_instance = Student.objects.get(id=student_id)
 
-            # Add the Live_Class instance to the Live_class_enroll field
+            #enroll code add
+            if live_class_instance in student_instance.Live_class_enroll.all():
+                    return Response({"Message": "Student is already enrolled in this Live_Class"}, status=status.HTTP_400_BAD_REQUEST)
+
             student_instance.Live_class_enroll.add(live_class_instance)
 
             serializer = StudentSerializers(student_instance)

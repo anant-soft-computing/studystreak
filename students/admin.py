@@ -68,6 +68,7 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
             "Registration",
             {
                 "fields": (
+                    "user",
                     "gender",
                     "country",
                     "state",
