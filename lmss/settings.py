@@ -72,7 +72,8 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",                      
+    "allauth.socialaccount.providers.google",    
+    "Create_Test"                  
     # "dj_rest_auth",
     #  'rest_framework.authtoken',
     # "dj_rest_auth.registration",

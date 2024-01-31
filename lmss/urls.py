@@ -89,7 +89,7 @@ from Writing_Exam.views import *  # noqa: F403
 from payment.views import start_payment, handle_payment_success
 from django.views.generic import TemplateView
 from LiveClass.views import liveclass_listwithid_view,StudentLiveClassEnrollmentAPIView
-from CreateTest.views import createexamview 
+from Create_Test.views import createexamview 
 
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")

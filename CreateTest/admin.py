@@ -1,11 +1,11 @@
-from django.contrib import admin
-from .models import *
-from nested_admin import NestedTabularInline, NestedModelAdmin
-# Register your models here.
+# from django.contrib import admin
+# from .models import *
+# from nested_admin import NestedTabularInline, NestedModelAdmin
+# # Register your models here.
 
 
-admin.site.register(createexam)
-admin.site.register(module)
+# admin.site.register(createexam)
+# admin.site.register(module)
 # admin.site.register(ReadingQuestionTypeName)
 # admin.site.register(ReadingPassageName)
 
