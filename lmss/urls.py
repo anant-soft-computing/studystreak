@@ -331,7 +331,7 @@ urlpatterns = [
     path('api/answerretupddelview/<int:pk>/', AnswerRetUpdDelView.as_view(), name='answerretupddelview'),
     path('api/answerslistview/<int:exam_id>/', AnswerListView.as_view(), name='answer-list'),
     path('api/liveclass_listwithid_view/<int:batch_id>/', liveclass_listwithid_view.as_view(), name='liveclass_listwithid_view'),
-    path('enroll-students-in-live-class/', StudentLiveClassEnrollmentAPIView.as_view(), name='enroll-live-class'),
+    path('api/enroll-students-in-live-class/', StudentLiveClassEnrollmentAPIView.as_view(), name='enroll-live-class'),
     # path('accounts/',include('allauth.urls')),
     # path('socialaccount/google',TemplateView.as_view(template_name='socialaccount/google.html'),name='google')
 
