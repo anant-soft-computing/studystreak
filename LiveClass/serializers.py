@@ -6,8 +6,7 @@ class LiveClassListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Live_Class
         fields = '__all__'
-        
-        
+        depth = 2
         
 class LiveClassCreateSerializer(serializers.ModelSerializer):
     class Meta:
