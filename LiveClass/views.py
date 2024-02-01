@@ -43,7 +43,7 @@ class LiveClassListView(APIView):
         
         
 class liveclass_list_view(generics.ListAPIView):
-    queryset = Live_Class.objects.all()
+    queryset = Live_Class.objects.all().order_by('-start_time')
     serializer_class = LiveClassListSerializer
 
 
@@ -88,7 +88,7 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
 
             #enroll code add
             if live_class_instance in student_instance.Live_class_enroll.all():
-                    return Response({"Message": "Student is already enrolled in this Live_Class"}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"Message": "You are already enrolled "}, status=status.HTTP_400_BAD_REQUEST)
 
             student_instance.Live_class_enroll.add(live_class_instance)
 
@@ -136,31 +136,29 @@ class StudentLiveClassEnrollmentAPIView(generics.UpdateAPIView):
 ###########################################################################
 
 
-# class StudentLiveClassEnrollmentAPIView(generics.CreateAPIView):
-#     serializer_class = LiveClassListSerializer
-#     permission_classes = [IsAuthenticated]
+class StudentRemoveLiveClassAPIView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializers
 
-#     def perform_create(self, serializer):
-#         user = self.request.user
-#         if not hasattr(user, 'student'):
-#             return Response({"message": "User has no associated student"}, status=status.HTTP_400_BAD_REQUEST)
+    def update(self, request, *args, **kwargs):
+        live_class_id = request.data.get('live_class_id')
+        student_id = kwargs.get('pk')  
 
-#         student = user.student
+        try:
+            live_class_instance = Live_Class.objects.get(id=live_class_id)
+            student_instance = Student.objects.get(id=student_id)
 
-#         if 'live_class' not in serializer.validated_data:
-#             return Response({"message": "Live class data is not available in the request"}, status=status.HTTP_400_BAD_REQUEST)
+          
+            if live_class_instance in student_instance.Live_class_enroll.all():
+                student_instance.Live_class_enroll.remove(live_class_instance)
+                serializer = StudentSerializers(student_instance)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({"Message": "Student is not enrolled in this Live_Class"}, status=status.HTTP_400_BAD_REQUEST)
 
-#         live_class_data = serializer.validated_data['live_class']
+        except Live_Class.DoesNotExist:
+            return Response({"error": "Live_Class not found"}, status=status.HTTP_404_NOT_FOUND)
 
-#         try:
-#             live_class = Live_Class.objects.get(id=live_class_data['id'])
-#         except Live_Class.DoesNotExist:
-#             return Response({"message": "Live class not found"}, status=status.HTTP_400_BAD_REQUEST)
-
-#         if student.Live_class_enroll.filter(id=live_class.id).exists():
-#             return Response({"message": "Student is already enrolled in this live class"}, status=status.HTTP_400_BAD_REQUEST)
-
-#         student.Live_class_enroll.add(live_class)
-#         student.save()
-
-#         return Response({"message": "Enrollment successful"}, status=status.HTTP_201_CREATED)
+        except Student.DoesNotExist:
+            return Response({"error": "Student not found"}, status=status.HTTP_404_NOT_FOUND)

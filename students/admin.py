@@ -64,47 +64,54 @@ class StudentAdmin(ExportMixin, admin.ModelAdmin):
     )
 
     fieldsets = (
-        (
-            "Registration",
-            {
-                "fields": (
-                    "user",
-                    "gender",
-                    "country",
-                    "state",
-                    "city",
-                    "phone_no",
-                    "whatsapp_no",
-                    "reference_by",
-                    # "Live_class_enroll",
-                )
-            },
-        ),
-        (
-            "Profile",
-            {
-                "fields": ("country_interested_in",
-                    "Live_class_enroll",
-                    "last_education",
-                    "ielts_taken_before",
-                    "duolingo_taken_before",
-                    "pte_taken_before",
-                    "toefl_taken_before",
-                    "gre_taken_before",
-                    "gmat_taken_before",
-                    "remark",
-                    "biography",
-                    "user_image",
-                    "interested_in_visa_counselling",
-                    "select_batch",
-                    "select_package",
-                    "referal_code",
-                   
-                  ),
-            },
-        ),
-        
-    )
+    (
+        "Registration",
+        {
+            "fields": (
+                "user",
+                "gender",
+                "country",
+                "state",
+                "city",
+                "phone_no",
+                "whatsapp_no",
+                "reference_by",
+            )
+        },
+    ),
+    (
+        "Profile",
+        {
+            "fields": (
+                "country_interested_in",
+                "Live_class_enroll",
+                "last_education",
+                "ielts_taken_before",
+                "duolingo_taken_before",
+                "pte_taken_before",
+                "toefl_taken_before",
+                "gre_taken_before",
+                "gmat_taken_before",
+                "remark",
+                "biography",
+                "user_image",
+                "interested_in_visa_counselling",
+                "select_batch",
+                "select_package",
+                "referal_code",
+            ),
+        },
+    ),
+    (
+        "Counter",
+        {
+            "fields": (
+                "student_exam_block",
+                "student_module",
+            ),
+        },
+    ),
+)
 
     def get_batch_names(self, obj):
         return ", ".join([batch.batch_name for batch in obj.select_batch.all()])

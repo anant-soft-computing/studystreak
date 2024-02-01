@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Course
 from master.serializers import AdditionalResourceListSerializers, CourseMaterialListSerializers
 from coursedetail.serializers import LessonListSerializers, LessonDetailSerializer
+from django.contrib.auth.models import User
 
 class CourseListSerializers(serializers.ModelSerializer):
     lessons = LessonListSerializers(many=True, read_only=True)
@@ -46,3 +47,8 @@ class Course_List_Serializers_forpackage(serializers.ModelSerializer):
         fields = "__all__"
         depth=2
        
+        
+class UserListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

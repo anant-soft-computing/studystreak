@@ -9,7 +9,8 @@ from master.models import City  # For the City, State, and Country ForeignKey
 from master.models import Country, State
 from package.models import Package
 from LiveClass.models import Live_Class
-
+from exam.models import Exam
+from Create_Test.models import module
 
 class StudentManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -91,7 +92,9 @@ class Student(models.Model):
     referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    student_exam_block = models.ManyToManyField(Exam, null=True, blank=True)
+    student_module = models.ManyToManyField(module, null=True, blank=True)
+    
     # def __str__(self):
     #     return self.last_education
 
