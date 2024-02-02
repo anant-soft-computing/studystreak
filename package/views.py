@@ -38,15 +38,15 @@ class PackageRetUpdDelView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PackageRetUpdDelSerializers
     
 
-#  def get(self, request, *args, **kwargs):
-#         queryset = self.get_queryset()
-#         package_count = queryset.count()  
-#         serializer = self.serializer_class(queryset, many=True)
-#         data = {
-#             'package_count': package_count,
-#             'packages': serializer.data,
-#         }
-#         return Response(data)
+    # def get(self, request, *args, **kwargs):
+    #         queryset = self.get_queryset()
+    #         package_count = queryset.count()  
+    #         serializer = self.serializer_class(queryset, many=True)
+    #         data = {
+    #             'packages': serializer.data,
+                    # 'package_count': package_count.data
+    #         }
+    #         return Response(data)
 
 class CoursePackageView(generics.RetrieveAPIView):
     queryset = Course.objects.all()
@@ -135,12 +135,9 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
     def get(self, request):
         queryset = self.get_queryset()
         package_count = queryset.count()
-
         package_list = []
-
         for student in queryset:
             select_batch = student.select_batch.all() if student.select_batch else None
-
             if select_batch:
                 for batch in select_batch:
                     if batch.add_package:
@@ -176,7 +173,6 @@ class UserWisePackageWithCourseID(generics.ListAPIView):
                     'course': None,
                     'package': None,
                 })
-
         data = {
             'package_count': package_count,
             'student_packages': package_list,

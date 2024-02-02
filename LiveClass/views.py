@@ -43,7 +43,8 @@ class LiveClassListView(APIView):
         
         
 class liveclass_list_view(generics.ListAPIView):
-    queryset = Live_Class.objects.all().order_by('-id')
+    # queryset = Live_Class.objects.all().order_by('-id')
+    queryset = Live_Class.objects.all().order_by('-start_time')
     serializer_class = LiveClassListSerializer
 
 

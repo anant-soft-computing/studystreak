@@ -14,8 +14,7 @@ class StudentView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-
-       
+        # user = request.user
         if isinstance(user, AnonymousUser):
             return Student.objects.none() 
 
