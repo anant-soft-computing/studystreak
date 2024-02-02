@@ -89,7 +89,7 @@ from Writing_Exam.views import *  # noqa: F403
 from payment.views import start_payment, handle_payment_success
 from django.views.generic import TemplateView
 from LiveClass.views import liveclass_listwithid_view,StudentLiveClassEnrollmentAPIView, StudentRemoveLiveClassAPIView
-from Create_Test.views import createexamview, ResponsesView
+from Create_Test.views import createexamview, ResponsesView, moduleListView
 from Exam_Responses.views import StudentAnswerListView
 
 router = DefaultRouter()
@@ -338,6 +338,8 @@ urlpatterns = [
     path('api/responsesview/', ResponsesView.as_view(), name='responsesview'),
     path('api/remove-live-class/<int:pk>/', StudentRemoveLiveClassAPIView.as_view(), name='remove-live-class'),
     path('api/studentanswerlistview/', StudentAnswerListView.as_view(), name='studentanswerlistview'),
+    path('api/moduleListView/', moduleListView.as_view(), name='moduleListView'),
+
 
 
 

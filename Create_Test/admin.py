@@ -13,8 +13,10 @@ admin.site.register(Responses)
 
 
 class moduleadmin(admin.ModelAdmin):
-    list_display = ("Name", "reading_list", "listening_list", "speaking_list", "writing_list")
+    list_display = ("Name", "reading_list", "listening_list", "speaking_list", "writing_list", "module_category")
     list_filter = ("Name",)
+
+
 
     def reading_list(self, obj):
         return ", ".join([str(exam) for exam in obj.Reading.all()])
