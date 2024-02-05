@@ -3,8 +3,9 @@ from .models import Studentanswer, Student_answer
 
 class StudentAnswerAnswerSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Student_answer
-        fields = ("question_number", "answer_text")
+        model = Studentanswer
+        # fields = ("question_number", "answer_text")
+        fields = "__all__"
 
 
 class StudentAnswerSerializers(serializers.ModelSerializer):

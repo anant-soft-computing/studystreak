@@ -8,12 +8,22 @@ class StudentAnswerAnswerSerializers(serializers.ModelSerializer):
 
 
 class StudentAnswerSerializers(serializers.ModelSerializer):
-    student_answers = serializers.SerializerMethodField()
+    # student_answers = serializers.SerializerMethodField()
     class Meta:
         model = Studentanswer
         fields = "__all__"
-        depth=2
 
-    def get_student_answers(self, obj):
-        student_answers = Student_answer.objects.filter(student_exam=obj)
-        return StudentAnswerAnswerSerializers(student_answers, many=True).data
+    def create(self, validated_data):
+        print("validated_data",validated_data)
+        return super().create(validated_data)
+
+    # def get_student_answers(self, obj):
+    #     student_answers = Student_answer.objects.filter(student_exam=obj)
+    #     return StudentAnswerAnswerSerializers(student_answers, many=True).data
+
+
+class SAS(serializers.ModelSerializer):   
+    
+    class Meta:
+        model = Studentanswer
+        fields = "__all__"
