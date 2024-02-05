@@ -142,7 +142,7 @@ class StudentRemoveLiveClassAPIView(generics.UpdateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializers
 
-    def update(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         live_class_id = request.data.get('live_class_id')
         student_id = kwargs.get('pk')  
 

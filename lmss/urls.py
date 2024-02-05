@@ -104,8 +104,8 @@ router.register(
 router.register("api/test-types", TestTypeViewset, basename="test-types")
 
 urlpatterns = [
-    path('live-classes/', LiveClassListView.as_view(), name='live-classes-list'),
-    path('live-classes-users/', LiveClassUsersView.as_view(), name='live-classes-users'),
+    path('api/live-classes/', LiveClassListView.as_view(), name='live-classes-list'),
+    path('api/live-classes-users/', LiveClassUsersView.as_view(), name='live-classes-users'),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("api/li", get_csrf_token, name="csrf-token"),
     path("__debug__/", include("debug_toolbar.urls")),
@@ -125,8 +125,8 @@ urlpatterns = [
         CourseRetUpdDelView.as_view(),
     ),
     # path('api/LiveClassView/', LiveClassView.as_view()),
-    path('api/list-live-classes/', LiveClassListView.as_view(), name='live-class-list'),
-    path("api/liveclassview/", LiveClassListView.as_view()),
+    # path('api/list-live-classes/', LiveClassListView.as_view(), name='live-class-list'),
+    # path("api/liveclassview/", LiveClassListView.as_view()),
     #path("api/liveclassretupddelview/<int:pk>/", LiveClassRetUpdDelView.as_view()),
     path("api/categoryview/", CategoryListView.as_view()),
     path("api/categoryretupddelview/<int:pk>/", CategoryRetUpdDelView.as_view()),
