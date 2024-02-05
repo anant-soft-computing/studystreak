@@ -35,7 +35,7 @@ class LiveClassListView(APIView):
     def post(self, request):
         meeting_list = client.meeting.create(user_id="jP0UzREKQdaFADMVsxTRlA", json={
             'topic': 'My Zoom Meeting 1',
-            'type': 1,  # 1 for instant meeting, 2 for scheduled meeting
+            'type': 2,  # 1 for instant meeting, 2 for scheduled meeting
             'password': 'YourMeetingPassword12345'
         })
         print("meeting_list",meeting_list.json())
