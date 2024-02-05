@@ -7,14 +7,23 @@ from exam.models import Exam
 
 class StudentAnswer(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
-    exam = models.ForeignKey(Exam, related_name="exam", on_delete=models.CASCADE, )
+    exam = models.ForeignKey(Exam, related_name="exam", on_delete=models.CASCADE, null=False, blank=True)
+    # question_number = (
+    #     models.IntegerField()
+    # )  
+    # answer_text = models.TextField()
+
+    # def __str__(self):
+    #     return self.answer_text
+    
+    # class Meta:
+    #     unique_together = ("exam", "question_number", "user")
+class Student_Answer(models.Model):
+    student_exam = models.ForeignKey(StudentAnswer, related_name="student_exam", on_delete=models.CASCADE)
     question_number = (
         models.IntegerField()
-    )  
+    ) 
     answer_text = models.TextField()
 
     def __str__(self):
         return self.answer_text
-    
-    # class Meta:
-    #     unique_together = ("exam", "question_number", "user")
