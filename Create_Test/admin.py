@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import createexam, module, Responses
+from .models import createexam, module
 # Register your models here.
 
 class createexamadmin(admin.ModelAdmin):
@@ -9,7 +9,7 @@ class createexamadmin(admin.ModelAdmin):
         return str(obj.IELTS.Name) if obj.IELTS else ""
 
 admin.site.register(createexam, createexamadmin)
-admin.site.register(Responses)
+# admin.site.register(Responses)
 
 
 class moduleadmin(admin.ModelAdmin):
