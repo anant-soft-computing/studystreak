@@ -22,7 +22,8 @@ DEBUG = True
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["65.20.73.247", "localhost", "127.0.0.1", "studystreak.io"]
+# ALLOWED_HOSTS = ["65.20.73.247", "localhost", "127.0.0.1", "studystreak.io"]
+ALLOWED_HOSTS = ["*"]
 # settings.py
 
 ZOOM_API_ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA1NDg5NTE5LCJpYXQiOjE3MDU0ODkyMTksImp0aSI6IjQ3MjY3NDE3MWViMjRkZGNiMTM2OGRjMTU5M2RhZTdkIiwidXNlcl9pZCI6Mn0.Gq4SNpGYNqI-nrU6G8iP902vX9SOnFIGjF_z66pzRe4'
