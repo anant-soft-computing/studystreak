@@ -26,9 +26,9 @@ class ExamType(models.TextChoices):
 
 # Create your models here.
 class Exam(models.Model):
-    exam_name = models.CharField(max_length=10)
+    exam_name = models.CharField(max_length=200)
     exam_type = models.CharField(
-        max_length=20,
+        max_length=200,
         choices=ExamType.choices,
         default=ExamType.reading,
         help_text="(Reading, Listening, Speaking, Writing)",
@@ -38,9 +38,9 @@ class Exam(models.Model):
     passage = RichTextUploadingField("contents", null=True, blank=True)
     no_of_questions = models.IntegerField(default=4)
     question = RichTextField()
-    block_type = models.CharField(max_length=20, choices=BlockType.choices, null=True)
+    block_type = models.CharField(max_length=200, choices=BlockType.choices, null=True)
     difficulty_level = models.CharField(
-        max_length=20, choices=Difficulty.choices, null=True
+        max_length=200, choices=Difficulty.choices, null=True
     )
     block_threshold = models.PositiveIntegerField(null=True)
     type_of_module = models.ForeignKey(
