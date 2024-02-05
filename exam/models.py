@@ -26,25 +26,25 @@ class ExamType(models.TextChoices):
 
 # Create your models here.
 class Exam(models.Model):
-    exam_name = models.CharField(max_length=200)
+    exam_name = models.CharField(max_length=200, null=True, blank=True)
     exam_type = models.CharField(
         max_length=200,
         choices=ExamType.choices,
         default=ExamType.reading,
-        help_text="(Reading, Listening, Speaking, Writing)",
+        help_text="(Reading, Listening, Speaking, Writing)",null=True, blank=True
     )
     # test_type = models.ForeignKey(TestType, on_delete=models.SET_NULL, null=True)
     # question_type = models.ManyToManyField(QuestionType, null=True)
     passage = RichTextUploadingField("contents", null=True, blank=True)
-    no_of_questions = models.IntegerField(default=4)
-    question = RichTextField()
-    block_type = models.CharField(max_length=200, choices=BlockType.choices, null=True)
+    no_of_questions = models.IntegerField(default=4, null=True, blank=True)
+    question = RichTextField(null=True, blank=True)
+    block_type = models.CharField(max_length=200, choices=BlockType.choices, null=True, blank=True)
     difficulty_level = models.CharField(
-        max_length=200, choices=Difficulty.choices, null=True
+        max_length=200, choices=Difficulty.choices, null=True, blank=True
     )
-    block_threshold = models.PositiveIntegerField(null=True)
+    block_threshold = models.PositiveIntegerField(null=True, blank=True)
     type_of_module = models.ForeignKey(
-        "master.ModuleType", on_delete=models.SET_NULL, null=True
+        "master.ModuleType", on_delete=models.SET_NULL, null=True, blank=True
     )
     exam_category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     audio_file = models.FileField(upload_to="examblockaudio/", null=True, blank=True)
