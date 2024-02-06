@@ -26,7 +26,7 @@ class LessonCreateSerializers(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = "__all__"
-        depth=2
+        depth=3
 
 class LessonDetailSerializer(serializers.ModelSerializer):
     attachment_lession_count = serializers.SerializerMethodField()
