@@ -4,7 +4,7 @@ from rest_framework import status
 from django.http import JsonResponse
 
 import requests, json
-from datetime import datetime
+from datetime import datetime, timedelta
 from rest_framework.permissions import IsAuthenticated
 
 from zoomus import ZoomClient
@@ -25,11 +25,21 @@ class LiveClassListView(APIView):
         return JsonResponse(data=list_meeting.json(), status =200)
     
     def post(self, request):
-        meeting_list = client.meeting.create(user_id="jP0UzREKQdaFADMVsxTRlA", json={
-            'topic': 'My Zoom Meeting 1',
-            'type': 1,  # 1 for instant meeting, 2 for scheduled meeting
-            'password': 'YourMeetingPassword12345'
-        })
+        params = request.data
+        if params.get("start_time"):
+            start_time = datetime.strptime(params.get("start_time"), '%Y-%m-%d %H:%M:%S')
+        else:
+            start_time = datetime.utcnow()
+        meeting_data = {
+            'topic': params.get("topic", 'My Zoom Meeting scheduled'),
+            'type': 2,  # 1 for instant meeting, 2 for scheduled meeting
+            'start_time': start_time,
+            'duration': params.get("duration", 30),  # Meeting duration in minutes
+            'timezone': 'UTC',  # Set your desired timezone
+            'user_id': params.get("user_id", "jP0UzREKQdaFADMVsxTRlA")
+        }
+        meeting_list = client.meeting.create(**meeting_data)
+        
         print("meeting_list",meeting_list.json())
         return JsonResponse(data= meeting_list.json(), status=200)
         

@@ -7,7 +7,8 @@ from drf_spectacular.views import (
 )
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenRefreshView
-
+#from django.urls import path
+#from . import views
 from assessment.views import assessmentListView, assessmentRetUpdDelView
 from coursedetail.views import LessionRetUpdDelView, LessonListView
 from Courses.views import CourseListView, CourseRetUpdDelView
@@ -81,6 +82,9 @@ from website.views import (
     HomepageSliderRetUpdDelView,
 )
 from Writing_Exam.views import *  # noqa: F403
+from Studentanswer.views import StudentAnswerListCreateAPIView, StudentAnswerRetrieveUpdateDestroyAPIView
+
+
 
 router = DefaultRouter()
 router.register("api/exam-blocks", ExamViewSet, basename="exam-blocks")
@@ -94,6 +98,7 @@ router.register(
 router.register("api/test-types", TestTypeViewset, basename="test-types")
 
 urlpatterns = [
+    #path('courses/complete/<int:course_id>/', views.complete_course, name='complete_course'),
     path('live-classes/', LiveClassListView.as_view(), name='live-classes-list'),
     path('live-classes-users/', LiveClassUsersView.as_view(), name='live-classes-users'),
     path("ckeditor/", include("ckeditor_uploader.urls")),

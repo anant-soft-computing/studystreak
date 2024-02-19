@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "live_classes",
     "package",
     "students",
+    "Studentanswer",
+    "Activities",
     "assessment",
     "coursedetail",
     "import_export",
@@ -67,6 +69,8 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "drf_spectacular",
     "django_filters",
+    "django_gamification"
+
 ]
 CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [

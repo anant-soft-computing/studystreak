@@ -8,6 +8,7 @@ from django.db import models
 from master.models import City  # For the City, State, and Country ForeignKey
 from master.models import Country, State
 from package.models import Package
+from django_gamification.models import Badge
 
 
 class StudentManager(BaseUserManager):
@@ -85,6 +86,7 @@ class Student(models.Model):
     referal_code = models.CharField(max_length=20, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    badge = models.ForeignKey(Badge, null=True, blank=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
         

@@ -3,6 +3,9 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 from master.models import ExamType, TestType
+from django.contrib.auth.models import User
+# from .views import create_student_answer
+# from Studentanswer.models import Studentanswer
 
 
 class BlockType(models.TextChoices):
@@ -54,9 +57,18 @@ class Exam(models.Model):
     class Meta:
         verbose_name = "Exam_Block"
 
+class Studentanswer(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE, related_name='student_answers')
+    question_number = models.IntegerField()
+    answer_text = models.TextField()
+
+    def __str__(self):
+        return f"{self.student.username} - Q{self.question_number}: {self.answer_text}"
 
 class Answer(models.Model):
     exam = models.ForeignKey(Exam, related_name="answers", on_delete=models.CASCADE)
+    student = models.ForeignKey(User,  on_delete=models.SET_NULL, null=True, blank=True)
     question_number = (
         models.IntegerField()
     )  # Indicates which question this answer corresponds to
@@ -64,9 +76,13 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer_text
+    
+    def save(self, *args, **kwargs):
+        Studentanswer.objects.create(student=self.student,exam=self.exam, question_number=self.question_number, answer_text=self.answer_text)
+        super().save(*args, **kwargs)
 
     class Meta:
-        unique_together = ("exam", "question_number")
+        unique_together = ("exam", "question_number", "student")
 
 
 class FullLengthTest(models.Model):
